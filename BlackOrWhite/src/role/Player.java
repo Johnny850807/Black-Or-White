@@ -29,7 +29,7 @@ public class Player extends Role implements Runnable{
 	}
 	
 	private final void processRequest(){
-		
+		// handle the request ... and update the model
 	}
 	
 	public final void addRequest(Request request){
