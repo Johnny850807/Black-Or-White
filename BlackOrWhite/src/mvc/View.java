@@ -18,10 +18,9 @@ public class View extends JPanel {
 	public ButtonsPanel buttonPanel;
 	private List<Role> roles;
 	private List<Bullet> bullets;
-	private MapBuilder builder;// build the map whenever the view got settled the builder
 	
 	public View() {
-		builder = new BasicMapBuilder(this);
+		
 	}
 
 	public View(Controller controller) {
@@ -37,22 +36,6 @@ public class View extends JPanel {
 		this.controller = controller;
 	}
 	
-	
-	public MapBuilder getBuilder() {
-		return builder;
-	}
-
-	public void setBuilder(MapBuilder builder) {
-		this.builder = builder;
-	}
-	
-	public void buildMap(Graphics g){
-		String[] mapString = null;
-		if ( builder == null )
-			Log.e("MapBuilder is null !! Should set it before you invoke buildMap() ."); 
-		else
-			builder.buildMap(mapString, g);
-	}
 
 
 	//放置按鈕的panel (開始遊戲按鈕或者連線等等)
@@ -68,7 +51,13 @@ public class View extends JPanel {
 	
 	//放置遊戲畫面的panel
 	static class GamePanel extends JPanel{
-
+		public static final int SIZEX = MapBuilder.SIZEX * MapBuilder.SIZE_IMG;  //取得地圖大小* 圖片大小
+		public static final int SIZEY = MapBuilder.SIZEY * MapBuilder.SIZE_IMG;
+		private MapBuilder builder;// build the map whenever the view got settled the builder
+		
+		public GamePanel(){
+			builder = new BasicMapBuilder();
+		}
 		@Override
 		protected void paintComponent(Graphics g) {
 			/* draw here
@@ -76,8 +65,25 @@ public class View extends JPanel {
 			 * 2. Paint All the roles
 			 * 3. Paint All the Bullets 
 			 */
+			buildMap(g);
 			
 			super.paintComponent(g);
+		}
+		
+		public void buildMap(Graphics g){
+			String[] mapString = null;
+			if ( builder == null )
+				Log.e("MapBuilder is null !! Should set it before you invoke buildMap() ."); 
+			else
+				builder.buildMap(mapString, g);
+		}
+		
+		public MapBuilder getBuilder() {
+			return builder;
+		}
+
+		public void setBuilder(MapBuilder builder) {
+			this.builder = builder;
 		}
 		
 		
