@@ -1,6 +1,9 @@
 package mvc;
 
+import java.awt.Font;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -14,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -106,7 +110,18 @@ public class View {
 
 	//放置按鈕的panel (開始遊戲按鈕或者連線等等)
 	static class ButtonsPanel extends JPanel implements ActionListener{
-
+		public ButtonsPanel(){
+			JButton start = new JButton("Start Game");
+			JButton networkGame = new JButton("Connect to Another Player !!");
+			start.setBackground(Color.cyan);
+			start.setPreferredSize(new Dimension(200,60));
+			start.setFont(new Font("Arial", Font.PLAIN, 20));
+			networkGame.setFont(new Font("Arial", Font.PLAIN, 20));
+			networkGame.setBackground(Color.cyan);
+			networkGame.setPreferredSize(new Dimension(350,60));
+			add(start);
+			add(networkGame);
+		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
@@ -160,10 +175,12 @@ public class View {
 	public static void main(String[] argv){
 		View v = new View();
 		GamePanel game = v.getGamePanel();
+		ButtonsPanel buttonsPanel = v.getButtonPanel();
 		JFrame frame = new JFrame("Black Or White");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1300,900);
+		frame.setSize(1300,1000);
 		frame.getContentPane().add(BorderLayout.CENTER, game);
+		frame.getContentPane().add(BorderLayout.SOUTH , buttonsPanel);
 		frame.setVisible(true);
 		game.repaint();
 		
