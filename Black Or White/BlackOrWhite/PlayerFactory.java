@@ -44,20 +44,21 @@ public class PlayerFactory implements RoleFactory {
 
 	@Override
 	public ImageSequence[][] getActionImages() {
+		
 		/* HALT,WALK,SHOOT,DIE 為動作索引順序  
 		 * NORTH,EAST,SOUTH,WEST 為方向索引順序
 		 * [動作][方向]
 		 * 將此段複製貼上 以免錯誤
 		 */
 		ImageSequence[][] actionImgs = {
-  /*Halt*/		{ new ImageSequence( "pics/Player/Halt/East","png",1) ,
-					new ImageSequence( "pics/Player/Halt/East","png",1) ,
-					new ImageSequence( "pics/Player/Halt/East","png",1) ,
-					new ImageSequence( "pics/Player/Halt/East","png",1)} ,
-  /*Walk*/		{ new ImageSequence( "pics/Player/Walk/East","png",1) ,
-						new ImageSequence( "pics/Player/Walk/East","png",1) ,
-						new ImageSequence( "pics/Player/Walk/East","png",1) ,
-						new ImageSequence( "pics/Player/Walk/East","png",1)}
+  /*Halt*/		{ new ImageSequence( "Black Or White/pics/Player/Halt/East","png",1) ,
+					new ImageSequence( "Black Or White/pics/Player/Halt/East","png",1) ,
+					new ImageSequence( "Black Or White/pics/Player/Halt/East","png",1) ,
+					new ImageSequence( "Black Or White/pics/Player/Halt/East","png",1)} ,
+  /*Walk*/		{ new ImageSequence( "Black Or White/pics/Player/Walk/East","png",1) ,
+						new ImageSequence( "Black Or White/pics/Player/Walk/East","png",1) ,
+						new ImageSequence( "Black Or White/pics/Player/Walk/East","png",1) ,
+						new ImageSequence( "Black Or White/pics/Player/Walk/East","png",1)}
 					};
 		return actionImgs;
 	}
