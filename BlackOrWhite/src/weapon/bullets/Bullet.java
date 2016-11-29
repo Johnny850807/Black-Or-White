@@ -1,9 +1,11 @@
 package weapon.bullets;
 
 import mvc.Dir;
+import mvc.Model;
 import weapon.bulletflying.BulletFlying;
 
 public abstract class Bullet {
+	private Model model;
 	public int cX;  //°_ÂI®y¼Ð
 	public int cY;
 	private int damage;
@@ -51,12 +53,15 @@ public abstract class Bullet {
 		 * */
 		return null;
 	}
+	
+	public Model getModel() {
+		return model;
+	}
 
-	
-	
-	
-	
-	
+	public void setModel(Model model) {
+		this.model = model;
+	}
+
 	public int getcX() {
 		return cX;
 	}

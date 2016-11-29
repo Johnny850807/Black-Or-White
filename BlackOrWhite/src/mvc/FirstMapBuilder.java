@@ -8,23 +8,26 @@ public class FirstMapBuilder extends MapBuilder{
 
 	@Override
 	public void buildBlockingBarrier() {
-		System.out.print("*");
+		System.out.print(MapBuilder.BLOCKING);
 		
 	}
 
 	@Override
 	public void buildGroundBarrier() {
-		System.out.print("0");
+		System.out.print(MapBuilder.GROUND_BARRIER);
 	}
 
 	@Override
 	public void buildWalkableRoad() {
-		System.out.print("-");
+		System.out.print(MapBuilder.ROAD);
 	}
 	
 	public static void main(String[] argv){
 		MapBuilder bui = new FirstMapBuilder(new View());
+		
+		// this is the director example for 10x10 map 
 		String[] mapString=   
+				
 			         { "**********" , 
 				       "*00000000*" ,
 				       "*-**--**-*" , 

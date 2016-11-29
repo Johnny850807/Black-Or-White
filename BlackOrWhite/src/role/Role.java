@@ -1,5 +1,8 @@
 package role;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 import mvc.*;
 import role.abstractFactory.RoleFactory;
 import role.movements.AI_Movement;
@@ -7,12 +10,13 @@ import role.movements.Backable;
 import weapon.guns.Gun;
 
 public abstract class Role {
-	private Model model;
-	private ImageSequence[][] actionImgs;
-	private Backable backable; //受到傷害後的行為
-	private RoleFactory factory; //抽象角色工廠
-	private Gun gun;  //角色擁有的槍 若沒有為null
-	private AI_Movement movement; //選擇動作 玩家此變數為null
+	protected Model model;
+	protected ImageSequence[][] actionImgs;
+	protected Backable backable; //受到傷害後的行為
+	protected RoleFactory factory; //抽象角色工廠
+	protected Gun gun;  //角色擁有的槍 若沒有為null
+	protected AI_Movement movement; //選擇動作 玩家此變數為null
+	protected Queue<Request> requests;
 	public int x;
 	public int y;
 	public int hp;  //生命
@@ -20,6 +24,17 @@ public abstract class Role {
 	public int atk;  //怪物的觸碰攻擊 若玩家則為0
 	public ActionType curAct;
 	public Dir curDir;
+	public boolean isDead; //判斷是否死亡  若死亡要啟動死亡生命週期
+	
+	//玩家輸入的命令
+	protected class Request{
+		public ActionType act;
+		public Dir dir;
+		public Request(ActionType act , Dir dir){
+			this.act = act;
+			this.dir = dir;
+		}
+	}
 	
 	public Role(RoleFactory factory){
 		this.factory = factory;
@@ -30,6 +45,9 @@ public abstract class Role {
 		hp = factory.getHp();
 		df = factory.getDf();
 		atk = factory.getAtk();
+		
+		isDead = false;
+		requests = new LinkedList(); // requests queue
 	}
 	
 	public Role(RoleFactory factory, int x, int y) {
@@ -37,15 +55,18 @@ public abstract class Role {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public Model getModel() {
+		return model;
+	}
 
-	//玩家輸入的命令
-	protected class Request{
-		public ActionType act;
-		public Dir dir;
-		public Request(ActionType act , Dir dir){
-			this.act = act;
-			this.dir = dir;
-		}
+	public void setModel(Model model) {
+		this.model = model;
+	}
+
+	protected void hurtedJudgement(){
+		// hook method , do something while hurted.
+		
 	}
 	
 }
