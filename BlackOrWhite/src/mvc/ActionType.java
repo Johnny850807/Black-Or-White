@@ -1,5 +1,5 @@
 package mvc;
 
 public enum ActionType {
-	HALT,WALK
+	HALT,WALK,SHOOT,DIE
 }
