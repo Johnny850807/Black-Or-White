@@ -20,8 +20,6 @@ public abstract class Role {
 	public int x;
 	public int y;
 	public int hp;  //生命
-	public int df;  //防禦力
-	public int atk;  //怪物的觸碰攻擊 若玩家則為0
 	public ActionType curAct;
 	public Dir curDir;
 	public boolean isDead; //判斷是否死亡  若死亡要啟動死亡生命週期
@@ -43,8 +41,6 @@ public abstract class Role {
 		gun = factory.getGun();
 		movement = factory.getMovement();
 		hp = factory.getHp();
-		df = factory.getDf();
-		atk = factory.getAtk();
 		
 		isDead = false;
 		requests = new LinkedList(); // requests queue

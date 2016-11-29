@@ -11,6 +11,6 @@ public interface RoleFactory {
 	AI_Movement getMovement();
 	Backable getBackable();
 	int getHp();
-	int getDf();
-	int getAtk();
+	/*int getDf();
+	int getAtk();  不會變的數值 不用工廠給了*/
 }

@@ -34,17 +34,6 @@ public class PlayerFactory implements RoleFactory {
 	}
 
 	@Override
-	public int getDf() {
-		return 10;
-	}
-
-	@Override
-	public int getAtk() {
-		// player don't have a touching-injury
-		return 0;
-	}
-
-	@Override
 	public ImageSequence[][] getActionImages() {
 		
 		/* Singleton Pattern

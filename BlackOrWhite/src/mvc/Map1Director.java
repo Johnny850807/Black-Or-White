@@ -1,7 +1,7 @@
 package mvc;
 
 public class Map1Director implements MapDirector{
-	private static String[] mapString;
+	private static String[] mapString; // singleton
 	// 玩家、怪物出生地座標
 	public final static int PLAYER_CREATE_X = 200;
 	public final static int PLAYER_CREATE_Y = 700;

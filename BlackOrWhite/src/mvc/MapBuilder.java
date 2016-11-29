@@ -25,11 +25,11 @@ public abstract class MapBuilder {
 				if ( mapMessage[i].length() != SIZEX )
 					Log.e("Map Parameter String Size Wrong !");
 				if ( mapMessage[i].charAt(j) == BLOCKING )
-					buildBlockingBarrier(g , i * SIZE_IMG , j * SIZE_IMG );
+					buildBlockingBarrier(g , j * SIZE_IMG , i * SIZE_IMG );
 				else if ( mapMessage[i].charAt(j) == GROUND_BARRIER )
-					buildGroundBarrier(g , i * SIZE_IMG , j * SIZE_IMG );
+					buildGroundBarrier(g , j * SIZE_IMG , i * SIZE_IMG );
 				else
-					buildWalkableRoad(g , i * SIZE_IMG , j * SIZE_IMG);
+					buildWalkableRoad(g , j * SIZE_IMG , i * SIZE_IMG);
 			}
 	}
 }

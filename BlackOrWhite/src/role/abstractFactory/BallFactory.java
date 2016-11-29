@@ -42,16 +42,6 @@ public class BallFactory implements RoleFactory {
 	}
 
 	@Override
-	public int getDf() {
-		return 20;
-	}
-
-	@Override
-	public int getAtk() {
-		return 24;
-	}
-
-	@Override
 	public ImageSequence[][] getActionImages() {
 
 		/* Singleton Pattern
