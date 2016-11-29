@@ -24,11 +24,11 @@ public abstract class MapBuilder {
 				if ( mapMessage[i].length() != SIZE )
 					Log.e("Map Parameter String Size Wrong !");
 				if ( mapMessage[i].charAt(j) == BLOCKING )
-					buildBlockingBarrier(g);
+					buildBlockingBarrier(g , i * 100 , j * 100 );
 				else if ( mapMessage[i].charAt(j) == GROUND_BARRIER )
-					buildGroundBarrier(g);
+					buildGroundBarrier(g , i * 100 , j * 100 );
 				else
-					buildWalkableRoad(g);
+					buildWalkableRoad(g , i * 100 , j * 100);
 			}
 	}
 }
