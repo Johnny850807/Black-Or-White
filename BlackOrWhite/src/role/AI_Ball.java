@@ -12,4 +12,10 @@ public class AI_Ball extends AI {
 		super(factory,x,y);
 	}
 
+	@Override
+	protected void die() {
+		
+		
+	}
+
 }

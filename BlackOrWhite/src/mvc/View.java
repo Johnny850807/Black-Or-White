@@ -15,10 +15,13 @@ public class View extends JPanel {
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
+	
+	public View() {}
 
 	public View(Controller controller) {
 		super();
 		this.controller = controller;
 	}
+	
 
 }
