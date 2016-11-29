@@ -18,11 +18,14 @@ public class View extends JPanel {
 	public ButtonsPanel buttonPanel;
 	private List<Role> roles;
 	private List<Bullet> bullets;
+	private MapBuilder builder;// build the map whenever the view got settled the builder
 	
-	public View() {}
+	public View() {
+		builder = new BasicMapBuilder(this);
+	}
 
 	public View(Controller controller) {
-		super();
+		this();
 		this.controller = controller;
 	}
 
@@ -34,6 +37,24 @@ public class View extends JPanel {
 		this.controller = controller;
 	}
 	
+	
+	public MapBuilder getBuilder() {
+		return builder;
+	}
+
+	public void setBuilder(MapBuilder builder) {
+		this.builder = builder;
+	}
+	
+	public void buildMap(Graphics g){
+		String[] mapString = null;
+		if ( builder == null )
+			Log.e("MapBuilder is null !! Should set it before you invoke buildMap() ."); 
+		else
+			builder.buildMap(mapString, g);
+	}
+
+
 	//放置按鈕的panel (開始遊戲按鈕或者連線等等)
 	static class ButtonsPanel extends JPanel implements ActionListener{
 
