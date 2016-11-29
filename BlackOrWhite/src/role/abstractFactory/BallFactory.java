@@ -50,8 +50,30 @@ public class BallFactory implements RoleFactory {
 
 	@Override
 	public ImageSequence[][] getActionImages() {
-		// TODO Auto-generated method stub
-		return null;
+		/* HALT,WALK,SHOOT,DIE 為動作索引順序  
+		 * NORTH,EAST,SOUTH,WEST 為方向索引順序
+		 * [動作][方向]
+		 * 將此段複製貼上 以免錯誤
+		 * 
+		 * 
+		 * 怪物的還沒設置!!!!!!!!!!!!!!!!!!
+		 */
+		ImageSequence[][] actionImgs = {
+  /*Halt*/		{ new ImageSequence( "pics/Player/Halt/East","png",1) ,
+					new ImageSequence( "pics/Player/Halt/East","png",1) ,
+					new ImageSequence( "pics/Player/Halt/East","png",1) ,
+					new ImageSequence( "pics/Player/Halt/East","png",1)} ,
+  /*Walk*/		{ new ImageSequence( "pics/Player/Walk/East","png",1) ,
+						new ImageSequence( "pics/Player/Walk/East","png",1) ,
+						new ImageSequence( "pics/Player/Walk/East","png",1) ,
+						new ImageSequence( "pics/Player/Walk/East","png",1)}
+					};
+		return actionImgs;
+	}
+
+	// test if the file path works
+	public static void main(String[] argv){
+		ImageSequence[][] actionImgs = new BallFactory().getActionImages();
 	}
 
 }

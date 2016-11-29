@@ -23,10 +23,21 @@ public abstract class Role {
 	
 	public Role(RoleFactory factory){
 		this.factory = factory;
-		
+		actionImgs = factory.getActionImages();
+		backable = factory.getBackable();
+		gun = factory.getGun();
+		movement = factory.getMovement();
+		hp = factory.getHp();
+		df = factory.getDf();
+		atk = factory.getAtk();
+	}
+	
+	public Role(RoleFactory factory, int x, int y) {
+		this(factory);
+		this.x = x;
+		this.y = y;
 	}
 
-	
 	//玩家輸入的命令
 	protected class Request{
 		public ActionType act;
