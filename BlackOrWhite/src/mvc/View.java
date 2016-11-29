@@ -110,22 +110,39 @@ public class View {
 
 	//放置按鈕的panel (開始遊戲按鈕或者連線等等)
 	static class ButtonsPanel extends JPanel implements ActionListener{
+		private JButton start;
+		private JButton networkGame;
 		public ButtonsPanel(){
-			JButton start = new JButton("Start Game");
-			JButton networkGame = new JButton("Connect to Another Player !!");
+			start = new JButton("Start Game");
+			networkGame = new JButton("Connect to Another Player !!");
 			start.setBackground(Color.cyan);
 			start.setPreferredSize(new Dimension(200,60));
 			start.setFont(new Font("Arial", Font.PLAIN, 20));
+			start.addActionListener(this);
 			networkGame.setFont(new Font("Arial", Font.PLAIN, 20));
 			networkGame.setBackground(Color.cyan);
 			networkGame.setPreferredSize(new Dimension(350,60));
+			networkGame.addActionListener(this);
 			add(start);
 			add(networkGame);
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
-			
+			JButton event = (JButton)e.getSource();
+			if (event.equals(start)){
+				if ( event.getText() != "End Game" ){
+					// End game event
+					start.setText("End Game");
+					
+				}
+				else{
+					// Start game Event
+					
+				}
+			}
+			else if (event.equals(networkGame)){
+				
+			}
 		}
 		
 	}
