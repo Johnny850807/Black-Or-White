@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 public class ImageSequence { //分鏡畫面物件
 	private String baseFileName; //圖片檔主名
-	private String fileExt; //圖片檔附加名(如png檔)
+	private String fileExt; //圖片檔附加名(如png檔)666
 	private int numFiles; //分鏡畫面檔個數
 	private Image[] imgs ; //儲存分鏡畫面圖檔(Image物件陣列)
 	private int index = -1; //分鏡畫面索引
