@@ -14,8 +14,8 @@ public class Controller extends Thread{
 	public static boolean gameStart = false;
 	public static boolean netWork = false;
 	public static View view;
-	public Role player1 = null;  // single game
-	public Role player2 = null;  // net game
+	public Player player1 = null;  // single game
+	public Player player2 = null;  // net game
 	public Stage curStage;
 	public List<Role> roles;
 	public List<Bullet> bullets;
@@ -23,10 +23,15 @@ public class Controller extends Thread{
 	private Controller(){}; // singleton
 	public static Controller getController(){return controller;}
 	
-	private void createPlayer(){
+	private void createPlayer(){  //create the player in the pair of specific coordinates
 		player1 = new Player(Map1Director.PLAYER_CREATE_X,Map1Director.PLAYER_CREATE_Y);
-		if(netWork)
+		Log.d("Create PLAYER 1 ");
+		new Thread(player1).start();
+		roles.add(player1);
+		/*if(netWork){ //網路部分....可有可無
 			player2 = new Player(Map1Director.PLAYER_CREATE_X,Map1Director.PLAYER_CREATE_Y);
+			roles.add(player2);
+		}*/
 	}
 	public void startGame(){
 		gameStart = true;
@@ -41,11 +46,16 @@ public class Controller extends Thread{
 	}
 	public void run(){
 		curStage = StageFactory.createAllStages(this);
+		view.refreshScreen();
 		new Thread(curStage).start(); // 開始生產怪物
 		while(gameStart)
 		{
-		
+			//處理按鍵需求
 		}
+	}
+	
+	public void movePlayer(ActionType act,Dir dir){
+		player1.addRequest(act, dir);
 	}
 	
 	public int getRemainningMonster(){

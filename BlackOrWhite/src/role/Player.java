@@ -1,6 +1,8 @@
 package role;
 
+import mvc.ActionType;
 import mvc.Controller;
+import mvc.Dir;
 import role.abstractFactory.PlayerFactory;
 import role.abstractFactory.RoleFactory;
 
@@ -11,7 +13,7 @@ public class Player extends Role implements Runnable{
 	}
 
 	public Player(int x ,int y){
-		super(new PlayerFactory(),x,y);
+		super(new PlayerFactory(),x,y, ActionType.HALT , Dir.NORTH);
 	}
 
 	@Override
@@ -34,8 +36,8 @@ public class Player extends Role implements Runnable{
 		// handle the request ... and update the model
 	}
 	
-	public final void addRequest(Request request){
-		requests.offer(request);
+	public final void addRequest(ActionType act , Dir dir){
+		requests.offer(new Request(act,dir));
 	}
 	
 	protected void die(){

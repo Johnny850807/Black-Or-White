@@ -49,6 +49,11 @@ public class View {
 		playerPanel = new PlayerPanel();
 		buttonsPanel = new ButtonsPanel(playerPanel);
 	}
+	
+	public void refreshScreen(){
+		//更新畫面
+		gamePanel.repaint();
+	}
 
 	public Controller getController() {
 		return controller;
@@ -146,9 +151,10 @@ public class View {
 	}
 
 	//放置按鈕的panel (開始遊戲按鈕或者連線等等)
-	class ButtonsPanel extends JPanel implements ActionListener{
+	class ButtonsPanel extends JPanel implements ActionListener , KeyListener{
 		private static final String NET_MESSAGE = "請輸入遊戲伺服器IP.";
 		private static final String NET_CONNECT = "連線到伺服器中.";
+		private Dir playerCurDir = Dir.NORTH;  //用來記錄玩家目前面向方位!
 		private JButton start;
 		private JButton networkGame;
 		private JFrame netFrame;
@@ -195,6 +201,7 @@ public class View {
 					//make playerPanel visible
 					playerPanel.setP1Hp(500);
 					parent.setVisible(true);
+					controller.startGame();
 				}
 				else{
 					// End game Event 
@@ -208,7 +215,45 @@ public class View {
 				netFrame.setVisible(true);
 			}
 		}
-		
+		@Override
+		public void keyPressed(KeyEvent e) {
+			int code = e.getKeyCode();
+			if (!netWorking)  //single game
+			{
+				switch(code){
+				case KeyEvent.VK_UP:
+					controller.movePlayer(ActionType.WALK, Dir.NORTH);
+					break;
+				case KeyEvent.VK_DOWN:
+					controller.movePlayer(ActionType.WALK, Dir.SOUTH);
+					break;
+				case KeyEvent.VK_LEFT:
+					controller.movePlayer(ActionType.WALK, Dir.WEST);
+					break;
+				case KeyEvent.VK_RIGHT:
+					controller.movePlayer(ActionType.WALK, Dir.EAST);
+					break;
+				case KeyEvent.VK_C:  //shoot
+				case KeyEvent.VK_SPACE:  //also shoot
+					controller.movePlayer(ActionType.SHOOT, playerCurDir);
+					break;
+				}
+			}
+			else  //網路遊戲 要傳指令給server的controller
+			{
+				
+			}
+			
+		}
+		@Override
+		public void keyTyped(KeyEvent e) {}
+		@Override
+		public void keyReleased(KeyEvent e) {
+			if(!netWorking)
+				controller.movePlayer(ActionType.HALT, Dir.NORTH);
+			else //net work
+				;
+		}
 	}
 	
 	//放置遊戲畫面的panel

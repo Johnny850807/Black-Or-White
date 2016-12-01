@@ -1,5 +1,7 @@
 package role;
 
+import mvc.ActionType;
+import mvc.Dir;
 import role.abstractFactory.RoleFactory;
 
 public abstract class AI extends Role implements Runnable{
@@ -8,8 +10,8 @@ public abstract class AI extends Role implements Runnable{
 		super(factory);
 	}
 	
-	public AI(RoleFactory factory,int x ,int y){
-		super(factory,x,y);
+	public AI(RoleFactory factory,int x ,int y , ActionType act , Dir dir){
+		super(factory,x,y,act,dir);
 	}
 	
 	@Override

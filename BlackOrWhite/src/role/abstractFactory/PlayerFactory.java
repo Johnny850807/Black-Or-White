@@ -45,14 +45,14 @@ public class PlayerFactory implements RoleFactory {
 		
 		if ( actImgs == null ){
 			actImgs = new ImageSequence[][]{
-  /*Halt*/		{ new ImageSequence( "pics/Player/Halt/East","png",1) ,
+  /*Halt*/		{ new ImageSequence( "pics/Player/Halt/North","png",1) ,
 					new ImageSequence( "pics/Player/Halt/East","png",1) ,
-					new ImageSequence( "pics/Player/Halt/East","png",1) ,
-					new ImageSequence( "pics/Player/Halt/East","png",1)} ,
-  /*Walk*/		{ new ImageSequence( "pics/Player/Walk/East","png",1) ,
-						new ImageSequence( "pics/Player/Walk/East","png",1) ,
-						new ImageSequence( "pics/Player/Walk/East","png",1) ,
-						new ImageSequence( "pics/Player/Walk/East","png",1)}
+					new ImageSequence( "pics/Player/Halt/South","png",1) ,
+					new ImageSequence( "pics/Player/Halt/West","png",1)} ,
+  /*Walk*/		{ new ImageSequence( "pics/Player/Walk/North","png",4) ,
+						new ImageSequence( "pics/Player/Walk/East","png",6) ,
+						new ImageSequence( "pics/Player/Walk/South","png",4) ,
+						new ImageSequence( "pics/Player/Walk/West","png",6)}
 					};
 		}
 		

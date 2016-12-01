@@ -41,15 +41,17 @@ public abstract class Role {
 		gun = factory.getGun();
 		movement = factory.getMovement();
 		hp = factory.getHp();
-		
 		isDead = false;
 		requests = new LinkedList(); // requests queue
 	}
 	
-	public Role(RoleFactory factory, int x, int y) {
+	public Role(RoleFactory factory, int x, int y , ActionType act , Dir dir) {
 		this(factory);
 		this.x = x;
 		this.y = y;
+		this.curAct = act;
+		this.curDir = dir;
+		this.model = new Model(x,y,act,dir,actionImgs[curAct.ordinal()][curDir.ordinal()]);
 	}
 	
 	public Model getModel() {

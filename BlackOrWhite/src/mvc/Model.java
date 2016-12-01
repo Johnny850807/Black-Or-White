@@ -8,7 +8,13 @@ public class Model {
 	public Dir dir;
 	public ImageSequence iS;  //目前的分鏡動作
 	
-	
+	public Model(int cX,int cY, ActionType act,Dir dir ,ImageSequence iS){
+		this.cX = cX;
+		this.cY = cY;
+		this.act = act;
+		this.dir = dir;
+		this.iS = iS;
+	}
 
 	
 	public Controller getController() {

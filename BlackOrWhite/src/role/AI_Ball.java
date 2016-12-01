@@ -1,6 +1,6 @@
 package role;
 
-import mvc.ImageSequence;
+import mvc.*;
 import role.abstractFactory.RoleFactory;
 
 public class AI_Ball extends AI {
@@ -12,8 +12,8 @@ public class AI_Ball extends AI {
 		super(factory);
 	}
 	
-	public AI_Ball(RoleFactory factory ,int x , int y) {
-		super(factory,x,y);
+	public AI_Ball(RoleFactory factory ,int x , int y , ActionType act , Dir dir) {
+		super(factory,x,y,act,dir);
 	}
 
 	@Override
