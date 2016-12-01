@@ -17,6 +17,8 @@ public class BasicMapBuilder extends MapBuilder{
 		
 	}
 	
+	// there are three singletons inside each creational function
+	
 	@Override
 	public void buildBlockingBarrier(Graphics g , int x , int y ) {
 		System.out.print(MapBuilder.BLOCKING);

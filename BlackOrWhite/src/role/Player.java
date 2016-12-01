@@ -1,15 +1,17 @@
 package role;
 
+import mvc.Controller;
+import role.abstractFactory.PlayerFactory;
 import role.abstractFactory.RoleFactory;
 
 public class Player extends Role implements Runnable{
 
-	public Player(RoleFactory factory) {
-		super(factory);
+	public Player() {
+		super(new PlayerFactory());
 	}
 
-	public Player(RoleFactory factory,int x ,int y){
-		super(factory,x,y);
+	public Player(int x ,int y){
+		super(new PlayerFactory(),x,y);
 	}
 
 	@Override
