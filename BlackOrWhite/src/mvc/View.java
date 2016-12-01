@@ -41,7 +41,7 @@ public class View {
 	private List<Role> roles; //所有存在角色
 	private List<Bullet> bullets;  //所有存在子彈
 	private static boolean startGame = false;  
-	private boolean netWorking = false; // true if choose the networking mode
+	public boolean netWorking = false; // true if choose the networking mode
 	
 	public View(JFrame frame) {
 		this.parent = frame;
@@ -154,6 +154,7 @@ public class View {
 	class ButtonsPanel extends JPanel implements ActionListener , KeyListener{
 		private static final String NET_MESSAGE = "請輸入遊戲伺服器IP.";
 		private static final String NET_CONNECT = "連線到伺服器中.";
+		public boolean isShootSpacing = false;  //射擊間隔
 		private Dir playerCurDir = Dir.NORTH;  //用來記錄玩家目前面向方位!
 		private JButton start;
 		private JButton networkGame;
@@ -242,6 +243,11 @@ public class View {
 					break;
 				case KeyEvent.VK_C:  //shoot
 				case KeyEvent.VK_SPACE:  //also shoot
+					if (isShootSpacing){
+						controller.movePlayer(ActionType.HALT, playerCurDir);
+						break;
+					}
+					new ShootSpacing(this).start();
 					controller.movePlayer(ActionType.SHOOT, playerCurDir);
 					break;
 				}
@@ -286,7 +292,7 @@ public class View {
 			buildMap(g);
 			for ( Role r : roles ){
 				m = r.getModel();
-				cycle = m.getAct() == ActionType.DIE ? false : true; //死亡不能是循環分鏡圖
+				cycle = m.getAct() == ActionType.DIE  ? false : true; //死亡不能是循環分鏡圖
 				g.drawImage( m.getiS().next(cycle), m.getcX(), m.getcY(), null );
 			}
 			for ( Bullet b : bullets ){

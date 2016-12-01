@@ -10,17 +10,17 @@ import role.Role;
 import weapon.bullets.Bullet;
 
 public class Controller extends Thread{
-	public volatile static Controller controller = new Controller(); // double checked singleton
-	public static boolean gameStart = false;
-	public static boolean netWork = false;
-	public static View view;
-	public Player player1 = null;  // single game
-	public Player player2 = null;  // net game
-	public Stage curStage;
-	public volatile List<Role> roles;
-	public volatile List<Bullet> bullets;
-	public boolean[] roleUpdates = new boolean[1000];  //確認所有角色狀態更新之後，controller才更新一次畫面
-	public boolean[] bulletUpdates = new boolean[1000];  //確認所有子彈狀態更新之後，controller才更新一次畫面
+	private volatile static Controller controller = new Controller(); // double checked singleton
+	private static boolean gameStart = false;
+	private static boolean netWork = false;
+	private static View view;
+	private Player player1 = null;  // single game
+	private Player player2 = null;  // net game
+	private Stage curStage;
+	private volatile List<Role> roles;
+	private volatile List<Bullet> bullets;
+	private boolean[] roleUpdates = new boolean[1000];  //確認所有角色狀態更新之後，controller才更新一次畫面
+	private boolean[] bulletUpdates = new boolean[1000];  //確認所有子彈狀態更新之後，controller才更新一次畫面
 	
 	private Controller(){}; // singleton
 	public static Controller getController(){return controller;}
@@ -53,12 +53,12 @@ public class Controller extends Thread{
 		new Thread(curStage).start(); // 開始生產怪物
 		while(gameStart)
 		{
-			if(checkUpdate())
+			if(true)
 			{
 				view.refreshScreen();
 				clearAllUpdate();
 			}
-			try {Thread.sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
+			try {Thread.sleep(30);} catch (InterruptedException e) {e.printStackTrace();}
 		}
 	}
 	
@@ -69,7 +69,14 @@ public class Controller extends Thread{
 	
 	public void updateModel(Bullet bullet){
 		//更新某個子彈的狀態
-		roleUpdates[roles.indexOf(bullet)] = true;
+		bulletUpdates[bullets.indexOf(bullet)] = true;
+	}
+	
+	public void deleteModel(Role role){
+		roles.remove(role);
+	}
+	public void deleteModel(Bullet bullet){
+		bullets.remove(bullet);
 	}
 	
 	//確認是否全部更新
@@ -104,6 +111,11 @@ public class Controller extends Thread{
 	public void addMonster(AI monster){
 		roles.add(monster);
 	}
+	
+	public void addBullet(Bullet bullet){
+		bullets.add(bullet);
+	}
+	
 	public static boolean isNetWork() {
 		return netWork;
 	}

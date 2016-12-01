@@ -63,7 +63,7 @@ public abstract class Role {
 		this.y = y;
 		this.curAct = act;
 		this.curDir = dir;
-		this.model = new Model(this,x,y,act,dir,actionImgs[curAct.ordinal()][curDir.ordinal()]);
+		this.model = new Model(this,Item.ROLE,x,y,act,dir,actionImgs[curAct.ordinal()][curDir.ordinal()]);
 	}
 	
 	public Model getModel() {
@@ -93,6 +93,7 @@ public abstract class Role {
 		curDir = dir;
 		int dX = 0,dY = 0; //位移
 		ImageSequence iS = model.getiS();
+
 		switch(curAct)
 		{
 			case HALT:  
@@ -111,10 +112,13 @@ public abstract class Role {
 				}
 				break;
 			case SHOOT:
-				curAct = ActionType.SHOOT;
+				gun.gunShooting(this);
+			try {Thread.sleep(20);} catch (InterruptedException e) {e.printStackTrace();}
 				break;
 		}
-		int rX = model.getcX() + offsetX + dX, rY = model.getcY() + offsetY + dY;  //結果位子
+		x = model.getcX();
+		y = model.getcY();
+		int rX = x + offsetX + dX, rY = y + offsetY + dY;  //結果位子
 		Boolean conflict = false; //撞到障礙物
 		for ( int i = 0 ; i < BARRIER_X_SET.size() ; i ++ )
 			if ( (rX+feetW >= BARRIER_X_SET.get(i) && rX <= BARRIER_X_SET.get(i) + 100) 
@@ -125,9 +129,12 @@ public abstract class Role {
 		iS = actionImgs[curAct.ordinal()][curDir.ordinal()];
 		if ( curDir != dir )
 			iS.reset();
+
 		model.setState(dX, dY, curAct, curDir, iS);
 	}
 	
 	abstract int getMovingDistance(ActionType act , Dir dir);  //回傳該角色每次移動距離
+	
+	
 	
 }
