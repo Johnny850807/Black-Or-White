@@ -1,5 +1,7 @@
 package mvc;
 
+import role.Role;
+
 public class Model {
 	private Controller controller; //更新之後要通知controller
 	public int cX;
@@ -7,8 +9,10 @@ public class Model {
 	public ActionType act;
 	public Dir dir;
 	public ImageSequence iS;  //目前的分鏡動作
+	public Role parent;  //記錄誰擁有這個model
 	
-	public Model(int cX,int cY, ActionType act,Dir dir ,ImageSequence iS){
+	public Model(Role parent,int cX,int cY, ActionType act,Dir dir ,ImageSequence iS){
+		this.parent = parent;
 		this.cX = cX;
 		this.cY = cY;
 		this.act = act;

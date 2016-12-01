@@ -51,7 +51,7 @@ public abstract class Role {
 		this.y = y;
 		this.curAct = act;
 		this.curDir = dir;
-		this.model = new Model(x,y,act,dir,actionImgs[curAct.ordinal()][curDir.ordinal()]);
+		this.model = new Model(this,x,y,act,dir,actionImgs[curAct.ordinal()][curDir.ordinal()]);
 	}
 	
 	public Model getModel() {
@@ -66,5 +66,7 @@ public abstract class Role {
 		// hook method , do something while hurted.
 		
 	}
+	
+	abstract int getMovingDistance(ActionType act , Dir dir);  //回傳該角色每次移動距離
 	
 }

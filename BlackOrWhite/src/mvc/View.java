@@ -250,7 +250,7 @@ public class View {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			if(!netWorking)
-				controller.movePlayer(ActionType.HALT, Dir.NORTH);
+				controller.movePlayer(ActionType.HALT, playerCurDir);
 			else //net work
 				;
 		}

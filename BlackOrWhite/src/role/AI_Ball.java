@@ -22,4 +22,10 @@ public class AI_Ball extends AI {
 		
 	}
 
+	@Override
+	int getMovingDistance(ActionType act , Dir dir) {
+		//¨C¦¸²¾°Ê¶ZÂ÷
+		return 5;
+	}
+
 }

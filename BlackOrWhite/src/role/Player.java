@@ -34,6 +34,26 @@ public class Player extends Role implements Runnable{
 	
 	private final void processRequest(){
 		// handle the request ... and update the model
+		Request request;
+
+		while(requests.size() > 0)
+		{
+			request = requests.poll();
+			curAct = request.act;
+			curDir = request.dir;
+			switch(request.act)
+			{
+				case HALT:
+					curAct = ActionType.HALT;
+					break;
+				case WALK:
+					curAct = ActionType.WALK;
+					break;
+				case SHOOT:
+					curAct = ActionType.SHOOT;
+					break;
+			}
+		}
 	}
 	
 	public final void addRequest(ActionType act , Dir dir){
@@ -44,6 +64,28 @@ public class Player extends Role implements Runnable{
 		// while the player dies
 		
 		
+	}
+
+	@Override
+	int getMovingDistance(ActionType act , Dir dir) {
+		switch(act)
+		{
+			case WALK:
+				switch(dir){
+					case NORTH:
+						return -5;
+					case SOUTH:
+						return 5;
+					case EAST:
+						return 9;
+					case WEST:
+						return -9;
+				}
+				break;
+			default:
+				return 0;
+		}
+		return 0;
 	}
 	
 }

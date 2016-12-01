@@ -17,8 +17,10 @@ public class Controller extends Thread{
 	public Player player1 = null;  // single game
 	public Player player2 = null;  // net game
 	public Stage curStage;
-	public List<Role> roles;
-	public List<Bullet> bullets;
+	public volatile List<Role> roles;
+	public volatile List<Bullet> bullets;
+	public boolean[] roleUpdates = new boolean[1000];  //確認所有角色狀態更新之後，controller才更新一次畫面
+	public boolean[] bulletUpdates = new boolean[1000];  //確認所有子彈狀態更新之後，controller才更新一次畫面
 	
 	private Controller(){}; // singleton
 	public static Controller getController(){return controller;}
@@ -50,12 +52,39 @@ public class Controller extends Thread{
 		new Thread(curStage).start(); // 開始生產怪物
 		while(gameStart)
 		{
-			//處理按鍵需求
+			
 		}
+	}
+	
+	public void updateModel(Role role){
+		//更新某個角色的狀態
+		roleUpdates[roles.indexOf(role)] = true;
+	}
+	
+	public void updateModel(Bullet bullet){
+		//更新某個子彈的狀態
+		roleUpdates[roles.indexOf(bullet)] = true;
+	}
+	
+	//確認是否全部更新
+	public boolean checkUpdate(){
+		for ( int i = 0 ; i < roles.size() ; i ++ )
+			if ( roleUpdates[i] == false )
+				return false;
+		for ( int i = 0 ; i < bullets.size() ; i ++ )
+			if ( bulletUpdates[i] == false )
+				return false;
+		return true;
+	}
+	
+	public void clearAllUpdate(){
+		roleUpdates = new boolean[1000]; // 預設為false ...
+		bulletUpdates = new boolean[1000]; // 預設為false ...
 	}
 	
 	public void movePlayer(ActionType act,Dir dir){
 		player1.addRequest(act, dir);
+		Log.d("按鍵需求:"+act.getClass().getName()+","+dir.getClass().getName());
 	}
 	
 	public int getRemainningMonster(){
