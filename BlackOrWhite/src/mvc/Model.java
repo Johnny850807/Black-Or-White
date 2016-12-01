@@ -3,13 +3,13 @@ package mvc;
 import role.Role;
 
 public class Model {
-	private Controller controller; //更新之後要通知controller
-	public int cX;
-	public int cY;
-	public ActionType act;
-	public Dir dir;
-	public ImageSequence iS;  //目前的分鏡動作
-	public Role parent;  //記錄誰擁有這個model
+	private Controller controller = Controller.getController(); //更新之後要通知controller
+	private int cX;
+	private int cY;
+	private ActionType act;
+	private Dir dir;
+	private ImageSequence iS;  //目前的分鏡動作
+	private Role parent;  //記錄誰擁有這個model
 	
 	public Model(Role parent,int cX,int cY, ActionType act,Dir dir ,ImageSequence iS){
 		this.parent = parent;
@@ -20,6 +20,14 @@ public class Model {
 		this.iS = iS;
 	}
 
+	public void setState(int deltaX,int deltaY, ActionType act,Dir dir ,ImageSequence iS){
+		this.cX += deltaX;
+		this.cY += deltaY;
+		this.act = act;
+		this.dir = dir;
+		this.iS = iS;
+		controller.updateModel(parent);
+	}
 	
 	public Controller getController() {
 		return controller;
@@ -27,18 +35,29 @@ public class Model {
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
+	public ActionType getAct() {
+		return act;
+	}
+	
+	public Dir getDir() {
+		return dir;
+	}
+
+	public ImageSequence getiS() {
+		return iS;
+	}
+
+	public Role getParent() {
+		return parent;
+	}
+
 	public int getcX() {
 		return cX;
 	}
-	public void setcX(int cX) {
-		this.cX = cX;
-	}
+
 	public int getcY() {
 		return cY;
 	}
-	public void setcY(int cY) {
-		this.cY = cY;
-	}
-	
+
 	
 }

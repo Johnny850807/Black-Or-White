@@ -1,5 +1,13 @@
 package mvc;
 
 public enum ActionType {
-	HALT,WALK,SHOOT,DIE
+	HALT("Halt"),WALK("Walk"),SHOOT("Shoot"),DIE("");
+	String message;
+	private ActionType(String text){
+		this.message = text;
+	}
+	public String getMessage() {
+		return message;
+	}
+
 }

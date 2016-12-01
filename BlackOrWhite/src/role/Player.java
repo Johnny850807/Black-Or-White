@@ -3,6 +3,7 @@ package role;
 import mvc.ActionType;
 import mvc.Controller;
 import mvc.Dir;
+import mvc.Log;
 import role.abstractFactory.PlayerFactory;
 import role.abstractFactory.RoleFactory;
 
@@ -14,6 +15,13 @@ public class Player extends Role implements Runnable{
 
 	public Player(int x ,int y){
 		super(new PlayerFactory(),x,y, ActionType.HALT , Dir.NORTH);
+		offsetX = 21;
+		offsetY = 90;
+		feetW = 40;
+		feetH = 10;
+		hp = 500;
+		atk = 0;
+		df = 20;
 	}
 
 	@Override
@@ -22,11 +30,13 @@ public class Player extends Role implements Runnable{
 		 * 1. check if hurted (hook)
 		 * 2. check if got requests (final)
 		 */
+		Log.d("Player run!");
 		while(!isDead){
 			hurtedJudgement();
 			
 			if ( requests.size() > 0 )
 				processRequest();
+			try {Thread.sleep(50);} catch (InterruptedException e) {e.printStackTrace();}
 		}
 		
 		die();
@@ -35,24 +45,11 @@ public class Player extends Role implements Runnable{
 	private final void processRequest(){
 		// handle the request ... and update the model
 		Request request;
-
+		Log.d("process request");
 		while(requests.size() > 0)
 		{
 			request = requests.poll();
-			curAct = request.act;
-			curDir = request.dir;
-			switch(request.act)
-			{
-				case HALT:
-					curAct = ActionType.HALT;
-					break;
-				case WALK:
-					curAct = ActionType.WALK;
-					break;
-				case SHOOT:
-					curAct = ActionType.SHOOT;
-					break;
-			}
+			super.getMoved(request.act, request.dir);
 		}
 	}
 	

@@ -49,10 +49,16 @@ public class Controller extends Thread{
 	public void run(){
 		curStage = StageFactory.createAllStages(this);
 		view.refreshScreen();
+		Log.d("Controller run!");
 		new Thread(curStage).start(); // 開始生產怪物
 		while(gameStart)
 		{
-			
+			if(checkUpdate())
+			{
+				view.refreshScreen();
+				clearAllUpdate();
+			}
+			try {Thread.sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
 		}
 	}
 	
@@ -84,7 +90,7 @@ public class Controller extends Thread{
 	
 	public void movePlayer(ActionType act,Dir dir){
 		player1.addRequest(act, dir);
-		Log.d("按鍵需求:"+act.getClass().getName()+","+dir.getClass().getName());
+		Log.d("按鍵需求:"+act.getMessage()+","+dir.getMessage());
 	}
 	
 	public int getRemainningMonster(){

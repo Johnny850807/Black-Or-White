@@ -37,7 +37,7 @@ public class View {
 	public ButtonsPanel buttonsPanel;  //按鈕畫面
 	public PlayerPanel playerPanel;  //玩家狀況
 	private MapBuilder builder; // build the map whenever the view got settled the builder
-	private MapDirector director; // to direct the builder
+	private Map1Director director; // to direct the builder
 	private List<Role> roles; //所有存在角色
 	private List<Bullet> bullets;  //所有存在子彈
 	private static boolean startGame = false;  
@@ -71,11 +71,11 @@ public class View {
 		this.builder = builder;
 	}
 	
-	public MapDirector getDirector() {
+	public Map1Director getDirector() {
 		return director;
 	}
 	
-	public void setDirector(MapDirector director) {
+	public void setDirector(Map1Director director) {
 		this.director = director;
 	}
 	
@@ -189,6 +189,8 @@ public class View {
 			panel.add(netConnectBTN);
 			netFrame.getContentPane().add(panel, BorderLayout.NORTH);
 			netFrame.getContentPane().add(netMessage,BorderLayout.CENTER);
+			
+			addKeyListener(this);
 		}
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -218,19 +220,24 @@ public class View {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int code = e.getKeyCode();
+			if (!startGame) return;
 			if (!netWorking)  //single game
 			{
 				switch(code){
 				case KeyEvent.VK_UP:
+					playerCurDir = Dir.NORTH;
 					controller.movePlayer(ActionType.WALK, Dir.NORTH);
 					break;
 				case KeyEvent.VK_DOWN:
+					playerCurDir = Dir.SOUTH;
 					controller.movePlayer(ActionType.WALK, Dir.SOUTH);
 					break;
 				case KeyEvent.VK_LEFT:
+					playerCurDir = Dir.WEST;
 					controller.movePlayer(ActionType.WALK, Dir.WEST);
 					break;
 				case KeyEvent.VK_RIGHT:
+					playerCurDir = Dir.EAST;
 					controller.movePlayer(ActionType.WALK, Dir.EAST);
 					break;
 				case KeyEvent.VK_C:  //shoot
@@ -249,6 +256,7 @@ public class View {
 		public void keyTyped(KeyEvent e) {}
 		@Override
 		public void keyReleased(KeyEvent e) {
+			if (!startGame) return;
 			if(!netWorking)
 				controller.movePlayer(ActionType.HALT, playerCurDir);
 			else //net work
@@ -278,14 +286,14 @@ public class View {
 			buildMap(g);
 			for ( Role r : roles ){
 				m = r.getModel();
-				cycle = m.act == ActionType.DIE ? false : true; //死亡不能是循環分鏡圖
-				g.drawImage( m.iS.next(cycle), m.cX	, m.cY, null );
+				cycle = m.getAct() == ActionType.DIE ? false : true; //死亡不能是循環分鏡圖
+				g.drawImage( m.getiS().next(cycle), m.getcX(), m.getcY(), null );
 			}
 			for ( Bullet b : bullets ){
 				m = b.getModel();
-				g.drawImage( m.iS.next(true), m.cX	, m.cY, null );
+				g.drawImage( m.getiS().next(true), m.getcX(), m.getcY(), null );
 			}
-			this.requestFocusInWindow();
+			buttonsPanel.requestFocusInWindow();
 		}
 		
 		public void buildMap(Graphics g){
@@ -294,7 +302,6 @@ public class View {
 			else
 				builder.buildMap(director.getMapString(), g);
 		}
-		
 
 	}
 	
@@ -303,7 +310,7 @@ public class View {
 		Controller controller = Controller.getController();
 		View v = new View(frame);
 		MapBuilder builder = new BasicMapBuilder();
-		MapDirector director = new Map1Director();
+		Map1Director director = new Map1Director();
 		v.setBuilder(builder);
 		v.setDirector(director);
 		v.setController(controller);
@@ -328,15 +335,13 @@ public class View {
 		//使Game Panel能接收按鍵事件
 			frame.addWindowListener(new WindowAdapter(){
 				@Override
-				public void windowOpened(WindowEvent e) {
-					super.windowOpened(e);
-					game.requestFocusInWindow();
-				}
+				 public void windowActivated( WindowEvent e){ 
+					buttonsPanel.requestFocusInWindow(); 
+	              } 
 				@Override
-				public void windowClosed(WindowEvent e) {
-					super.windowClosed(e);
-					game.requestFocusInWindow();
-				}
+				public void windowOpened( WindowEvent e){ 
+					buttonsPanel.requestFocusInWindow(); 
+	              } 
 					
 			});
 	}
