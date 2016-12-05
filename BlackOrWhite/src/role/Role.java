@@ -35,6 +35,7 @@ public abstract class Role {
 	public ActionType curAct;
 	public Dir curDir;
 	public boolean isDead = false; //判斷是否死亡  若死亡要啟動死亡生命週期
+	public boolean isShootSpacing = false; //射擊間距是否緩衝中
 	
 	//玩家輸入的命令
 	protected class Request{
@@ -81,6 +82,22 @@ public abstract class Role {
 	public void setHp(int hp) {
 		this.hp = hp;
 	}
+	
+	public boolean isShootSpacing() {
+		return isShootSpacing;
+	}
+
+	public void setShootSpacing(boolean isShootSpacing) {
+		this.isShootSpacing = isShootSpacing;
+	}
+
+	public Gun getGun() {
+		return gun;
+	}
+
+	public void setGun(Gun gun) {
+		this.gun = gun;
+	}
 
 	protected void hurtedJudgement(){
 		// hook method , do something while hurted.
@@ -113,26 +130,37 @@ public abstract class Role {
 				break;
 			case SHOOT:
 				gun.gunShooting(this);
-			try {Thread.sleep(20);} catch (InterruptedException e) {e.printStackTrace();}
+				ShootSpacing sh = new ShootSpacing(this);  //射擊間格
+				sh.start();
 				break;
 		}
 		x = model.getcX();
 		y = model.getcY();
 		int rX = x + offsetX + dX, rY = y + offsetY + dY;  //結果位子
-		Boolean conflict = false; //撞到障礙物
-		for ( int i = 0 ; i < BARRIER_X_SET.size() ; i ++ )
-			if ( (rX+feetW >= BARRIER_X_SET.get(i) && rX <= BARRIER_X_SET.get(i) + 100) 
-			&& (rY+feetH >= BARRIER_Y_SET.get(i) && rY <= BARRIER_Y_SET.get(i) + 100) )
-				conflict = true;
-		if (conflict)
-			dX = dY = 0;
+		if (!moveable(rX,rY)) //若不可移動則位移0
+			dX = dY = 0; 
 		iS = actionImgs[curAct.ordinal()][curDir.ordinal()];
 		if ( curDir != dir )
 			iS.reset();
-
 		model.setState(dX, dY, curAct, curDir, iS);
 	}
-	
+	public boolean moveable(int x , int y){
+		//判斷腳色是否可以繼續移動
+		return !(outOfBound(x,y) || conflictWithBarrier(x,y));
+	}
+	public boolean outOfBound(int x, int y){
+		//判斷是否出界
+		return x < -5 || y < -5 || x > MapBuilder.SIZEX*100+10 || y > MapBuilder.SIZEY*100+10;
+	}
+	public boolean conflictWithBarrier(int x , int y){
+		//判斷是否撞到障礙物
+		Boolean conflict = false;
+		for ( int i = 0 ; i < BARRIER_X_SET.size() ; i ++ )
+			if ( (x+feetW >= BARRIER_X_SET.get(i) && x <= BARRIER_X_SET.get(i) + 100) 
+			&& (y+feetH >= BARRIER_Y_SET.get(i) && y <= BARRIER_Y_SET.get(i) + 100) )
+				conflict = true;
+		return conflict;
+	}
 	abstract int getMovingDistance(ActionType act , Dir dir);  //回傳該角色每次移動距離
 	
 	

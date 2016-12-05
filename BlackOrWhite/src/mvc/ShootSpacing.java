@@ -1,16 +1,18 @@
 package mvc;
 
 import mvc.View.ButtonsPanel;
+import role.Player;
+import role.Role;
 
-class ShootSpacing extends Thread{
-	private ButtonsPanel panel;
-	public ShootSpacing(ButtonsPanel panel){
-		this.panel = panel;
+ public class ShootSpacing extends Thread{
+	private Role player;
+	public ShootSpacing(Role player){
+		this.player = player;
 	}
 	@Override
 	public void run(){
-		panel.isShootSpacing  = true;
-		try {Thread.sleep(750);} catch (InterruptedException e) {e.printStackTrace();}
-		panel.isShootSpacing = false;
+		player.setShootSpacing(true);  
+		try {Thread.sleep(player.getGun().getSpacing());} catch (InterruptedException e) {e.printStackTrace();}
+		player.setShootSpacing(false);  
 	}
 }

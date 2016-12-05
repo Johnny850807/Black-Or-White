@@ -10,20 +10,6 @@ public class BasicBullet extends Bullet {
 		super(x,y,7,26,120, curDir, factory);
 	}
 
-	@Override
-	public void run() {
-		Log.d("Basic Bullet Run!");
-		while(true){
-			flying();
-			if(!flyable())
-			{
-				Log.d("end flying");
-				model.delete();
-				break;
-			}
-			try {Thread.sleep(50);
-			} catch (InterruptedException e) {e.printStackTrace();}
-		}
-	}
+	
 
 }

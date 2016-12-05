@@ -2,7 +2,7 @@ package role;
 
 import mvc.*;
 import role.abstractFactory.RoleFactory;
-
+					//繼承AI 
 public class AI_Ball extends AI {
 	//不會變的數值
 	public static int df;  //防禦力
@@ -14,11 +14,11 @@ public class AI_Ball extends AI {
 	
 	public AI_Ball(RoleFactory factory ,int x , int y , ActionType act , Dir dir) {
 		super(factory,x,y,act,dir);
-	}
+	} 
 
 	@Override
 	protected void die() {
-		
+	//這邊的程式碼 是繼承AI的	
 		
 	}
 

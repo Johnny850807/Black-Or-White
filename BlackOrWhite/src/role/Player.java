@@ -36,6 +36,10 @@ public class Player extends Role implements Runnable{
 			
 			if ( requests.size() > 0 )
 				processRequest();
+			else{
+				if(curAct != ActionType.SHOOT)
+					getMoved(curAct, curDir);
+			}
 			try {Thread.sleep(50);} catch (InterruptedException e) {e.printStackTrace();}
 		}
 		
@@ -49,7 +53,9 @@ public class Player extends Role implements Runnable{
 		while(requests.size() > 0)
 		{
 			request = requests.poll();
-			super.getMoved(request.act, request.dir);
+			if ( request.act == ActionType.SHOOT && isShootSpacing )
+				return;  //如果位於射擊緩衝時間 而且使用者點選射擊 就不理會
+			super.getMoved(request.act, request.dir);	
 		}
 	}
 	

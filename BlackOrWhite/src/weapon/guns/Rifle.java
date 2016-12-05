@@ -33,7 +33,14 @@ public class Rifle implements Gun {
 		}
 		Bullet bullet = new BasicBullet( x , y , role.curDir , new RifleBulletFactory());
 		new Thread(bullet).start();
+	//	try {Thread.sleep(750);} catch (InterruptedException e) {e.printStackTrace();}
 		return bullet;
+	}
+
+	@Override
+	public int getSpacing() {
+		//®gÀ»¶¡®æ
+		return 750;
 	}
 	
 

@@ -154,7 +154,6 @@ public class View {
 	class ButtonsPanel extends JPanel implements ActionListener , KeyListener{
 		private static final String NET_MESSAGE = "請輸入遊戲伺服器IP.";
 		private static final String NET_CONNECT = "連線到伺服器中.";
-		public boolean isShootSpacing = false;  //射擊間隔
 		private Dir playerCurDir = Dir.NORTH;  //用來記錄玩家目前面向方位!
 		private JButton start;
 		private JButton networkGame;
@@ -243,11 +242,6 @@ public class View {
 					break;
 				case KeyEvent.VK_C:  //shoot
 				case KeyEvent.VK_SPACE:  //also shoot
-					if (isShootSpacing){
-						controller.movePlayer(ActionType.HALT, playerCurDir);
-						break;
-					}
-					new ShootSpacing(this).start();
 					controller.movePlayer(ActionType.SHOOT, playerCurDir);
 					break;
 				}

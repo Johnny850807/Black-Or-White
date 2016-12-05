@@ -14,8 +14,8 @@ import role.Role;
 import weapon.bulletflying.BulletFlying;
 
 public abstract class Bullet implements Runnable{
-	public static ArrayList<Integer> BARRIER_X_SET = Map1Director.BARRIER_X_SET;  //障礙物座標集合
-	public static ArrayList<Integer> BARRIER_Y_SET = Map1Director.BARRIER_Y_SET;
+	public static ArrayList<Integer> BARRIER_X_SET = Map1Director.BULLET_BARRIER_X_SET;  //障礙物座標集合
+	public static ArrayList<Integer> BARRIER_Y_SET = Map1Director.BULLET_BARRIER_Y_SET;
 	protected Model model;
 	//工廠
 	protected BulletFlying bulletFly;
@@ -25,7 +25,7 @@ public abstract class Bullet implements Runnable{
 	private int vW;  // vertical 垂直高度
 	private int vH;  // 垂直寬度 (所以橫向的話 高度,寬度要對調)
 
-	protected int cX;  //起點座標
+	protected int cX;  //座標
 	protected int cY;
 	public Dir curDir;  //飛行方向
 
@@ -40,6 +40,22 @@ public abstract class Bullet implements Runnable{
 		this.bulletFly = factory.getBulletFlying();
 		this.actionImgs = factory.getActionImages();
 		model = new Model(this, Item.BULLET, cX,cY, ActionType.WALK , curDir, actionImgs[0][curDir.ordinal()]);
+	}
+	
+	@Override
+	public void run() {
+		Log.d("Bullet Run!");
+		while(true){
+			flying();
+			if(!flyable())  //不能飛了  刪掉
+			{
+				Log.d("end flying");
+				model.delete();
+				break;
+			}
+			try {Thread.sleep(50);
+			} catch (InterruptedException e) {e.printStackTrace();}
+		}
 	}
 	
 	public void flying(){
@@ -65,27 +81,30 @@ public abstract class Bullet implements Runnable{
 		}
 
 		iS = actionImgs[0][curDir.ordinal()];
-		model.setState(dX, dY, ActionType.WALK , curDir, iS);
+		model.setState(dX, dY, ActionType.WALK , curDir, iS);  
+		cX = model.getcX();  //更新座標
+		cY = model.getcY();
 	}
 	
 	public boolean flyable(){
-		/*障礙物判斷子彈是否能繼續飛行，還是消失
-		 * */
-
+		//障礙物判斷子彈是否能繼續飛行，還是消失
+		return ! ( outOfBound(cX,cY) | conflictWithBarrier(cX,cY));
+	}
+	
+	public boolean outOfBound(int x, int y){
+		//判斷是否出界
+		return x < -5 || y < -5 || x > MapBuilder.SIZEX*100+10 || y > MapBuilder.SIZEY*100+10;
+	}
+	public boolean conflictWithBarrier(int x , int y){
 		int w = curDir == Dir.NORTH || curDir == Dir.SOUTH ? vW : vH;  //垂直
 		int h = curDir == Dir.EAST || curDir == Dir.WEST ? vW : vH;  //水平 寬高相反
-		//判斷是否碰到障礙物
-		if ( cX < 0 || cY < 0 || cX > MapBuilder.SIZEX*100 || cY > MapBuilder.SIZEY*100 ){
-			Log.d("超出界線");
-			return false;
-		}
+		//判斷是否撞到障礙物
+		Boolean conflict = false;
 		for ( int i = 0 ; i < BARRIER_X_SET.size() ; i ++ )
-			if ( (cX+w >= BARRIER_X_SET.get(i) && cX <= BARRIER_X_SET.get(i) + 100) 
-			&& (cY+h >= BARRIER_Y_SET.get(i) && cY <= BARRIER_Y_SET.get(i) + 100) ){
-				Log.d("撞到障礙物"+BARRIER_X_SET.get(i)+","+BARRIER_Y_SET.get(i)+",子彈:"+cX+","+cY);
-				return false;
-			}
-		return true;
+			if ( (x+w >= (BARRIER_X_SET.get(i)+18) && x <= BARRIER_X_SET.get(i) + 92) 
+			&& (y+h >= (BARRIER_Y_SET.get(i)+18) && y <= BARRIER_Y_SET.get(i) + 92) )
+				conflict = true;
+		return conflict;
 	}
 	
 	public Bullet endFlying(){

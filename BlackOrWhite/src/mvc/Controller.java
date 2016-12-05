@@ -51,14 +51,14 @@ public class Controller extends Thread{
 		view.refreshScreen();
 		Log.d("Controller run!");
 		new Thread(curStage).start(); // 開始生產怪物
-		while(gameStart)
+		while(true)
 		{
-			if(true)
+			if(checkUpdate())
 			{
 				view.refreshScreen();
 				clearAllUpdate();
 			}
-			try {Thread.sleep(30);} catch (InterruptedException e) {e.printStackTrace();}
+			try {Thread.sleep(100);} catch (InterruptedException e) {e.printStackTrace();}
 		}
 	}
 	
@@ -81,9 +81,12 @@ public class Controller extends Thread{
 	
 	//確認是否全部更新
 	public boolean checkUpdate(){
-		for ( int i = 0 ; i < roles.size() ; i ++ )
+		for ( int i = 0 ; i < roles.size() ; i ++ ){
+			if(roles.get(i)instanceof Player)
+				continue;
 			if ( roleUpdates[i] == false )
 				return false;
+		}
 		for ( int i = 0 ; i < bullets.size() ; i ++ )
 			if ( bulletUpdates[i] == false )
 				return false;
