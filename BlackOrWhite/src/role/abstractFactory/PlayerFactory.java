@@ -5,6 +5,7 @@ import role.movements.AI_Movement;
 import role.movements.Backable;
 import role.movements.GoBack;
 import weapon.guns.Gun;
+import weapon.guns.MachineGun;
 import weapon.guns.Rifle;
 
 public class PlayerFactory implements RoleFactory {
@@ -13,8 +14,8 @@ public class PlayerFactory implements RoleFactory {
 	
 	@Override
 	public Gun getGun() {
-		// Default Rifle gun
-		return new Rifle();
+		// return new Rifle(); 
+		return new MachineGun();
 	}
 
 	@Override

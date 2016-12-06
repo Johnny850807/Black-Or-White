@@ -46,12 +46,10 @@ public abstract class Bullet implements Runnable{
 	
 	@Override
 	public void run() {
-		Log.d("Bullet Run!");
 		while(true){
 			flying();
 			if(!flyable())  //不能飛了  刪掉
 			{
-				Log.d("end flying");
 				endFlying();
 				break;
 			}
@@ -81,9 +79,9 @@ public abstract class Bullet implements Runnable{
 		}
 
 		iS = actionImgs[0][curDir.ordinal()];
-		model.setState(dX, dY, ActionType.WALK , curDir, iS);  
 		cX = model.getcX();  //更新座標
 		cY = model.getcY();
+		model.setState(dX, dY, ActionType.WALK , curDir, iS);  
 	}
 	
 	public boolean flyable(){

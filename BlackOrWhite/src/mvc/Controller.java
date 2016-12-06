@@ -19,8 +19,8 @@ public class Controller extends Thread{
 	private Player player2 = null;  // net game
 	private Stage curStage;
 	private GameObjects gameObjects = GameObjects.getGameObjects();  //all objects will be painted in the game
-	private boolean[] roleUpdates = new boolean[1000];  //確認所有角色狀態更新之後，controller才更新一次畫面
-	private boolean[] bulletUpdates = new boolean[1000];  //確認所有子彈狀態更新之後，controller才更新一次畫面
+	private boolean[] roleUpdates = new boolean[10000];  //確認所有角色狀態更新之後，controller才更新一次畫面
+	private boolean[] bulletUpdates = new boolean[10000];  //確認所有子彈狀態更新之後，controller才更新一次畫面
 	
 	private Controller(){}; // singleton
 	public static Controller getController(){return controller;}
@@ -74,11 +74,15 @@ public class Controller extends Thread{
 	
 	public void updateModel(Role role){
 		//更新某個角色的狀態
-		roleUpdates[gameObjects.getIndexOf(role)] = true;
+		int idx = gameObjects.getIndexOf(role);
+		if(idx != -1)
+			roleUpdates[gameObjects.getIndexOf(role)] = true;
 	}
 	
 	public void updateModel(Bullet bullet){
 		//更新某個子彈的狀態
+		int idx = gameObjects.getIndexOf(bullet);
+		if(idx != -1)
 		bulletUpdates[gameObjects.getIndexOf(bullet)] = true;
 	}
 	
