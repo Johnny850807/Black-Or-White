@@ -21,7 +21,6 @@ public class BasicMapBuilder extends MapBuilder{
 	
 	@Override
 	public void buildBlockingBarrier(Graphics g , int x , int y ) {
-		System.out.print(MapBuilder.BLOCKING);
 		if ( barrier == null ){
 			try {
 				barrier = ImageIO.read(new File("pics/Map/tree.png"));
@@ -34,7 +33,6 @@ public class BasicMapBuilder extends MapBuilder{
 
 	@Override
 	public void buildGroundBarrier(Graphics g , int x , int y ) {
-		System.out.print(MapBuilder.GROUND_BARRIER);
 		if ( ground == null ){
 			try {
 				ground = ImageIO.read(new File("pics/Map/water.png"));
@@ -48,7 +46,6 @@ public class BasicMapBuilder extends MapBuilder{
 
 	@Override
 	public void buildWalkableRoad(Graphics g , int x , int y ) {
-		System.out.print(MapBuilder.ROAD);
 		if ( road == null ){
 			try {
 				road = ImageIO.read(new File("pics/Map/grass.png"));

@@ -10,6 +10,7 @@ import weapon.bullets.Bullet;
 public class GameObjectModelsItertor implements Iterator<Model> {
 	private GameObjects gameObjects;
 	private ArrayList<Model> models;
+	private Iterator<Model> iterator;
 	public GameObjectModelsItertor(GameObjects gameObjects){
 		this.gameObjects = gameObjects;
 		models = new ArrayList<Model>();
@@ -18,17 +19,15 @@ public class GameObjectModelsItertor implements Iterator<Model> {
 			models.add(r.getModel());
 		for ( Bullet b : gameObjects.getBullets() )
 			models.add(b.getModel());
+		iterator = models.iterator();
 	}
 	@Override
 	public boolean hasNext() {
-		
-		return false;
+		return iterator.hasNext();
 	}
-
 	@Override
 	public Model next() {
-
-		return null;
+		return iterator.next();
 	}
 
 }

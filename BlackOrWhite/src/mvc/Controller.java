@@ -3,6 +3,7 @@ package mvc;
 import java.util.ArrayList;
 import java.util.List;
 
+import mvc.gameObject.GameObjects;
 import mvc.stage.*;
 import role.AI;
 import role.Player;
@@ -10,17 +11,16 @@ import role.Role;
 import weapon.bullets.Bullet;
 
 public class Controller extends Thread{
-	private volatile static Controller controller = new Controller(); // double checked singleton
+	private volatile static Controller controller = new Controller(); // singleton
 	private static boolean gameStart = false;
 	private static boolean netWork = false;
 	private static View view;
 	private Player player1 = null;  // single game
 	private Player player2 = null;  // net game
 	private Stage curStage;
-	private volatile List<Role> roles;
-	private volatile List<Bullet> bullets;
-	private boolean[] roleUpdates = new boolean[1000];  //確認所有角色狀態更新之後，controller才更新一次畫面
-	private boolean[] bulletUpdates = new boolean[1000];  //確認所有子彈狀態更新之後，controller才更新一次畫面
+	private GameObjects gameObjects = GameObjects.getGameObjects();  //all objects will be painted in the game
+	private boolean[] roleUpdates = new boolean[10000];  //確認所有角色狀態更新之後，controller才更新一次畫面
+	private boolean[] bulletUpdates = new boolean[10000];  //確認所有子彈狀態更新之後，controller才更新一次畫面
 	
 	private Controller(){}; // singleton
 	public static Controller getController(){return controller;}
@@ -29,7 +29,7 @@ public class Controller extends Thread{
 		player1 = new Player(Map1Director.PLAYER_CREATE_X,Map1Director.PLAYER_CREATE_Y);
 		Log.d("Create PLAYER 1 ");
 		new Thread(player1).start();
-		roles.add(player1);
+		gameObjects.addRole(player1);
 		/*if(netWork){ //網路部分....可有可無
 			player2 = new Player(Map1Director.PLAYER_CREATE_X,Map1Director.PLAYER_CREATE_Y);
 			roles.add(player2);
@@ -51,43 +51,57 @@ public class Controller extends Thread{
 		view.refreshScreen();
 		Log.d("Controller run!");
 		new Thread(curStage).start(); // 開始生產怪物
-		while(true)
-		{
-			if(checkUpdate())
+		try{
+			while(true)
 			{
-				view.refreshScreen();
-				clearAllUpdate();
+				if(checkUpdate())
+				{
+					view.refreshScreen();
+					clearAllUpdate();
+				}
+				Thread.sleep(100); 
 			}
-			try {Thread.sleep(100);} catch (InterruptedException e) {e.printStackTrace();}
+		}catch (InterruptedException e) {
+			e.printStackTrace();
+		}catch(Exception e){
+			Log.d(e.toString());
 		}
+		catch (Error e){
+			Log.d(e.toString());
+		}
+		
 	}
 	
 	public void updateModel(Role role){
 		//更新某個角色的狀態
-		roleUpdates[roles.indexOf(role)] = true;
+		int idx = gameObjects.getIndexOf(role);
+		if(idx != -1)
+			roleUpdates[gameObjects.getIndexOf(role)] = true;
 	}
 	
 	public void updateModel(Bullet bullet){
 		//更新某個子彈的狀態
-		bulletUpdates[bullets.indexOf(bullet)] = true;
+		int idx = gameObjects.getIndexOf(bullet);
+		if(idx != -1)
+		bulletUpdates[gameObjects.getIndexOf(bullet)] = true;
 	}
 	
 	public void deleteModel(Role role){
-		roles.remove(role);
+		gameObjects.removeRole(role);
 	}
 	public void deleteModel(Bullet bullet){
-		bullets.remove(bullet);
+		gameObjects.removeBullet(bullet);
 	}
 	
 	//確認是否全部更新
 	public boolean checkUpdate(){
-		for ( int i = 0 ; i < roles.size() ; i ++ ){
-			if(roles.get(i)instanceof Player)
+		for ( int i = 0 ; i < gameObjects.rolesSize() ; i ++ ){
+			if(gameObjects.getRole(i)instanceof Player)  //不檢查玩家是否更新
 				continue;
 			if ( roleUpdates[i] == false )
 				return false;
 		}
-		for ( int i = 0 ; i < bullets.size() ; i ++ )
+		for ( int i = 0 ; i < gameObjects.bulletSize() ; i ++ )
 			if ( bulletUpdates[i] == false )
 				return false;
 		return true;
@@ -100,23 +114,22 @@ public class Controller extends Thread{
 	
 	public void movePlayer(ActionType act,Dir dir){
 		player1.addRequest(act, dir);
-		Log.d("按鍵需求:"+act.getMessage()+","+dir.getMessage());
 	}
 	
 	public int getRemainningMonster(){
 		//得到剩下怪物的數量
 		int sum = 0;
-		for ( int i = 0 ; i < roles.size() ; i ++ )
-			sum += roles.get(i) instanceof AI ? 1 : 0;
+		for ( int i = 0 ; i < gameObjects.rolesSize() ; i ++ )
+			sum += gameObjects.getRole(i) instanceof AI ? 1 : 0;
 		return sum;
 	}
 	
 	public void addMonster(AI monster){
-		roles.add(monster);
+		gameObjects.addRole(monster);
 	}
 	
 	public void addBullet(Bullet bullet){
-		bullets.add(bullet);
+		gameObjects.addBullet(bullet);
 	}
 	
 	public static boolean isNetWork() {
@@ -137,18 +150,5 @@ public class Controller extends Thread{
 	public static void setView(View view) {
 		Controller.view = view;
 	}
-	public List<Role> getRoles() {
-		return roles;
-	}
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-	public List<Bullet> getBullets() {
-		return bullets;
-	}
-	public void setBullets(List<Bullet> bullets) {
-		this.bullets = bullets;
-	}
-	
 	
 }

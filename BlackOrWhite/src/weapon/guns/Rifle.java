@@ -2,7 +2,6 @@ package weapon.guns;
 
 import mvc.Dir;
 import role.Role;
-import weapon.bulletflying.NormalFlying;
 import weapon.bullets.BasicBullet;
 import weapon.bullets.Bullet;
 import weapon.bullets.RifleBulletFactory;
@@ -20,10 +19,10 @@ public class Rifle implements Gun {
 				y += 2;
 				break;
 			case EAST:
+				x += 87;
 				y += 47;
 				break;
 			case WEST:
-				x += 87;
 				y += 47;
 				break;
 			case SOUTH:

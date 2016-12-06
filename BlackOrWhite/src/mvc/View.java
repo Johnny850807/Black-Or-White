@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -27,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import mvc.gameObject.GameObjects;
 import role.Role;
 import weapon.bullets.Bullet;
 
@@ -38,8 +40,7 @@ public class View {
 	public PlayerPanel playerPanel;  //玩家狀況
 	private MapBuilder builder; // build the map whenever the view got settled the builder
 	private Map1Director director; // to direct the builder
-	private List<Role> roles; //所有存在角色
-	private List<Bullet> bullets;  //所有存在子彈
+	private GameObjects gameObjects = GameObjects.getGameObjects();  //all objects will be painted in the game
 	private static boolean startGame = false;  
 	public boolean netWorking = false; // true if choose the networking mode
 	
@@ -95,22 +96,6 @@ public class View {
 		this.buttonsPanel = buttonPanel;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
-	public List<Bullet> getBullets() {
-		return bullets;
-	}
-
-	public void setBullets(List<Bullet> bullets) {
-		this.bullets = bullets;
-	}
-
 	static class PlayerPanel extends JPanel {
 		private static final String Player1 = "Player1 ";
 		private static final String Player2 = "Player2 ";
@@ -155,6 +140,7 @@ public class View {
 		private static final String NET_MESSAGE = "請輸入遊戲伺服器IP.";
 		private static final String NET_CONNECT = "連線到伺服器中.";
 		private Dir playerCurDir = Dir.NORTH;  //用來記錄玩家目前面向方位!
+		private boolean releaseWhileShooting = true;  //為了讓玩家不能按著空白鍵連射，按下去時為false,放開才為true
 		private JButton start;
 		private JButton networkGame;
 		private JFrame netFrame;
@@ -220,7 +206,7 @@ public class View {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int code = e.getKeyCode();
-			if (!startGame) return;
+			if (!startGame) return; //若遊戲還沒開始 則不反應按鍵
 			if (!netWorking)  //single game
 			{
 				switch(code){
@@ -242,7 +228,14 @@ public class View {
 					break;
 				case KeyEvent.VK_C:  //shoot
 				case KeyEvent.VK_SPACE:  //also shoot
-					controller.movePlayer(ActionType.SHOOT, playerCurDir);
+					//if(releaseWhileShooting){//
+						releaseWhileShooting = false;
+						Log.d("press");
+						controller.movePlayer(ActionType.SHOOT, playerCurDir);
+				//	}
+					break;
+				case KeyEvent.VK_ENTER:  //印出遊戲資訊
+					Log.d("Role : " + gameObjects.rolesSize() + "Bullet : " + gameObjects.bulletSize());
 					break;
 				}
 			}
@@ -256,9 +249,14 @@ public class View {
 		public void keyTyped(KeyEvent e) {}
 		@Override
 		public void keyReleased(KeyEvent e) {
-			if (!startGame) return;
+			int code = e.getKeyCode();
+			if (!startGame) return;  //若遊戲還沒開始 則不反應按鍵
 			if(!netWorking)
 				controller.movePlayer(ActionType.HALT, playerCurDir);
+		/*	else if (!releaseWhileShooting){
+				releaseWhileShooting = true;
+				Log.d("release");
+			}*/
 			else //net work
 				;
 		}
@@ -281,19 +279,22 @@ public class View {
 			 * 2. Paint All the roles
 			 * 3. Paint All the Bullets 
 			 */
-			Model m;
-			Boolean cycle;
-			buildMap(g);
-			for ( Role r : roles ){
-				m = r.getModel();
-				cycle = m.getAct() == ActionType.DIE  ? false : true; //死亡不能是循環分鏡圖
-				g.drawImage( m.getiS().next(cycle), m.getcX(), m.getcY(), null );
+			try{
+				Model m;
+				Boolean cycle;
+				buildMap(g);
+				Iterator<Model> iterator = gameObjects.iterator();
+				while(iterator.hasNext())
+				{
+					m = iterator.next();
+					g.drawImage( m.getiS().next(true), m.getcX(), m.getcY(), null );
+				}
+				
+				buttonsPanel.requestFocusInWindow();
+			}catch(Exception err){
+				Log.d(err.toString());
 			}
-			for ( Bullet b : bullets ){
-				m = b.getModel();
-				g.drawImage( m.getiS().next(true), m.getcX(), m.getcY(), null );
-			}
-			buttonsPanel.requestFocusInWindow();
+			
 		}
 		
 		public void buildMap(Graphics g){
@@ -323,14 +324,6 @@ public class View {
 		frame.getContentPane().add(BorderLayout.CENTER, game);
 		frame.getContentPane().add(BorderLayout.SOUTH , buttonsPanel);
 		frame.setVisible(true);
-		
-		//物件設置
-		List<Role> roles =  Collections.checkedList( new ArrayList<Role>(), Role.class);
-		List<Bullet> bullets = Collections.checkedList( new ArrayList<Bullet>(), Bullet.class);
-		controller.setRoles(roles);
-		controller.setBullets(bullets);
-		v.setRoles(roles);
-		v.setBullets(bullets);
 		
 		//使Game Panel能接收按鍵事件
 			frame.addWindowListener(new WindowAdapter(){

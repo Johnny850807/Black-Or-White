@@ -2,7 +2,7 @@ package weapon.bullets;
 
 import mvc.Dir;
 import mvc.Log;
-import weapon.bulletflying.BulletFlying;
+
 
 public class BasicBullet extends Bullet {
 
