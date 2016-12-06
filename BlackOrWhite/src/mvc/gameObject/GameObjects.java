@@ -8,10 +8,17 @@ import role.Role;
 import weapon.bullets.Bullet;
 //所有出現在畫面中的物件
 public class GameObjects {
+	private static GameObjects gameObjects;  //singleton
 	private List<Role> roles = Collections.checkedList(new ArrayList<Role>(), Role.class); //所有存在角色
 	private List<Bullet> bullets  = Collections.checkedList(new ArrayList<Bullet>(), Bullet.class);  //所有存在子彈
 	
-	public GameObjects(){}
+	private GameObjects(){} //singleton
+	
+	public static GameObjects getGameObjects(){
+		if ( gameObjects == null ) //singleton
+			gameObjects = new GameObjects();
+		return gameObjects;
+	}
 	
 	public GameObjectModelsItertor iterator(){
 		return new GameObjectModelsItertor(this);
@@ -46,6 +53,25 @@ public class GameObjects {
 	}
 	public void removeBullet(int b){
 		bullets.remove(b);
+	}
+	public Role getRole(int idx){
+		return roles.get(idx);
+	}
+	public Bullet getBullet(int idx){
+		return bullets.get(idx);
+	}
+	//overloading
+	public int getIndexOf(Role r){
+		return roles.indexOf(r);
+	}
+	public int getIndexOf(Bullet b){
+		return bullets.indexOf(b);
+	}
+	public int rolesSize(){
+		return roles.size();
+	}
+	public int bulletSize(){
+		return bullets.size();
 	}
 	
 	
