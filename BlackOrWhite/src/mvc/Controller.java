@@ -51,15 +51,25 @@ public class Controller extends Thread{
 		view.refreshScreen();
 		Log.d("Controller run!");
 		new Thread(curStage).start(); // 開始生產怪物
-		while(true)
-		{
-			if(checkUpdate())
+		try{
+			while(true)
 			{
-				view.refreshScreen();
-				clearAllUpdate();
+				if(checkUpdate())
+				{
+					view.refreshScreen();
+					clearAllUpdate();
+				}
+				Thread.sleep(100); 
 			}
-			try {Thread.sleep(100);} catch (InterruptedException e) {e.printStackTrace();}
+		}catch (InterruptedException e) {
+			e.printStackTrace();
+		}catch(Exception e){
+			Log.d(e.toString());
 		}
+		catch (Error e){
+			Log.d(e.toString());
+		}
+		
 	}
 	
 	public void updateModel(Role role){

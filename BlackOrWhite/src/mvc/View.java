@@ -229,7 +229,7 @@ public class View {
 				case KeyEvent.VK_SPACE:  //also shoot
 					controller.movePlayer(ActionType.SHOOT, playerCurDir);
 					break;
-				case KeyEvent.VK_Q:  //印出遊戲資訊
+				case KeyEvent.VK_ENTER:  //印出遊戲資訊
 					Log.d("Role : " + gameObjects.rolesSize() + "Bullet : " + gameObjects.bulletSize());
 					break;
 				}
@@ -269,17 +269,22 @@ public class View {
 			 * 2. Paint All the roles
 			 * 3. Paint All the Bullets 
 			 */
-			Model m;
-			Boolean cycle;
-			buildMap(g);
-			Iterator<Model> iterator = gameObjects.iterator();
-			while(iterator.hasNext())
-			{
-				m = iterator.next();
-				g.drawImage( m.getiS().next(true), m.getcX(), m.getcY(), null );
+			try{
+				Model m;
+				Boolean cycle;
+				buildMap(g);
+				Iterator<Model> iterator = gameObjects.iterator();
+				while(iterator.hasNext())
+				{
+					m = iterator.next();
+					g.drawImage( m.getiS().next(true), m.getcX(), m.getcY(), null );
+				}
+				
+				buttonsPanel.requestFocusInWindow();
+			}catch(Exception err){
+				Log.d(err.toString());
 			}
 			
-			buttonsPanel.requestFocusInWindow();
 		}
 		
 		public void buildMap(Graphics g){

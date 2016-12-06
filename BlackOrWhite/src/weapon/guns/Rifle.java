@@ -20,10 +20,10 @@ public class Rifle implements Gun {
 				y += 2;
 				break;
 			case EAST:
+				x += 87;
 				y += 47;
 				break;
 			case WEST:
-				x += 87;
 				y += 47;
 				break;
 			case SOUTH:
