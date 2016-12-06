@@ -59,6 +59,10 @@ public class Controller extends Thread{
 					view.refreshScreen();
 					clearAllUpdate();
 				}
+				else
+				{
+					Log.d("False");
+				}
 				Thread.sleep(100); 
 			}
 		}catch (InterruptedException e) {

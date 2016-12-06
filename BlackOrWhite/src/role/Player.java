@@ -53,9 +53,11 @@ public class Player extends Role implements Runnable{
 		while(requests.size() > 0)
 		{
 			request = requests.poll();
-			if ( request.act == ActionType.SHOOT && isShootSpacing )
+			if ( request.act == ActionType.SHOOT && isShootSpacing ){
+				Log.d("間格時間，不給射擊");
 				return;  //如果位於射擊緩衝時間 而且使用者點選射擊 就不理會
-			super.getMoved(request.act, request.dir);	
+			}
+			getMoved(request.act, request.dir);	
 		}
 	}
 	

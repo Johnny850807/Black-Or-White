@@ -228,11 +228,11 @@ public class View {
 					break;
 				case KeyEvent.VK_C:  //shoot
 				case KeyEvent.VK_SPACE:  //also shoot
-					//if(releaseWhileShooting){//
+					if(releaseWhileShooting){
 						releaseWhileShooting = false;
 						Log.d("press");
 						controller.movePlayer(ActionType.SHOOT, playerCurDir);
-				//	}
+					}
 					break;
 				case KeyEvent.VK_ENTER:  //印出遊戲資訊
 					Log.d("Role : " + gameObjects.rolesSize() + "Bullet : " + gameObjects.bulletSize());
@@ -251,12 +251,13 @@ public class View {
 		public void keyReleased(KeyEvent e) {
 			int code = e.getKeyCode();
 			if (!startGame) return;  //若遊戲還沒開始 則不反應按鍵
-			if(!netWorking)
-				controller.movePlayer(ActionType.HALT, playerCurDir);
-		/*	else if (!releaseWhileShooting){
+			if (!releaseWhileShooting){
 				releaseWhileShooting = true;
 				Log.d("release");
-			}*/
+			}
+			if(!netWorking)
+				controller.movePlayer(ActionType.HALT, playerCurDir);
+			
 			else //net work
 				;
 		}
