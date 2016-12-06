@@ -2,7 +2,6 @@ package weapon.guns;
 
 import mvc.Dir;
 import role.Role;
-import weapon.bulletflying.NormalFlying;
 import weapon.bullets.BasicBullet;
 import weapon.bullets.Bullet;
 import weapon.bullets.RifleBulletFactory;

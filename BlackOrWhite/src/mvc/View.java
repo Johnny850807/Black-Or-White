@@ -140,6 +140,7 @@ public class View {
 		private static final String NET_MESSAGE = "請輸入遊戲伺服器IP.";
 		private static final String NET_CONNECT = "連線到伺服器中.";
 		private Dir playerCurDir = Dir.NORTH;  //用來記錄玩家目前面向方位!
+		private boolean releaseWhileShooting = true;  //為了讓玩家不能按著空白鍵連射，按下去時為false,放開才為true
 		private JButton start;
 		private JButton networkGame;
 		private JFrame netFrame;
@@ -205,7 +206,7 @@ public class View {
 		@Override
 		public void keyPressed(KeyEvent e) {
 			int code = e.getKeyCode();
-			if (!startGame) return;
+			if (!startGame) return; //若遊戲還沒開始 則不反應按鍵
 			if (!netWorking)  //single game
 			{
 				switch(code){
@@ -227,7 +228,11 @@ public class View {
 					break;
 				case KeyEvent.VK_C:  //shoot
 				case KeyEvent.VK_SPACE:  //also shoot
-					controller.movePlayer(ActionType.SHOOT, playerCurDir);
+					if(releaseWhileShooting){
+						releaseWhileShooting = false;
+						Log.d("press");
+						controller.movePlayer(ActionType.SHOOT, playerCurDir);
+					}
 					break;
 				case KeyEvent.VK_ENTER:  //印出遊戲資訊
 					Log.d("Role : " + gameObjects.rolesSize() + "Bullet : " + gameObjects.bulletSize());
@@ -244,9 +249,14 @@ public class View {
 		public void keyTyped(KeyEvent e) {}
 		@Override
 		public void keyReleased(KeyEvent e) {
-			if (!startGame) return;
+			int code = e.getKeyCode();
+			if (!startGame) return;  //若遊戲還沒開始 則不反應按鍵
 			if(!netWorking)
 				controller.movePlayer(ActionType.HALT, playerCurDir);
+			else if (!releaseWhileShooting){
+				releaseWhileShooting = true;
+				Log.d("release");
+			}
 			else //net work
 				;
 		}
@@ -314,11 +324,6 @@ public class View {
 		frame.getContentPane().add(BorderLayout.CENTER, game);
 		frame.getContentPane().add(BorderLayout.SOUTH , buttonsPanel);
 		frame.setVisible(true);
-		
-		//物件設置
-		List<Role> roles =  Collections.checkedList( new ArrayList<Role>(), Role.class);
-		List<Bullet> bullets = Collections.checkedList( new ArrayList<Bullet>(), Bullet.class);
-	
 		
 		//使Game Panel能接收按鍵事件
 			frame.addWindowListener(new WindowAdapter(){

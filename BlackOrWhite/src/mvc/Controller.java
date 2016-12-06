@@ -110,7 +110,6 @@ public class Controller extends Thread{
 	
 	public void movePlayer(ActionType act,Dir dir){
 		player1.addRequest(act, dir);
-		Log.d("«öÁä»İ¨D:"+act.getMessage()+","+dir.getMessage());
 	}
 	
 	public int getRemainningMonster(){

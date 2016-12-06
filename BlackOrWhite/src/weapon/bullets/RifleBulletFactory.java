@@ -2,8 +2,7 @@ package weapon.bullets;
 
 import mvc.ImageSequence;
 import role.abstractFactory.PlayerFactory;
-import weapon.bulletflying.BulletFlying;
-import weapon.bulletflying.NormalFlying;
+
 
 public class RifleBulletFactory implements BulletFactory{
 	private static ImageSequence[][] actImgs = new ImageSequence[][]{{
@@ -11,10 +10,6 @@ public class RifleBulletFactory implements BulletFactory{
 		,new ImageSequence( "pics/Bullet/BasicBullet/Horizontal","png",1)
 		,new ImageSequence( "pics/Bullet/BasicBullet/Vertical","png",1)
 		,new ImageSequence( "pics/Bullet/BasicBullet/Horizontal","png",1)}};
-	@Override
-	public BulletFlying getBulletFlying() {
-		return new NormalFlying();
-	}
 
 	@Override
 	public ImageSequence[][] getActionImages() {
@@ -25,5 +20,17 @@ public class RifleBulletFactory implements BulletFactory{
 		public static void main(String[] argv){
 			ImageSequence[][] actionImgs = new  RifleBulletFactory().getActionImages();
 		}
+
+	@Override
+	public int getDamage() {
+		// TODO Auto-generated method stub
+		return 120;
+	}
+
+	@Override
+	public int getDistance() {
+		// TODO Auto-generated method stub
+		return 35;
+	}
 
 }

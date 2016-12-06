@@ -11,19 +11,21 @@ import mvc.Map1Director;
 import mvc.MapBuilder;
 import mvc.Model;
 import role.Role;
-import weapon.bulletflying.BulletFlying;
+
 
 public abstract class Bullet implements Runnable{
 	public static ArrayList<Integer> BARRIER_X_SET = Map1Director.BULLET_BARRIER_X_SET;  //障礙物座標集合
 	public static ArrayList<Integer> BARRIER_Y_SET = Map1Director.BULLET_BARRIER_Y_SET;
 	protected Model model;
-	//工廠
-	protected BulletFlying bulletFly;
+
 	protected ImageSequence[][] actionImgs;
+	protected int distance; //飛行距離
+	protected int damage;
 	//建構子
-	private int damage;
+
 	private int vW;  // vertical 垂直高度
 	private int vH;  // 垂直寬度 (所以橫向的話 高度,寬度要對調)
+	
 
 	protected int cX;  //座標
 	protected int cY;
@@ -36,9 +38,9 @@ public abstract class Bullet implements Runnable{
 		this.vW = w;
 		this.vH = h;
 		this.curDir = curDir;
-		this.damage = damage;
-		this.bulletFly = factory.getBulletFlying();
+		this.damage = factory.getDamage();
 		this.actionImgs = factory.getActionImages();
+		this.distance = factory.getDistance();
 		model = new Model(this, Item.BULLET, cX,cY, ActionType.WALK , curDir, actionImgs[0][curDir.ordinal()]);
 	}
 	
@@ -50,7 +52,7 @@ public abstract class Bullet implements Runnable{
 			if(!flyable())  //不能飛了  刪掉
 			{
 				Log.d("end flying");
-				model.delete();
+				endFlying();
 				break;
 			}
 			try {Thread.sleep(50);
@@ -59,8 +61,6 @@ public abstract class Bullet implements Runnable{
 	}
 	
 	public void flying(){
-		//從飛行strategy中取得子彈每次飛行距離
-		int distance = bulletFly.getFlyingDistance();
 		//然後根據不同方向更新座標 還要判斷障礙物
 		int dX = 0,dY = 0; //位移
 		ImageSequence iS = model.getiS();
@@ -107,11 +107,11 @@ public abstract class Bullet implements Runnable{
 		return conflict;
 	}
 	
-	public Bullet endFlying(){
+	public void endFlying(){
 		/*結束飛行後要做的事情
 		 * 
 		 * */
-		return null;
+		model.delete();
 	}
 	
 	public Model getModel() {
@@ -139,12 +139,6 @@ public abstract class Bullet implements Runnable{
 	}
 	public void setDamage(int damage) {
 		this.damage = damage;
-	}
-	public BulletFlying getBulletFly() {
-		return bulletFly;
-	}
-	public void setBulletFly(BulletFlying bulletFly) {
-		this.bulletFly = bulletFly;
 	}
 	
 	
