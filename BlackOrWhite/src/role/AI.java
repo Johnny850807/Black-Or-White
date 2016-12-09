@@ -4,7 +4,7 @@ import mvc.ActionType;
 import mvc.Dir;
 import role.abstractFactory.RoleFactory;
 
-public abstract class AI extends Role implements Runnable{
+public abstract class AI extends Role {
 
 	public AI(RoleFactory factory) {
 		super(factory);

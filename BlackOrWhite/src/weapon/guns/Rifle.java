@@ -32,7 +32,6 @@ public class Rifle implements Gun {
 				break;
 		}
 		Bullet bullet = new BasicBullet( x , y , role.curDir , new RifleBulletFactory());
-		new Thread(bullet).start();
 		Log.d("¤l¼u++");
 	//	try {Thread.sleep(750);} catch (InterruptedException e) {e.printStackTrace();}
 		return bullet;

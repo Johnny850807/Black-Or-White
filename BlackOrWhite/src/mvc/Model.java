@@ -31,10 +31,10 @@ public class Model {
 		this.act = act;
 		this.dir = dir;
 		this.iS = iS;
-		if ( type == Item.ROLE )
+	/*	if ( type == Item.ROLE )
 			controller.updateModel((Role)parent);
 		else
-			controller.updateModel((Bullet)parent);
+			controller.updateModel((Bullet)parent);*/
 	}
 	
 	//讓這個model在controller中結束生命周期

@@ -1,6 +1,7 @@
 package mvc;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import mvc.gameObject.GameObjects;
@@ -19,8 +20,6 @@ public class Controller extends Thread{
 	private Player player2 = null;  // net game
 	private Stage curStage;
 	private GameObjects gameObjects = GameObjects.getGameObjects();  //all objects will be painted in the game
-	private boolean[] roleUpdates = new boolean[10000];  //確認所有角色狀態更新之後，controller才更新一次畫面
-	private boolean[] bulletUpdates = new boolean[10000];  //確認所有子彈狀態更新之後，controller才更新一次畫面
 	
 	private Controller(){}; // singleton
 	public static Controller getController(){return controller;}
@@ -28,7 +27,6 @@ public class Controller extends Thread{
 	private void createPlayer(){  //create the player in the pair of specific coordinates
 		player1 = new Player(Map1Director.PLAYER_CREATE_X,Map1Director.PLAYER_CREATE_Y);
 		Log.d("Create PLAYER 1 ");
-		new Thread(player1).start();
 		gameObjects.addRole(player1);
 		/*if(netWork){ //網路部分....可有可無
 			player2 = new Player(Map1Director.PLAYER_CREATE_X,Map1Director.PLAYER_CREATE_Y);
@@ -54,16 +52,9 @@ public class Controller extends Thread{
 		try{
 			while(true)
 			{
-				if(checkUpdate())
-				{
-					view.refreshScreen();
-					clearAllUpdate();
-				}
-				else
-				{
-					Log.d("False");
-				}
-				Thread.sleep(100); 
+				checkUpdate();
+				view.refreshScreen();
+				Thread.sleep(70); 
 			}
 		}catch (InterruptedException e) {
 			e.printStackTrace();
@@ -76,20 +67,6 @@ public class Controller extends Thread{
 		
 	}
 	
-	public void updateModel(Role role){
-		//更新某個角色的狀態
-		int idx = gameObjects.getIndexOf(role);
-		if(idx != -1)
-			roleUpdates[gameObjects.getIndexOf(role)] = true;
-	}
-	
-	public void updateModel(Bullet bullet){
-		//更新某個子彈的狀態
-		int idx = gameObjects.getIndexOf(bullet);
-		if(idx != -1)
-		bulletUpdates[gameObjects.getIndexOf(bullet)] = true;
-	}
-	
 	public void deleteModel(Role role){
 		gameObjects.removeRole(role);
 	}
@@ -97,25 +74,26 @@ public class Controller extends Thread{
 		gameObjects.removeBullet(bullet);
 	}
 	
-	//確認是否全部更新
+	//update all the object's states
 	public boolean checkUpdate(){
-		for ( int i = 0 ; i < gameObjects.rolesSize() ; i ++ ){
-			if(gameObjects.getRole(i)instanceof Player)  //不檢查玩家是否更新
-				continue;
-			if ( roleUpdates[i] == false )
-				return false;
+		try{
+			Iterator<Role> itR = gameObjects.rolesIterator();
+			Iterator<Bullet> itB = gameObjects.bulletsIterator();
+					
+			while(itR.hasNext())
+				itR.next().run();
+			
+			while(itB.hasNext())
+				itB.next().run();
+			
+		}catch(Exception err){
+			Log.d(err.toString());
+			return false;
 		}
-		for ( int i = 0 ; i < gameObjects.bulletSize() ; i ++ )
-			if ( bulletUpdates[i] == false )
-				return false;
+		
 		return true;
 	}
-	
-	public void clearAllUpdate(){
-		roleUpdates = new boolean[1000]; // 預設為false ...
-		bulletUpdates = new boolean[1000]; // 預設為false ...
-	}
-	
+
 	public void movePlayer(ActionType act,Dir dir){
 		player1.addRequest(act, dir);
 	}
