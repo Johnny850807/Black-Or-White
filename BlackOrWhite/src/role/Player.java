@@ -7,7 +7,7 @@ import mvc.Log;
 import role.abstractFactory.PlayerFactory;
 import role.abstractFactory.RoleFactory;
 
-public class Player extends Role implements Runnable{
+public class Player extends Role {
 
 	public Player() {
 		super(new PlayerFactory());
@@ -23,26 +23,20 @@ public class Player extends Role implements Runnable{
 		atk = 0;
 		df = 20;
 	}
-
-	@Override
+	@Override //單次執行 放棄使用執行緒
 	public void run(){
 		/*Thread template method
 		 * 1. check if hurted (hook)
 		 * 2. check if got requests (final)
 		 */
 		Log.d("Player run!");
-		while(!isDead){
 			hurtedJudgement();
-			
-			if ( requests.size() > 0 )
-				processRequest();
-			else{
-				if(curAct != ActionType.SHOOT)
-					getMoved(curAct, curDir);
-			}
-			try {Thread.sleep(50);} catch (InterruptedException e) {e.printStackTrace();}
+		if ( requests.size() > 0 )
+			processRequest();
+		else{
+			if(curAct != ActionType.SHOOT)
+				getMoved(curAct, curDir);
 		}
-		
 		die();
 	}
 	

@@ -10,7 +10,7 @@ import role.movements.AI_Movement;
 import role.movements.Backable;
 import weapon.guns.Gun;
 
-public abstract class Role {
+public abstract class Role implements Runnable{
 	protected Model model;
 	protected Queue<Request> requests;
 	public static ArrayList<Integer> BARRIER_X_SET = Map1Director.BARRIER_X_SET;  //障礙物座標集合

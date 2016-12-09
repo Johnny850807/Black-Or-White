@@ -2,6 +2,7 @@ package mvc.gameObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import role.Role;
@@ -22,6 +23,12 @@ public class GameObjects {
 	
 	public GameObjectModelsItertor iterator(){
 		return new GameObjectModelsItertor(this);
+	}
+	public Iterator rolesIterator(){
+		return roles.iterator();
+	}
+	public Iterator bulletsIterator(){
+		return bullets.iterator();
 	}
 	public List<Role> getRoles() {
 		return roles;
@@ -64,8 +71,8 @@ public class GameObjects {
 	public int getIndexOf(Role r){
 		return roles.indexOf(r);
 	}
-	public int getIndexOf(Bullet b){
-		return bullets.indexOf(b);
+	public int getIndexOf(Bullet b){  // index -> ex: roles : 0 1 2 3 4 5 bullets : 6 7 8 ... 
+		return roles.size()+bullets.indexOf(b);
 	}
 	public int rolesSize(){
 		return roles.size();

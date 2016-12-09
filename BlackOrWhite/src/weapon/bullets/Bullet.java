@@ -13,7 +13,7 @@ import mvc.Model;
 import role.Role;
 
 
-public abstract class Bullet implements Runnable{
+public abstract class Bullet {
 	public static ArrayList<Integer> BARRIER_X_SET = Map1Director.BULLET_BARRIER_X_SET;  //障礙物座標集合
 	public static ArrayList<Integer> BARRIER_Y_SET = Map1Director.BULLET_BARRIER_Y_SET;
 	protected Model model;
@@ -44,18 +44,10 @@ public abstract class Bullet implements Runnable{
 		model = new Model(this, Item.BULLET, cX,cY, ActionType.WALK , curDir, actionImgs[0][curDir.ordinal()]);
 	}
 	
-	@Override
 	public void run() {
-		while(true){
-			flying();
-			if(!flyable())  //不能飛了  刪掉
-			{
-				endFlying();
-				break;
-			}
-			try {Thread.sleep(50);
-			} catch (InterruptedException e) {e.printStackTrace();}
-		}
+		flying();
+		if(!flyable())  //不能飛了  刪掉
+			endFlying();
 	}
 	
 	public void flying(){

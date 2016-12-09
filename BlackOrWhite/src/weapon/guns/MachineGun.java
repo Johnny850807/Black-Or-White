@@ -31,7 +31,6 @@ public class MachineGun implements Gun{
 						break;
 				}
 				Bullet bullet = new BasicBullet( x , y , role.curDir , new MachineBulletFactory());
-				new Thread(bullet).start();
 			//	try {Thread.sleep(750);} catch (InterruptedException e) {e.printStackTrace();}
 				return bullet;
 	}
