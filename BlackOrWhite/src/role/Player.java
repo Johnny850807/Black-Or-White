@@ -14,14 +14,14 @@ public class Player extends Role {
 	}
 
 	public Player(int x ,int y){
-		super(new PlayerFactory(),x,y, ActionType.HALT , Dir.NORTH);
-		offsetX = 21;
+		super(new PlayerFactory(),x,y, ActionType.HALT , Dir.NORTH , 21 , 90 , 40 , 10 , 500 , 0 , 20);
+		/*offsetX = 21;
 		offsetY = 90;
 		feetW = 40;
 		feetH = 10;
 		hp = 500;
 		atk = 0;
-		df = 20;
+		df = 20;*/
 	}
 	@Override //單次執行 放棄使用執行緒
 	public void run(){
@@ -31,6 +31,7 @@ public class Player extends Role {
 		 */
 		Log.d("Player run!");
 			hurtedJudgement();
+		
 		if ( requests.size() > 0 )
 			processRequest();
 		else{

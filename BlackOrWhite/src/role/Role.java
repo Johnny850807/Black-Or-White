@@ -12,7 +12,7 @@ import weapon.guns.Gun;
 
 public abstract class Role implements Runnable{
 	protected Model model;
-	protected Queue<Request> requests;
+	protected volatile Queue<Request> requests;
 	public static ArrayList<Integer> BARRIER_X_SET = Map1Director.BARRIER_X_SET;  //障礙物座標集合
 	public static ArrayList<Integer> BARRIER_Y_SET = Map1Director.BARRIER_Y_SET;
 	//工廠生產
@@ -58,12 +58,20 @@ public abstract class Role implements Runnable{
 		requests = new LinkedList(); // requests queue
 	}
 	
-	public Role(RoleFactory factory, int x, int y , ActionType act , Dir dir) {
+	public Role(RoleFactory factory, int x, int y , ActionType act , Dir dir , 
+			int offsetX , int offsetY , int feetW , int feetH , int hp , int atk , int df) {
 		this(factory);
 		this.x = x;
 		this.y = y;
 		this.curAct = act;
 		this.curDir = dir;
+		this.offsetX = offsetX;
+		this.offsetY = offsetY;
+		this.feetW = feetW;
+		this.feetH = feetH;
+		this.hp = hp;
+		this.atk = atk;
+		this.df = df;
 		this.model = new Model(this,Item.ROLE,x,y,act,dir,actionImgs[curAct.ordinal()][curDir.ordinal()]);
 	}
 	
@@ -105,7 +113,7 @@ public abstract class Role implements Runnable{
 	}
 	
 	//真正執行動作
-	protected void getMoved(ActionType act , Dir dir){
+	public synchronized void getMoved(ActionType act , Dir dir){
 		curAct = act;
 		curDir = dir;
 		int dX = 0,dY = 0; //位移
@@ -150,7 +158,7 @@ public abstract class Role implements Runnable{
 	}
 	public boolean outOfBound(int x, int y){
 		//判斷是否出界
-		return x < -5 || y < -5 || x > MapBuilder.SIZEX*100+10 || y > MapBuilder.SIZEY*100+10;
+		return x < -5 || y < -5 || x > MapBuilder.SIZEX*100 || y > MapBuilder.SIZEY*100;
 	}
 	public boolean conflictWithBarrier(int x , int y){
 		//判斷是否撞到障礙物

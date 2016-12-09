@@ -3,6 +3,7 @@ package mvc;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import mvc.gameObject.GameObjects;
 import mvc.stage.*;
@@ -59,12 +60,11 @@ public class Controller extends Thread{
 		}catch (InterruptedException e) {
 			e.printStackTrace();
 		}catch(Exception e){
-			Log.d(e.toString());
+			e.printStackTrace();
 		}
 		catch (Error e){
-			Log.d(e.toString());
+			e.printStackTrace();
 		}
-		
 	}
 	
 	public void deleteModel(Role role){

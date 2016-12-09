@@ -55,14 +55,14 @@ public class BallFactory implements RoleFactory {
 		
 		if ( actImgs == null ){
 			actImgs = new ImageSequence[][]{
-  /*Halt*/		{ new ImageSequence( "pics/Player/Halt/East","png",1) ,
-					new ImageSequence( "pics/Player/Halt/East","png",1) ,
-					new ImageSequence( "pics/Player/Halt/East","png",1) ,
-					new ImageSequence( "pics/Player/Halt/East","png",1)} ,
-  /*Walk*/		{ new ImageSequence( "pics/Player/Walk/East","png",1) ,
-						new ImageSequence( "pics/Player/Walk/East","png",1) ,
-						new ImageSequence( "pics/Player/Walk/East","png",1) ,
-						new ImageSequence( "pics/Player/Walk/East","png",1)}
+  /*Halt*/		{ new ImageSequence( "pics/AI/Ball/Walk/East","png",1) ,
+					new ImageSequence( "pics/AI/Ball/Walk/East","png",1) ,
+					new ImageSequence( "pics/AI/Ball/Walk/East","png",1) ,
+					new ImageSequence( "pics/AI/Ball/Walk/East","png",1)} ,
+  /*Walk*/		{ new ImageSequence( "pics/AI/Ball/Walk/East","png",1) ,
+						new ImageSequence( "pics/AI/Ball/Walk/East","png",1) ,
+						new ImageSequence( "pics/AI/Ball/Walk/East","png",1) ,
+						new ImageSequence( "pics/AI/Ball/Walk/East","png",1)}
 					};
 		}
 		

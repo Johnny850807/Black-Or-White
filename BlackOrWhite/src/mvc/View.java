@@ -235,7 +235,7 @@ public class View {
 					}
 					break;
 				case KeyEvent.VK_ENTER:  //印出遊戲資訊
-					Log.d("Role : " + gameObjects.rolesSize() + "Bullet : " + gameObjects.bulletSize());
+					Log.d("Role : " + gameObjects.rolesSize() + "Bullet : " + gameObjects.bulletSize() + "怪物數量: " + controller.getRemainningMonster());
 					break;
 				}
 			}

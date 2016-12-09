@@ -1,6 +1,7 @@
 package mvc.stage;
 
 import mvc.Controller;
+import role.AI;
 
 public class Stage2 extends Stage {
 

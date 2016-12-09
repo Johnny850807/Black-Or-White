@@ -1,5 +1,6 @@
 package role.movements;
 
+import mvc.ActionType;
 import role.AI;
 
 public class AI_Halt extends AI_Decorator {
@@ -10,15 +11,14 @@ public class AI_Halt extends AI_Decorator {
 
 	@Override
 	public void randomChoose(AI ai) {
-		// 40% to halt about a while ...
-		if ( random.nextInt(100) >= 60 )
-			halt();
+		// 20% to halt about a while ...
+		
+		if ( random.nextInt(100) >= 80 && ai.isTimeToChangeMove() )
+				ai.getMoved( ActionType.HALT , dir[random.nextInt(dir.length)]);
 		else
 			movement.randomChoose(ai);
 	}
 	
-	public void halt(){
-		// halt algorithm
-	}
+
 
 }
