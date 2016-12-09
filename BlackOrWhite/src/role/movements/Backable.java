@@ -1,6 +1,6 @@
 package role.movements;
 
-import javax.management.relation.Role;
+import role.*;
 
 public interface Backable {
 	void goBack(Role role);

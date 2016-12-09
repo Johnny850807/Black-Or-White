@@ -29,8 +29,7 @@ public class Player extends Role {
 		 * 1. check if hurted (hook)
 		 * 2. check if got requests (final)
 		 */
-		Log.d("Player run!");
-			hurtedJudgement();
+		hurtedJudgement();
 		
 		if ( requests.size() > 0 )
 			processRequest();
@@ -44,12 +43,10 @@ public class Player extends Role {
 	private final void processRequest(){
 		// handle the request ... and update the model
 		Request request;
-		Log.d("process request");
 		while(requests.size() > 0)
 		{
 			request = requests.poll();
 			if ( request.act == ActionType.SHOOT && isShootSpacing ){
-				Log.d("間格時間，不給射擊");
 				return;  //如果位於射擊緩衝時間 而且使用者點選射擊 就不理會
 			}
 			getMoved(request.act, request.dir);	
@@ -62,12 +59,14 @@ public class Player extends Role {
 	
 	protected void die(){
 		// while the player dies
-		
-		
+		if ( hp <= 0 ){
+			model.getController().playerDie();  //跟控制器說要設置玩家死亡
+			model.delete();  //在控制器中刪除掉自己
+		}
 	}
 
 	@Override
-	int getMovingDistance(ActionType act , Dir dir) {
+	protected int getMovingDistance(ActionType act , Dir dir) {
 		switch(act)
 		{
 			case WALK:

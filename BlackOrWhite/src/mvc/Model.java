@@ -1,5 +1,6 @@
 package mvc;
 
+import role.Player;
 import role.Role;
 import weapon.bullets.Bullet;
 
@@ -8,6 +9,7 @@ public class Model {
 	private Item type;  //是子彈還是角色
 	private int cX;
 	private int cY;
+	private int hp;
 	private ActionType act;
 	private Dir dir;
 	private ImageSequence iS;  //目前的分鏡動作
@@ -31,10 +33,6 @@ public class Model {
 		this.act = act;
 		this.dir = dir;
 		this.iS = iS;
-	/*	if ( type == Item.ROLE )
-			controller.updateModel((Role)parent);
-		else
-			controller.updateModel((Bullet)parent);*/
 	}
 	
 	//讓這個model在controller中結束生命周期
@@ -77,5 +75,16 @@ public class Model {
 		return cY;
 	}
 
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+		if ( parent instanceof Player)
+			controller.updatePlayerHp();
+	}
+
+	
 	
 }

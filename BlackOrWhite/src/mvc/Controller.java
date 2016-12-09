@@ -54,6 +54,7 @@ public class Controller extends Thread{
 			while(true)
 			{
 				checkUpdate();
+				checkConflict();
 				view.refreshScreen();
 				Thread.sleep(70); 
 			}
@@ -74,26 +75,62 @@ public class Controller extends Thread{
 		gameObjects.removeBullet(bullet);
 	}
 	
+	public void checkConflict(){
+		//確認衝突
+		List<Role> roles = gameObjects.getRoles();
+		AI ai;
+		Model playerModel = player1.getModel();
+		int pX = playerModel.getcX() , pY = playerModel.getcY(); //玩家座標
+		Model AIModel;  //怪物資料
+		//確認玩家是否碰到怪物
+		//略過玩家
+		for ( int i = 1 ; i < roles.size() ; i ++ ){
+			ai = (AI)roles.get(i);
+			AIModel = ai.getModel();
+			if ( player1.conflictWithSomething(AIModel.getcX(), AIModel.getcY(), ai.getFeetW() , ai.getFeetH() ))
+				player1.getDamaged(ai);
+		}
+		//確認怪物是否碰到子彈
+		List<Bullet> bullets = gameObjects.getBullets();
+		Role role;
+		Bullet bullet;
+		Model bModel;
+		for ( int i = 0 ; i < roles.size() ; i ++ ){
+			role = roles.get(i);
+			for ( int j = 0 ; j < bullets.size() ; j ++ ){
+				bullet = bullets.get(j);
+				bModel = bullet.getModel();
+				if ( role.conflictWithSomething(bModel.getcX(), bModel.getcY(), bullet.getvW(), bullet.getvH())){
+					role.getDamaged(bullet);
+				}
+			}
+		}
+	}
+	
 	//update all the object's states
 	public boolean checkUpdate(){
 		try{
 			Iterator<Role> itR = gameObjects.rolesIterator();
-			Iterator<Bullet> itB = gameObjects.bulletsIterator();
-					
+			Iterator<Bullet> itB = gameObjects.bulletsIterator();	
 			while(itR.hasNext())
 				itR.next().run();
-			
 			while(itB.hasNext())
 				itB.next().run();
-			
 		}catch(Exception err){
 			Log.d(err.toString());
 			return false;
 		}
-		
 		return true;
 	}
-
+	
+	public void updatePlayerHp(){
+		view.updatePlayerHp(player1.getModel().getHp());
+	}
+	
+	public void playerDie(){
+		view.playerSetDie();
+	}
+	
 	public void movePlayer(ActionType act,Dir dir){
 		player1.addRequest(act, dir);
 	}

@@ -130,6 +130,14 @@ public abstract class Bullet {
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
-	
+
+	public int getvW() {
+		return vW;
+	}
+
+	public int getvH() {
+		return vH;
+	}
+
 	
 }

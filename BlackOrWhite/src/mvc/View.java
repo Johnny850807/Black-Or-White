@@ -51,6 +51,14 @@ public class View {
 		buttonsPanel = new ButtonsPanel(playerPanel);
 	}
 	
+	public void updatePlayerHp(int hp){
+		playerPanel.setP1Hp(hp);
+	}
+	
+	public void playerSetDie(){
+		playerPanel.player1SetDie();
+	}
+	
 	public void refreshScreen(){
 		//更新畫面
 		gamePanel.repaint();
@@ -131,6 +139,14 @@ public class View {
 		public void setP2Hp(int p2Hp) {
 			this.p2Hp = p2Hp;
 			updateText();
+		}
+		public void player1SetDie(){
+			this.p1Hp = 0;
+			player1HP.setText("Game Over");
+		}
+		public void player2SetDie(){
+			this.p2Hp = 0;
+			player2HP.setText("Game Over");
 		}
 			
 	}

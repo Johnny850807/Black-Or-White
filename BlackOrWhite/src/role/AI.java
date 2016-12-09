@@ -17,7 +17,10 @@ public abstract class AI extends Role {
 			int offsetX , int offsetY , int feetW , int feetH , int hp , int atk , int df){
 		super(factory,x,y,act,dir,offsetX,offsetY,feetW,feetH,hp,atk,df);
 	}
-	
+	public void moveDurationCountDown(int countdown){
+		//每 moveDuration 個更新換一次動作
+		moveCountDown = (moveCountDown-countdown) < 0 ? moveDuration : moveCountDown-countdown;
+	}
 	public void moveDurationCountDown(){
 		//每 moveDuration 個更新換一次動作
 		moveCountDown = moveCountDown == 0 ? moveDuration : moveCountDown - 1;

@@ -14,7 +14,7 @@ public class AI_Ball extends AI {
 	}
 	
 	public AI_Ball(int x , int y , ActionType act , Dir dir) {
-		super(new BallFactory(),x,y,act,dir,1,3,64,59,300,0,20);
+		super(new BallFactory(),x,y,act,dir,1,3,64,59,300,80,20);
 		/*offsetX = 1;
 		offsetY = 3;
 		feetW = 64;
@@ -26,12 +26,13 @@ public class AI_Ball extends AI {
 
 	@Override
 	protected void die() {
-	//這邊的程式碼 是繼承AI的	
-		
+		if ( hp <= 0 ){
+			model.delete();  //在控制器中刪除掉自己
+		}
 	}
 
 	@Override
-	int getMovingDistance(ActionType act , Dir dir) {
+	protected int getMovingDistance(ActionType act , Dir dir) {
 		switch(act)
 		{
 			case WALK:

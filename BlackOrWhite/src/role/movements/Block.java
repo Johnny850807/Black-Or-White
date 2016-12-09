@@ -1,6 +1,6 @@
 package role.movements;
 
-import javax.management.relation.Role;
+import role.*;
 
 public class Block implements Backable {
 

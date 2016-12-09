@@ -5,9 +5,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import mvc.*;
+import role.movements.*;
 import role.abstractFactory.RoleFactory;
 import role.movements.AI_Movement;
 import role.movements.Backable;
+import weapon.bullets.BasicBullet;
+import weapon.bullets.Bullet;
 import weapon.guns.Gun;
 
 public abstract class Role implements Runnable{
@@ -36,6 +39,7 @@ public abstract class Role implements Runnable{
 	public Dir curDir;
 	public boolean isDead = false; //判斷是否死亡  若死亡要啟動死亡生命週期
 	public boolean isShootSpacing = false; //射擊間距是否緩衝中
+	public boolean isBeingHurted = false;  //是否被傷害中(避免連續受傷)
 	
 	//玩家輸入的命令
 	protected class Request{
@@ -75,6 +79,14 @@ public abstract class Role implements Runnable{
 		this.model = new Model(this,Item.ROLE,x,y,act,dir,actionImgs[curAct.ordinal()][curDir.ordinal()]);
 	}
 	
+	public int getAtk() {
+		return atk;
+	}
+
+	public int getDf() {
+		return df;
+	}
+
 	public Model getModel() {
 		return model;
 	}
@@ -105,6 +117,12 @@ public abstract class Role implements Runnable{
 
 	public void setGun(Gun gun) {
 		this.gun = gun;
+	}
+	public int getFeetW() {
+		return feetW;
+	}
+	public int getFeetH() {
+		return feetH;
 	}
 
 	protected void hurtedJudgement(){
@@ -158,7 +176,15 @@ public abstract class Role implements Runnable{
 	}
 	public boolean outOfBound(int x, int y){
 		//判斷是否出界
-		return x < -5 || y < -5 || x > MapBuilder.SIZEX*100 || y > MapBuilder.SIZEY*100;
+		return x < -5 || y < -5 || x > MapBuilder.SIZEX*100 - 40 || y > MapBuilder.SIZEY*100;
+	}
+	public boolean conflictWithSomething(int oX , int oY , int oW , int oH){
+		//判斷是否撞到某個東西
+		Boolean conflict = false;
+			if ( (x+offsetX+feetW >= oX && x <= oX + oW) 
+			&& (y+offsetY+feetH >= oY && y <= oY + oH) )
+				conflict = true;
+		return conflict;
 	}
 	public boolean conflictWithBarrier(int x , int y){
 		//判斷是否撞到障礙物
@@ -169,7 +195,40 @@ public abstract class Role implements Runnable{
 				conflict = true;
 		return conflict;
 	}
-	abstract int getMovingDistance(ActionType act , Dir dir);  //回傳該角色每次移動距離
+	public void getDamaged(Bullet bullet){
+		//人類的子彈 只有怪物才會受到攻擊
+		if ( bullet instanceof BasicBullet )  {
+			if ( this instanceof AI && !isBeingHurted ){
+				hp = (hp - (bullet.getDamage() - df)) < 0 ? 0 : (hp - (bullet.getDamage() - df));
+				Log.d("受到攻擊"+x+","+y);
+				updateHp();
+				bullet.getModel().delete();
+			}
+		}
+		else //怪物子彈
+			;
+		
+	}
+	/*public void getDamaged(AI_Bullet bullet){
+		//怪物的子彈
+		if ( this instanceof Player)
+			hp = (hp - (bullet.getDamage() - df)) < 0 ? 0 : (hp - (bullet.getDamage() - df));
+		updateHp();
+	}*/
+	public void getDamaged(AI ai){
+		//受到怪物接觸攻擊
+		if ( this instanceof Player && !isBeingHurted){
+			hp = (hp - (ai.getAtk() - df)) < 0 ? 0 : (hp - (ai.getAtk() - df));
+			new BeingHurted(this,3.5f).start();
+			backable.goBack(this);
+			updateHp();
+		}
+	}
+	
+	public void updateHp(){
+		model.setHp(hp);
+	}
+	protected abstract int getMovingDistance(ActionType act , Dir dir);  //回傳該角色每次移動距離
 	
 	
 	
