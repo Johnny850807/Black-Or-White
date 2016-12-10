@@ -27,8 +27,10 @@ public abstract class Stage implements Runnable{
 				specificlyAddMonster(i);
 			//再慢慢隨機產生
 			while(monsters.size() > 0){
-				try {TimeUnit.SECONDS.sleep(18);}catch (InterruptedException e) {e.printStackTrace();}
+				try {TimeUnit.SECONDS.sleep(15);}catch (InterruptedException e) {e.printStackTrace();}
 				randomlyAddMonster();
+				if (monsters.size() > 0)
+					randomlyAddMonster();
 				if (monsters.size() > 0)
 					randomlyAddMonster();
 			}
