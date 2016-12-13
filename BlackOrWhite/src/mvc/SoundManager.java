@@ -13,27 +13,11 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class SoundManager {
 	private static SoundManager soundManager = new SoundManager();
-	private static Clip soundClip;
 
-	public SoundManager(){
-		initiate();
-	}
 	public static SoundManager getSoundManager(){
 		return soundManager;
 	}
-	private void initiate(){
-		try {
-			soundClip = AudioSystem.getClip();
-			try {
-				soundClip.open(AudioSystem.getAudioInputStream(new File("sounds/shoot/rifle.wav").toURL()));
-			} catch (IOException | UnsupportedAudioFileException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		} catch (LineUnavailableException e) {
-			e.printStackTrace();
-		} 
-	}
+	
 	/*public void playMainMusic(){
 		 new Thread(new Runnable() {
 			  // The wrapper thread is unnecessary, unless it blocks on the
@@ -50,40 +34,50 @@ public class SoundManager {
 
 	}*/
 	public void playRifleSound(){
-		 new Thread(new Runnable() {
-			  // The wrapper thread is unnecessary, unless it bl  ocks on the
-			  // Clip finishing; see comments.
-			    public void run() {
-			      try {
-			    	/**if(soundClip.isOpen()){
-			    		soundClip.close();
-			    	}*/
-			
-			  		soundClip.loop(1);
-			      } catch (Exception e) {
-			        soundClip.close();
-			     
-			      }
-			    }
-			  }
-		 ).start();
+		 try {
+			new Thread(new Runnable() {
+				  // The wrapper thread is unnecessary, unless it bl  ocks on the
+				  // Clip finishing; see comments.
+				 Clip soundClip = AudioSystem.getClip();
+				    public void run() {
+				      try {
+				    	soundClip.open(AudioSystem.getAudioInputStream(new File("sounds/shoot/rifle.wav").toURL()));
+				  		soundClip.start();
+				      } catch (Exception e) {
+				        soundClip.close();
+				     
+				      }
+				    }
+				  }
+			 ).start();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public void playMachineSound(){
-		 new Thread(new Runnable() {
-			  // The wrapper thread is unnecessary, unless it bl  ocks on the
-			  // Clip finishing; see comments.
-			 public void run() {
-			      try {
-			    	/**if(soundClip.isOpen()){
-			    		soundClip.close();
-			    	}*/
-			
-			  		soundClip.loop(-1);
-			      } catch (Exception e) {
-			        soundClip.close();
-			     
-			      }
-			    }
-			  }).start();
+		try {
+			new Thread(new Runnable() {
+				  // The wrapper thread is unnecessary, unless it bl  ocks on the
+				  // Clip finishing; see comments.
+				 Clip soundClip = AudioSystem.getClip();
+				    public void run() {
+				      try {
+				    	if(soundClip.isOpen()){
+				    		soundClip.close();
+				    	}
+				    	soundClip.open(AudioSystem.getAudioInputStream(new File("sounds/shoot/machineGun.wav").toURL()));
+				  		soundClip.start();
+				      } catch (Exception e) {
+				        soundClip.close();
+				     
+				      }
+				    }
+				  }
+			 ).start();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -12,6 +12,7 @@ public class MachineGun implements Gun{
 	@Override
 	public Bullet gunShooting(Role role) {
 		// 座標點還要根據圖案中槍的位子
+		SoundManager.getSoundManager().playMachineSound();
 				int x = role.x;
 				int y = role.y;
 				switch(role.curDir){
@@ -32,7 +33,7 @@ public class MachineGun implements Gun{
 						break;
 				}
 				Bullet bullet = new BasicBullet( x , y , role.curDir , new MachineBulletFactory());
-				SoundManager.getSoundManager().playMachineSound();
+	
 			//	try {Thread.sleep(750);} catch (InterruptedException e) {e.printStackTrace();}
 				return bullet;
 	}
