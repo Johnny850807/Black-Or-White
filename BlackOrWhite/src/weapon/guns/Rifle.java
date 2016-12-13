@@ -13,7 +13,7 @@ public class Rifle implements Gun {
 	@Override
 	public Bullet gunShooting(Role role) {
 		// 座標點還要根據圖案中槍的位子
-		SoundManager.getSoundManager().playRifleSound();
+		SoundManager.getSoundManager().playSound("sounds/shoot/rifle.wav");
 		int x = role.x;
 		int y = role.y;
 		switch(role.curDir){

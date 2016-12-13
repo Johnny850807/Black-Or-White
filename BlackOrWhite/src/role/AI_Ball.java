@@ -56,12 +56,17 @@ public class AI_Ball extends AI {
 		Random random = new Random();
 		if (GameObjects.getGameObjects().fallenItemSize() < 2 )
 		{
-			if(random.nextInt(100) > 93) //7%機關槍
+			if(random.nextInt(100) > 84) //15%機關槍
 				Controller.getController().fallGun(new FallenMachine(x,y));
 			else if (random.nextInt(100) > 97)  //2%狙擊槍
 				Controller.getController().fallGun(new FallenSniperRifle(x,y));
 		}
 			
+	}
+
+	@Override
+	protected void dieProcess() {
+		SoundManager.getSoundManager().playSound("sounds/monster/ball_die.wav");
 	}
 
 }

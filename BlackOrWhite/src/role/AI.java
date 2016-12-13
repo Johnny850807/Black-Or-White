@@ -59,8 +59,10 @@ public abstract class AI extends Role {
 	protected  void die(){
 		if ( hp <= 0 ){
 			model.delete();  //在控制器中刪除掉自己
+			dieProcess();
 			throwGun();
 		}
 	}
 	protected abstract void throwGun();  //如果怪物死亡有機率掉槍
+	protected abstract void dieProcess();  //死亡後要做的事情
 }

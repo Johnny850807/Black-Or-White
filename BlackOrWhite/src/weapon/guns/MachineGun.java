@@ -13,7 +13,7 @@ public class MachineGun implements Gun{
 	@Override
 	public Bullet gunShooting(Role role) {
 		// 座標點還要根據圖案中槍的位子
-		SoundManager.getSoundManager().playMachineSound();
+		SoundManager.getSoundManager().playSound("sounds/shoot/machineGun.wav");
 				int x = role.x;
 				int y = role.y;
 				switch(role.curDir){

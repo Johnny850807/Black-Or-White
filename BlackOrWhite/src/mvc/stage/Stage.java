@@ -21,22 +21,22 @@ public abstract class Stage implements Runnable{
 	}
 	@Override
 	public void run(){
-
-			//先產生怪物在特定區域
-			for(int i = 0 ; i < Map1Director.AI_CREATE_X_SET.length && i < monsters.size() ; i ++ )
-				specificlyAddMonster(i);
-			//再慢慢隨機產生
-			while(monsters.size() > 0){
-				try {TimeUnit.SECONDS.sleep(15);}catch (InterruptedException e) {e.printStackTrace();}
-				//randomlyAddMonster();
-				for ( int i = 0 ; i < 4 && monsters.size() > 0 ; i ++ )
-					randomlyAddMonster();
-			}
+		playMusic(); //播放音樂
+		//先產生怪物在特定區域
+		for(int i = 0 ; i < Map1Director.AI_CREATE_X_SET.length && i < monsters.size() ; i ++ )
+			specificlyAddMonster(i);
+		//再慢慢隨機產生
+		while(monsters.size() > 0){
+			try {TimeUnit.SECONDS.sleep(15);}catch (InterruptedException e) {e.printStackTrace();}
+			//randomlyAddMonster();
+			for ( int i = 0 ; i < 4 && monsters.size() > 0 ; i ++ )
+				randomlyAddMonster();
+		}
 			
-			while ( controller.getRemainningMonster() > 1 ); //只要還有一隻怪物就不繼續
+		while ( controller.getRemainningMonster() > 1 ); //只要還有一隻怪物就不繼續
 			
-			Log.d("下一關開始!!");
-			new Thread(nextStage).start();  //下一關
+		Log.d("下一關開始!!");
+		new Thread(nextStage).start();  //下一關
 			
 	} 
 	
@@ -65,6 +65,8 @@ public abstract class Stage implements Runnable{
 		Dimension d = new Dimension(x,y);
 		return new Dimension(x,y); 
 	}
+	
+	public abstract void playMusic();
 	public Stage getNextStage() {
 		return nextStage;
 	}
