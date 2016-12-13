@@ -100,11 +100,11 @@ public class View {
 		return buttonsPanel;
 	}
 
-	public void setButtonPanel(ButtonsPanel buttonPanel) {
+ 	public void setButtonPanel(ButtonsPanel buttonPanel) {
 		this.buttonsPanel = buttonPanel;
 	}
 
-	static class PlayerPanel extends JPanel {
+   	static class PlayerPanel extends JPanel { 
 		private static final String Player1 = "Player1 ";
 		private static final String Player2 = "Player2 ";
 		private static final String HP = "HP : ";

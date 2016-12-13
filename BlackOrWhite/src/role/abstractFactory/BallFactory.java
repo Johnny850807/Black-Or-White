@@ -1,6 +1,7 @@
 package role.abstractFactory;
 
 import mvc.ImageSequence;
+import mvc.Log;
 import role.movements.AI_Halt;
 import role.movements.AI_Movement;
 import role.movements.AI_Walk;
@@ -64,6 +65,7 @@ public class BallFactory implements RoleFactory {
 						new ImageSequence( "pics/AI/Ball/Walk/East","png",1) ,
 						new ImageSequence( "pics/AI/Ball/Walk/East","png",1)}
 					};
+			Log.d("create ball image");
 		}
 		
 		return actImgs;

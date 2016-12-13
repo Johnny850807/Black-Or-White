@@ -37,6 +37,7 @@ public class Controller extends Thread{
 	public void startGame(){
 		gameStart = true;
 		createPlayer();
+		super.setName("controller");
 		start();  //run stage
 	}
 	public void startP2PGame(){
@@ -138,6 +139,7 @@ public class Controller extends Thread{
 	public int getRemainningMonster(){
 		//得到剩下怪物的數量
 		int sum = 0;
+		Log.d(gameObjects.rolesSize()+"");
 		for ( int i = 0 ; i < gameObjects.rolesSize() ; i ++ )
 			sum += gameObjects.getRole(i) instanceof AI ? 1 : 0;
 		return sum;

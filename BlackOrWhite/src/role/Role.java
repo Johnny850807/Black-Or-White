@@ -158,6 +158,7 @@ public abstract class Role implements Runnable{
 				gun.gunShooting(this);
 				ShootSpacing sh = new ShootSpacing(this);  //®gÀ»¶¡®æ
 				sh.start();
+				
 				break;
 		}
 		x = model.getcX();

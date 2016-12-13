@@ -11,7 +11,7 @@ import role.AI_Ball;
 public class Stage1 extends Stage {
 	public Stage1(Controller controller) {
 		super(controller);
-		for ( int i = 0 ; i < 13 ; i ++ )  //第一關10隻
+		for ( int i = 0 ; i < 14 ; i ++ )  //第一關10隻
 			monsters.add(new AI_Ball(0,0,ActionType.HALT,Dir.NORTH));
 	}
 }

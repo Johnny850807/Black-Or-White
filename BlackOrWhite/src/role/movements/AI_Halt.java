@@ -1,6 +1,7 @@
 package role.movements;
 
 import mvc.ActionType;
+import mvc.Log;
 import role.AI;
 
 public class AI_Halt extends AI_Decorator {
@@ -11,11 +12,12 @@ public class AI_Halt extends AI_Decorator {
 
 	@Override
 	public void randomChoose(AI ai) {
-		// 20% to halt about a while ...
+		// 10% to halt about a while ...
 		//機率符合 或者  符合可以移動的時機 就移動
-		if ( random.nextInt(100) >= 80 && ai.isTimeToChangeMove() ){
+		if ( random.nextInt(100) >= 90 && ai.isTimeToChangeMove() ){
 				ai.getMoved( ActionType.HALT , dir[random.nextInt(dir.length)]);
 				ai.moveDurationCountDown(20); // HALT設定倒數20
+				Log.d("halt!!");
 		}
 		else if( !ai.isTimeToChangeMove() )  //機率符合 但卻不符合移動時機 就維持原本動作
 				ai.keepCurrentMove();
