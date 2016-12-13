@@ -131,7 +131,7 @@ public abstract class Role implements Runnable{
 	}
 	
 	//真正執行動作
-	public synchronized void getMoved(ActionType act , Dir dir){
+	public void getMoved(ActionType act , Dir dir){
 		curAct = act;
 		curDir = dir;
 		int dX = 0,dY = 0; //位移
@@ -198,13 +198,12 @@ public abstract class Role implements Runnable{
 	}
 	public void getDamaged(Bullet bullet){
 		//人類的子彈 只有怪物才會受到攻擊
-		if ( bullet instanceof BasicBullet )  {
-			if ( this instanceof AI && !isBeingHurted ){
-				hp = (hp - (bullet.getDamage() - df)) < 0 ? 0 : (hp - (bullet.getDamage() - df));
-				Log.d("受到攻擊"+x+","+y);
-				updateHp();
-				bullet.getModel().delete();
-			}
+		if ( this instanceof AI && !isBeingHurted ){
+			Log.d(bullet.getDamage()+"");
+			hp = (hp - (bullet.getDamage() - df)) < 0 ? 0 : (hp - (bullet.getDamage() - df));
+			Log.d("受到攻擊"+x+","+y);
+			updateHp();
+			bullet.getModel().delete();
 		}
 		else //怪物子彈
 			;

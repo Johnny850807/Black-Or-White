@@ -8,16 +8,11 @@ public class MachineBulletFactory implements BulletFactory {
 		,new ImageSequence( "pics/Bullet/BasicBullet/Horizontal","png",1)
 		,new ImageSequence( "pics/Bullet/BasicBullet/Vertical","png",1)
 		,new ImageSequence( "pics/Bullet/BasicBullet/Horizontal","png",1)}};
-	@Override
-	public int getDamage() {
-		// TODO Auto-generated method stub
-		return 100;
-	}
 
 	@Override
 	public int getDistance() {
 		// TODO Auto-generated method stub
-		return 40;
+		return 75;
 	}
 
 	@Override

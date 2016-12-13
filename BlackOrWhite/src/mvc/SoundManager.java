@@ -63,10 +63,30 @@ public class SoundManager {
 				 Clip soundClip = AudioSystem.getClip();
 				    public void run() {
 				      try {
-				    	if(soundClip.isOpen()){
-				    		soundClip.close();
-				    	}
 				    	soundClip.open(AudioSystem.getAudioInputStream(new File("sounds/shoot/machineGun.wav").toURL()));
+				  		soundClip.start();
+				      } catch (Exception e) {
+				        soundClip.close();
+				     
+				      }
+				    }
+				  }
+			 ).start();
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void playSniperSound(){
+		try {
+			new Thread(new Runnable() {
+				  // The wrapper thread is unnecessary, unless it bl  ocks on the
+				  // Clip finishing; see comments.
+				 Clip soundClip = AudioSystem.getClip();
+				    public void run() {
+				      try {
+				    	soundClip.open(AudioSystem.getAudioInputStream(new File("sounds/shoot/sniperRifle.wav").toURL()));
 				  		soundClip.start();
 				      } catch (Exception e) {
 				        soundClip.close();

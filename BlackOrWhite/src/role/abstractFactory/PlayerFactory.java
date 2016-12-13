@@ -7,6 +7,7 @@ import role.movements.GoBack;
 import weapon.guns.Gun;
 import weapon.guns.MachineGun;
 import weapon.guns.Rifle;
+import weapon.guns.SniperRifle;
 
 public class PlayerFactory implements RoleFactory {
 
@@ -15,7 +16,8 @@ public class PlayerFactory implements RoleFactory {
 	@Override
 	public Gun getGun() {
 		//return new Rifle(); 
-		return new MachineGun();
+		return new SniperRifle();
+		//return new MachineGun();
 	}
 
 	@Override

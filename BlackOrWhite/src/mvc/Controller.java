@@ -11,6 +11,7 @@ import role.AI;
 import role.Player;
 import role.Role;
 import weapon.bullets.Bullet;
+import weapon.guns.fallenWeapon.FallenItem;
 
 public class Controller extends Thread{
 	private volatile static Controller controller = new Controller(); // singleton
@@ -20,7 +21,7 @@ public class Controller extends Thread{
 	private Player player1 = null;  // single game
 	private Player player2 = null;  // net game
 	private Stage curStage;
-	private GameObjects gameObjects = GameObjects.getGameObjects();  //all objects will be painted in the game
+	private volatile GameObjects gameObjects = GameObjects.getGameObjects();  //all objects will be painted in the game
 	
 	private Controller(){}; // singleton
 	public static Controller getController(){return controller;}
@@ -106,6 +107,20 @@ public class Controller extends Thread{
 				}
 			}
 		}
+		
+		//½T»{¬O§_¾ß¨ìºj
+		List<FallenItem>  fallItems= gameObjects.getFallItems();
+		FallenItem fallItem;
+		Model fModel;
+		for ( int i = 0 ; i < fallItems.size() ; i ++ ){
+			fallItem = fallItems.get(i);
+			fModel = fallItem.getModel();
+			if ( player1.conflictWithSomething(fModel.getcX(), fModel.getcY(), fallItem.getW(), fallItem.getH())){
+				player1.setGun(fallItem.getGun());
+				fallItems.remove(fallItem);
+				break;
+			}
+		}
 	}
 	
 	//update all the object's states
@@ -122,6 +137,11 @@ public class Controller extends Thread{
 			return false;
 		}
 		return true;
+	}
+	
+	public synchronized void fallGun(FallenItem fallItem){
+		Log.d("1111");
+		gameObjects.addFallenGun(fallItem);
 	}
 	
 	public void updatePlayerHp(){

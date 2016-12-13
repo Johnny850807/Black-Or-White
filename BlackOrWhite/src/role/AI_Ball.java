@@ -1,8 +1,13 @@
 package role;
 
+import java.util.Random;
+
 import mvc.*;
+import mvc.gameObject.GameObjects;
 import role.abstractFactory.BallFactory;
 import role.abstractFactory.RoleFactory;
+import weapon.guns.fallenWeapon.FallenMachine;
+import weapon.guns.fallenWeapon.FallenSniperRifle;
 					//繼承AI 
 public class AI_Ball extends AI {
 	//不會變的數值
@@ -25,13 +30,6 @@ public class AI_Ball extends AI {
 	} 
 
 	@Override
-	protected void die() {
-		if ( hp <= 0 ){
-			model.delete();  //在控制器中刪除掉自己
-		}
-	}
-
-	@Override
 	protected int getMovingDistance(ActionType act , Dir dir) {
 		switch(act)
 		{
@@ -51,6 +49,19 @@ public class AI_Ball extends AI {
 				return 0;
 		}
 		return 0;
+	}
+
+	@Override
+	protected void throwGun() {
+		Random random = new Random();
+		if (GameObjects.getGameObjects().fallenItemSize() < 2 )
+		{
+			if(random.nextInt(100) > 93) //7%機關槍
+				Controller.getController().fallGun(new FallenMachine(x,y));
+			else if (random.nextInt(100) > 97)  //2%狙擊槍
+				Controller.getController().fallGun(new FallenSniperRifle(x,y));
+		}
+			
 	}
 
 }

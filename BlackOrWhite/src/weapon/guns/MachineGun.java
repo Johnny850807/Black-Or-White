@@ -4,6 +4,7 @@ import mvc.SoundManager;
 import role.Role;
 import weapon.bullets.BasicBullet;
 import weapon.bullets.Bullet;
+import weapon.bullets.MachineBullet;
 import weapon.bullets.MachineBulletFactory;
 import weapon.bullets.RifleBulletFactory;
 
@@ -32,7 +33,7 @@ public class MachineGun implements Gun{
 						y += 57;
 						break;
 				}
-				Bullet bullet = new BasicBullet( x , y , role.curDir , new MachineBulletFactory());
+				Bullet bullet = new MachineBullet( x , y , role.curDir , new MachineBulletFactory());
 	
 			//	try {Thread.sleep(750);} catch (InterruptedException e) {e.printStackTrace();}
 				return bullet;

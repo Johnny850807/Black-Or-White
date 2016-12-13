@@ -5,14 +5,16 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import mvc.Log;
 import role.Role;
 import weapon.bullets.Bullet;
+import weapon.guns.fallenWeapon.FallenItem;
 //所有出現在畫面中的物件
 public class GameObjects {
 	private static GameObjects gameObjects;  //singleton
 	private List<Role> roles = Collections.checkedList(new ArrayList<Role>(), Role.class); //所有存在角色
 	private List<Bullet> bullets  = Collections.checkedList(new ArrayList<Bullet>(), Bullet.class);  //所有存在子彈
-	
+	private List<FallenItem> fallItems = Collections.checkedList(new ArrayList<FallenItem>(), FallenItem.class);  //所有掉落槍枝
 	private GameObjects(){} //singleton
 	
 	public static GameObjects getGameObjects(){
@@ -30,6 +32,14 @@ public class GameObjects {
 	public Iterator bulletsIterator(){
 		return bullets.iterator();
 	}
+	public List<FallenItem> getFallItems() {
+		return fallItems;
+	}
+
+	public void setFallItems(List<FallenItem> fallItems) {
+		this.fallItems = fallItems;
+	}
+
 	public List<Role> getRoles() {
 		return roles;
 	}
@@ -48,11 +58,17 @@ public class GameObjects {
 	public void addBullet(Bullet b){
 		bullets.add(b);
 	}
+	public void addFallenGun(FallenItem f){
+		fallItems.add(f);
+	}
 	public void removeRole(Role r){
 		roles.remove(r);
 	}
 	public void removeBullet(Bullet b){
 		bullets.remove(b);
+	}
+	public void removeFallenItem(FallenItem f){
+		fallItems.remove(f);
 	}
 	//overloading
 	public void removeRole(int r){
@@ -79,6 +95,9 @@ public class GameObjects {
 	}
 	public int bulletSize(){
 		return bullets.size();
+	}
+	public int fallenItemSize(){
+		return fallItems.size();
 	}
 	
 	

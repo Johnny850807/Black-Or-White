@@ -38,7 +38,7 @@ public abstract class Bullet {
 		this.vW = w;
 		this.vH = h;
 		this.curDir = curDir;
-		this.damage = factory.getDamage();
+		this.damage = damage;
 		this.actionImgs = factory.getActionImages();
 		this.distance = factory.getDistance();
 		model = new Model(this, Item.BULLET, cX,cY, ActionType.WALK , curDir, actionImgs[0][curDir.ordinal()]);

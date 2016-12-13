@@ -56,5 +56,11 @@ public abstract class AI extends Role {
 		model.setState(x, y, curAct, curDir, model.getiS());
 	}
 	
-	protected abstract void die(); // do something while dying , maybe throws a gun over the map
+	protected  void die(){
+		if ( hp <= 0 ){
+			model.delete();  //在控制器中刪除掉自己
+			throwGun();
+		}
+	}
+	protected abstract void throwGun();  //如果怪物死亡有機率掉槍
 }
