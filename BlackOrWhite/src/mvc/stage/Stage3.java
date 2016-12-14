@@ -5,13 +5,25 @@ import mvc.Controller;
 import mvc.Dir;
 import role.AI_Ball;
 import role.AI_SnowBall;
+import role.AI_SnowBallEX;
 
 public class Stage3 extends Stage{
 
 	public Stage3(Controller controller) {
 		super(controller);
-		for ( int i = 0 ; i < 11 ; i ++ )  //²Ä¤@Ãö10°¦
+		
+		monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 2 ; i ++ )  
 			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 2 ; i ++ )  
+			monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 2 ; i ++ )  
+			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 1 ; i ++ )  
+			monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 3 ; i ++ )  
+			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
+		monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
 		
 	}
 	@Override

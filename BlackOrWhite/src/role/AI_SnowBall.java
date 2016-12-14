@@ -24,11 +24,11 @@ public class AI_SnowBall extends AI {
 		}
 		
 		public AI_SnowBall(int x , int y , ActionType act , Dir dir) {
-			super(new SnowBallFactory(),x,y,act,dir,1,11,70,51,300,70,15);
+			super(new SnowBallFactory(),x,y,act,dir,1,10,70,55,300,70,15);
 			/*offsetX = 1;
-			offsetY = 11;
+			offsetY = 10;
 			feetW = 70;
-			feetH = 51;
+			feetH = 55;
 			hp = 300;
 			atk = 70;
 			df = 33;*/
@@ -61,10 +61,10 @@ public class AI_SnowBall extends AI {
 			Random random = new Random();
 			if (GameObjects.getGameObjects().fallenItemSize() < 2 )
 			{
-				if(random.nextInt(100) > 84) //15%¾÷Ãöºj
-					Controller.getController().fallGun(new FallenMachine(x,y));
-				else if (random.nextInt(100) > 93)  //2%ª®À»ºj
+				if (random.nextInt(100) > 90)
 					Controller.getController().fallGun(new FallenSniperRifle(x,y));
+				else if(random.nextInt(100) > 95) 
+					Controller.getController().fallGun(new FallenMachine(x,y));
 			}
 				
 		}

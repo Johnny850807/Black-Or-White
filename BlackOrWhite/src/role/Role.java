@@ -213,14 +213,8 @@ public abstract class Role implements Runnable{
 		//玩家受到怪物子彈攻擊
 		else if ( this instanceof Player && !bullet.isPlayerBullet() && !isBeingHurted) //怪物子彈
 			;
-		
 	}
-	/*public void getDamaged(AI_Bullet bullet){
-		//怪物的子彈
-		if ( this instanceof Player)
-			hp = (hp - (bullet.getDamage() - df)) < 0 ? 0 : (hp - (bullet.getDamage() - df));
-		updateHp();
-	}*/
+	
 	public void getDamaged(AI ai){
 		//受到怪物接觸攻擊
 		if ( this instanceof Player && !isBeingHurted){
