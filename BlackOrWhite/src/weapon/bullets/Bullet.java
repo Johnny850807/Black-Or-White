@@ -18,6 +18,7 @@ public abstract class Bullet {
 	public static ArrayList<Integer> BARRIER_Y_SET = Map1Director.BULLET_BARRIER_Y_SET;
 	protected Model model;
 	protected boolean singleHit; //是否為單數攻擊 (否則為群體攻擊 不會因為碰到怪物而消失)
+	protected boolean playerBullet;  //是否為玩家的子彈 如果是 則代表 會傷害到怪物 ， 若為否 則代表是怪物陣營的子彈 會傷害到玩家 
 
 	protected ImageSequence[][] actionImgs;
 	protected int distance; //飛行距離
@@ -32,11 +33,12 @@ public abstract class Bullet {
 	protected int cY;
 	public Dir curDir;  //飛行方向
 
-	public Bullet(int cX, int cY, int w, int h,int damage,boolean singleHit, Dir curDir ,BulletFactory factory) {
+	public Bullet(int cX, int cY, int w, int h,int damage,boolean singleHit,boolean playerBullet, Dir curDir ,BulletFactory factory) {
 		super();
 		this.cX = cX;
 		this.cY = cY;
 		this.singleHit = singleHit;
+		this.playerBullet = playerBullet;
 		this.vW = w;
 		this.vH = h;
 		this.curDir = curDir;
@@ -143,6 +145,10 @@ public abstract class Bullet {
 
 	public boolean isSingleHit() {
 		return singleHit;
+	}
+
+	public boolean isPlayerBullet() {
+		return playerBullet;
 	}
 	
 	

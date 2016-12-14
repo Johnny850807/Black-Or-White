@@ -203,16 +203,15 @@ public abstract class Role implements Runnable{
 		return conflict;
 	}
 	public void getDamaged(Bullet bullet){
-		//人類的子彈 只有怪物才會受到攻擊
-		if ( this instanceof AI && !isBeingHurted ){
-			Log.d(bullet.getDamage()+"");
+		// AI受到玩家子彈攻擊
+		if ( this instanceof AI && bullet.isPlayerBullet() && !isBeingHurted ){
 			hp = (hp - (bullet.getDamage() - df)) < 0 ? 0 : (hp - (bullet.getDamage() - df));
-			Log.d("受到攻擊"+x+","+y);
 			updateHp();
 			if (bullet.isSingleHit())  //若為單數攻擊就消失
 				bullet.getModel().delete();
 		}
-		else //怪物子彈
+		//玩家受到怪物子彈攻擊
+		else if ( this instanceof Player && !bullet.isPlayerBullet() && !isBeingHurted) //怪物子彈
 			;
 		
 	}

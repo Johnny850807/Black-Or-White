@@ -55,7 +55,6 @@ public class View {
 		playerPanel.setP1Hp(hp);
 	}
 	
-	
 	public void refreshScreen(){
 		//更新畫面
 		gamePanel.repaint();
