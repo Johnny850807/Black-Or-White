@@ -40,7 +40,7 @@ public class SniperRifle implements Gun {
 
 	@Override
 	public int getSpacing() {
-		return 3400;
+		return 2500;
 	}
 
 }

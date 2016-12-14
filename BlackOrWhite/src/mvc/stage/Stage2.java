@@ -5,20 +5,33 @@ import mvc.Controller;
 import mvc.Dir;
 import mvc.Log;
 import mvc.SoundManager;
-import role.AI;
-import role.AI_Ball;
+import role.*;
 
 public class Stage2 extends Stage {
 
 	public Stage2(Controller controller) {
 		super(controller);
-		for ( int i = 0 ; i < 15 ; i ++ )  //第二關15隻
+		for ( int i = 0 ; i < 3 ; i ++ )  
 			monsters.add(new AI_Ball(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 2 ; i ++ )  
+			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 3 ; i ++ )  
+			monsters.add(new AI_Ball(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 2 ; i ++ )  
+			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 3 ; i ++ )  
+			monsters.add(new AI_Ball(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 2 ; i ++ )  
+			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
 	}
 
 	@Override
 	public void playMusic() {
-		//不播音樂
+	}
+
+	@Override
+	public void playerControl() {
+
 	}
 
 

@@ -8,6 +8,7 @@ import mvc.Dir;
 import mvc.SoundManager;
 import role.AI;
 import role.AI_Ball;
+import role.AI_SnowBall;
 
 public class Stage1 extends Stage {
 	public Stage1(Controller controller) {
@@ -20,5 +21,9 @@ public class Stage1 extends Stage {
 	@Override
 	public void playMusic() {
 		SoundManager.getSoundManager().playStageMusic("sounds/stage/stage1_ost.wav");
+	}
+
+	@Override
+	public void playerControl() {
 	}
 }

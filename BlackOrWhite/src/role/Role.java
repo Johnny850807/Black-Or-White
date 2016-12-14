@@ -57,7 +57,6 @@ public abstract class Role implements Runnable{
 		backable = factory.getBackable();
 		gun = factory.getGun();
 		movement = factory.getMovement();
-		hp = factory.getHp();
 		isDead = false;
 		requests = new LinkedList(); // requests queue
 	}
@@ -101,6 +100,10 @@ public abstract class Role implements Runnable{
 
 	public void setHp(int hp) {
 		this.hp = hp;
+		//如果是玩家 設置生命之後要更新生命條
+		if(this instanceof Player)
+			updateHp();
+		
 	}
 	
 	public boolean isShootSpacing() {
@@ -130,8 +133,8 @@ public abstract class Role implements Runnable{
 		
 	}
 	
-	//真正執行動作
-	public void getMoved(ActionType act , Dir dir){
+	//真正執行動作 傳回是否可移動
+	public boolean getMoved(ActionType act , Dir dir){
 		curAct = act;
 		curDir = dir;
 		int dX = 0,dY = 0; //位移
@@ -164,12 +167,15 @@ public abstract class Role implements Runnable{
 		x = model.getcX();
 		y = model.getcY();
 		int rX = x + offsetX + dX, rY = y + offsetY + dY;  //結果位子
-		if (!moveable(rX,rY)) //若不可移動則位移0
+		if (!moveable(rX,rY)){ //若不可移動則位移0
 			dX = dY = 0; 
+			return false;
+		}
 		iS = actionImgs[curAct.ordinal()][curDir.ordinal()];
 		if ( curDir != dir )
 			iS.reset();
 		model.setState(dX, dY, curAct, curDir, iS);
+		return true;
 	}
 	public boolean moveable(int x , int y){
 		//判斷腳色是否可以繼續移動

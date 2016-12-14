@@ -55,9 +55,6 @@ public class View {
 		playerPanel.setP1Hp(hp);
 	}
 	
-	public void playerSetDie(){
-		playerPanel.player1SetDie();
-	}
 	
 	public void refreshScreen(){
 		//更新畫面
@@ -121,10 +118,25 @@ public class View {
 		}
 		public void updateText(){
 			player1HP.setText(Player1+HP+p1Hp);
+			if ( p1Hp <= 0 )
+				player1HP.setText("Game Over");
+			if ( p1Hp < 150 )  //警告生命顏色
+				player1HP.setForeground(Color.red);
+			else
+				player1HP.setForeground(Color.black);
 			if(p2Hp == -1)
 				player2HP.setText("");
 			else
-				player2HP.setText(Player2+HP+p1Hp);
+			{
+				player2HP.setText(Player2+HP+p2Hp);
+				if ( p2Hp < 150 )
+					player2HP.setForeground(Color.red);
+				else
+					player2HP.setForeground(Color.black);
+				if ( p2Hp <= 0 )
+					player2HP.setText("Game Over");
+			}
+				
 		}
 		public int getP1Hp() {
 			return p1Hp;
@@ -139,14 +151,6 @@ public class View {
 		public void setP2Hp(int p2Hp) {
 			this.p2Hp = p2Hp;
 			updateText();
-		}
-		public void player1SetDie(){
-			this.p1Hp = 0;
-			player1HP.setText("Game Over");
-		}
-		public void player2SetDie(){
-			this.p2Hp = 0;
-			player2HP.setText("Game Over");
 		}
 			
 	}

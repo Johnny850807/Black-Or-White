@@ -60,7 +60,6 @@ public class Player extends Role {
 	protected void die(){
 		// while the player dies
 		if ( hp <= 0 ){
-			model.getController().playerDie();  //跟控制器說要設置玩家死亡
 			model.delete();  //在控制器中刪除掉自己
 		}
 	}

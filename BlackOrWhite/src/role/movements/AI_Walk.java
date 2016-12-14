@@ -4,6 +4,7 @@ import java.util.Random;
 
 import mvc.ActionType;
 import mvc.Dir;
+import mvc.Log;
 import mvc.Model;
 import role.AI;
 
@@ -28,20 +29,28 @@ public class AI_Walk implements AI_Movement {
 		Dir[] dirWest = {Dir.NORTH,Dir.SOUTH,Dir.EAST,Dir.EAST,Dir.EAST,Dir.EAST,Dir.EAST};
 		Dir[] dirNorth = {Dir.EAST,Dir.WEST,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.NORTH};
 		Dir[] dirSouth = {Dir.EAST,Dir.WEST,Dir.NORTH,Dir.NORTH,Dir.NORTH,Dir.WEST,Dir.SOUTH};
+		Dir rDir;  //結果方向
 		//east
 		if ( x < 400 && y > 200 && y < 600 )
-			ai.getMoved( ActionType.WALK , dirEast[random.nextInt(dirEast.length)]);
+			rDir = dirEast[random.nextInt(dirEast.length)];
 		//west
-		else if ( x > 800 && y > 200 && y < 600 )
-			ai.getMoved( ActionType.WALK , dirWest[random.nextInt(dirWest.length)]);
+		else if ( x > 720 && y > 200 && y < 600 )
+			rDir = dirWest[random.nextInt(dirWest.length)];
 		//north
 		else if ( y <= 200 )
-			ai.getMoved( ActionType.WALK , dirNorth[random.nextInt(dirNorth.length)]);
+			rDir = dirNorth[random.nextInt(dirNorth.length)];
 		//south
 		else if ( y >= 600 )
-			ai.getMoved( ActionType.WALK , dirSouth[random.nextInt(dirSouth.length)]);
+			rDir = dirSouth[random.nextInt(dirSouth.length)];
 		else
+			rDir = dir[random.nextInt(dir.length)];
+		//如果位於不可移動的狀態就換方向
+		while( !ai.getMoved( ActionType.WALK , dir[random.nextInt(dir.length)]) ){
 			ai.getMoved( ActionType.WALK , dir[random.nextInt(dir.length)]);
+			ai.moveDurationCountDown(20);
+			Log.d("不可移動");
+		}
+		
 	}
 
 }

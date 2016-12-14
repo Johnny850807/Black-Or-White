@@ -37,10 +37,7 @@ public class BallFactory implements RoleFactory {
 		return new GoBack();
 	}
 
-	@Override
-	public int getHp() {
-		return 300;
-	}
+
 
 	@Override
 	public ImageSequence[][] getActionImages() {
@@ -58,12 +55,12 @@ public class BallFactory implements RoleFactory {
 			actImgs = new ImageSequence[][]{
   /*Halt*/		{ new ImageSequence( "pics/AI/Ball/Walk/East","png",1) ,
 					new ImageSequence( "pics/AI/Ball/Walk/East","png",1) ,
-					new ImageSequence( "pics/AI/Ball/Walk/East","png",1) ,
-					new ImageSequence( "pics/AI/Ball/Walk/East","png",1)} ,
+					new ImageSequence( "pics/AI/Ball/Walk/West","png",1) ,
+					new ImageSequence( "pics/AI/Ball/Walk/West","png",1)} ,
   /*Walk*/		{ new ImageSequence( "pics/AI/Ball/Walk/East","png",1) ,
 						new ImageSequence( "pics/AI/Ball/Walk/East","png",1) ,
-						new ImageSequence( "pics/AI/Ball/Walk/East","png",1) ,
-						new ImageSequence( "pics/AI/Ball/Walk/East","png",1)}
+						new ImageSequence( "pics/AI/Ball/Walk/West","png",1) ,
+						new ImageSequence( "pics/AI/Ball/Walk/West","png",1)}
 					};
 			Log.d("create ball image");
 		}

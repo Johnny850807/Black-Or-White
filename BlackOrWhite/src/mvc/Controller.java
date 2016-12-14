@@ -1,6 +1,8 @@
 package mvc;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -76,6 +78,9 @@ public class Controller extends Thread{
 	public void deleteModel(Bullet bullet){
 		gameObjects.removeBullet(bullet);
 	}
+	public void deleteModel(FallenItem fallen){
+		gameObjects.removeFallenItem(fallen);
+	}
 	
 	public void checkConflict(){
 		//確認衝突
@@ -132,24 +137,19 @@ public class Controller extends Thread{
 				itR.next().run();
 			while(itB.hasNext())
 				itB.next().run();
+		}catch(ConcurrentModificationException err){
 		}catch(Exception err){
-			Log.d(err.toString());
-			return false;
+			err.printStackTrace();
 		}
 		return true;
 	}
 	
-	public synchronized void fallGun(FallenItem fallItem){
-		Log.d("1111");
+	public void fallGun(FallenItem fallItem){
 		gameObjects.addFallenGun(fallItem);
 	}
 	
 	public void updatePlayerHp(){
 		view.updatePlayerHp(player1.getModel().getHp());
-	}
-	
-	public void playerDie(){
-		view.playerSetDie();
 	}
 	
 	public void movePlayer(ActionType act,Dir dir){
@@ -159,9 +159,16 @@ public class Controller extends Thread{
 	public int getRemainningMonster(){
 		//得到剩下怪物的數量
 		int sum = 0;
-		Log.d(gameObjects.rolesSize()+"");
-		for ( int i = 0 ; i < gameObjects.rolesSize() ; i ++ )
-			sum += gameObjects.getRole(i) instanceof AI ? 1 : 0;
+		List<Role> roles = new ArrayList<Role>();  //為了防止在走訪roles聚合時，controller更動了roles內容而造成IndexOutOfBound
+		//先複製內容 再到這個不被干擾的容器內走訪
+		roles.addAll(gameObjects.getRoles());
+		try{
+			for ( Role r : roles )
+				sum += r instanceof AI ? 1 : 0;
+		}catch(Exception err){
+			err.printStackTrace();
+		}
+		
 		return sum;
 	}
 	
@@ -171,6 +178,14 @@ public class Controller extends Thread{
 	
 	public void addBullet(Bullet bullet){
 		gameObjects.addBullet(bullet);
+	}
+	
+	//治療玩家
+	public void curePlayer(int hp){
+		if (player1 != null )
+			player1.setHp( player1.getHp()+hp > 500 ? 500 : player1.getHp()+hp);
+		if (player2 != null)
+			player2.setHp(player2.getHp()+hp > 500 ? 500 : player2.getHp()+hp);
 	}
 	
 	public static boolean isNetWork() {
@@ -190,6 +205,12 @@ public class Controller extends Thread{
 	}
 	public static void setView(View view) {
 		Controller.view = view;
+	}
+	public Player getPlayer1() {
+		return player1;
+	}
+	public Player getPlayer2() {
+		return player2;
 	}
 	
 }

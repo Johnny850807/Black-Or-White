@@ -1,6 +1,8 @@
 package weapon.guns.fallenWeapon;
 
 
+import java.util.concurrent.TimeUnit;
+
 import mvc.ActionType;
 import mvc.Dir;
 import mvc.ImageSequence;
@@ -18,7 +20,19 @@ public abstract class FallenItem {
 		this.h = h;
 		this.gun = gun;
 		model = new Model(this,Item.GUN,x,y,ActionType.HALT,Dir.NORTH,imgs);
+		itemExistTimeCountStart();
 	};
+	
+	public void itemExistTimeCountStart(){
+		//計算掉落物存在時間的倒數
+		new Thread(){
+			@Override
+			public void run(){
+				try {TimeUnit.SECONDS.sleep(10);} catch (InterruptedException e) {e.printStackTrace();}
+				model.delete();
+			}
+		}.start();
+	}
 	
 	public Model getModel() {
 		return model;

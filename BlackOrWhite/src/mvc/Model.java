@@ -3,6 +3,7 @@ package mvc;
 import role.Player;
 import role.Role;
 import weapon.bullets.Bullet;
+import weapon.guns.fallenWeapon.FallenItem;
 
 public class Model {
 	private Controller controller = Controller.getController(); //更新之後要通知controller
@@ -37,11 +38,13 @@ public class Model {
 	
 	//讓這個model在controller中結束生命周期
 	public void delete(){
-		if ( type == Item.ROLE )
+		if ( parent instanceof Role )
 			controller.deleteModel((Role)parent);
-		else
+		else if ( parent instanceof Bullet )
 			controller.deleteModel((Bullet)parent);
-	}
+		else if (parent instanceof FallenItem )
+			controller.deleteModel((FallenItem)parent);
+	} 
 	
 	public Controller getController() {
 		return controller;

@@ -21,19 +21,23 @@ public abstract class Stage implements Runnable{
 	}
 	@Override
 	public void run(){
+		playerControl(); //操作玩家
 		playMusic(); //播放音樂
+		
 		//先產生怪物在特定區域
 		for(int i = 0 ; i < Map1Director.AI_CREATE_X_SET.length && i < monsters.size() ; i ++ )
 			specificlyAddMonster(i);
-		//再慢慢隨機產生
+		
+		//再慢慢隨機位置產生
 		while(monsters.size() > 0){
 			try {TimeUnit.SECONDS.sleep(15);}catch (InterruptedException e) {e.printStackTrace();}
-			//randomlyAddMonster();
 			for ( int i = 0 ; i < 4 && monsters.size() > 0 ; i ++ )
 				randomlyAddMonster();
 		}
 			
-		while ( controller.getRemainningMonster() > 1 ); //只要還有一隻怪物就不繼續
+		while ( controller.getRemainningMonster() > 0 ); //只要還有一隻怪物就不繼續
+
+		try {TimeUnit.SECONDS.sleep(5);}catch (InterruptedException e) {e.printStackTrace();}
 			
 		Log.d("下一關開始!!");
 		new Thread(nextStage).start();  //下一關
@@ -66,7 +70,9 @@ public abstract class Stage implements Runnable{
 		return new Dimension(x,y); 
 	}
 	
-	public abstract void playMusic();
+	public abstract void playMusic();  //是否更換音樂
+	public abstract void playerControl();  //是否進行操作玩家 也許治療 也許移位..
+	
 	public Stage getNextStage() {
 		return nextStage;
 	}

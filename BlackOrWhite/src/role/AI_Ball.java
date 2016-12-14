@@ -25,7 +25,7 @@ public class AI_Ball extends AI {
 		feetW = 64;
 		feetH = 59;
 		hp = 300;
-		atk = 0;
+		atk = 80;
 		df = 20;*/
 	} 
 

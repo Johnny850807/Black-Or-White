@@ -15,8 +15,8 @@ public class PlayerFactory implements RoleFactory {
 	
 	@Override
 	public Gun getGun() {
-		return new Rifle(); 
-		//return new SniperRifle();
+		//return new Rifle(); 
+		return new SniperRifle();
 		//return new MachineGun();
 	}
 
@@ -31,10 +31,6 @@ public class PlayerFactory implements RoleFactory {
 		return new GoBack();
 	}
 
-	@Override
-	public int getHp() {
-		return 500;
-	}
 
 	@Override
 	public ImageSequence[][] getActionImages() {
