@@ -209,7 +209,8 @@ public abstract class Role implements Runnable{
 			hp = (hp - (bullet.getDamage() - df)) < 0 ? 0 : (hp - (bullet.getDamage() - df));
 			Log.d("受到攻擊"+x+","+y);
 			updateHp();
-			bullet.getModel().delete();
+			if (bullet.isSingleHit())  //若為單數攻擊就消失
+				bullet.getModel().delete();
 		}
 		else //怪物子彈
 			;
