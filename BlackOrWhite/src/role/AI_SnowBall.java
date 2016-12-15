@@ -61,7 +61,7 @@ public class AI_SnowBall extends AI {
 			Random random = new Random();
 			if (GameObjects.getGameObjects().fallenItemSize() < 2 )
 			{
-				if (random.nextInt(100) > 90)
+				if (random.nextInt(100) > 79)
 					Controller.getController().fallGun(new FallenSniperRifle(x,y));
 				else if(random.nextInt(100) > 95) 
 					Controller.getController().fallGun(new FallenMachine(x,y));

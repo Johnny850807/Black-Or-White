@@ -15,12 +15,11 @@ public class Stage3 extends Stage{
 		monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
 		for ( int i = 0 ; i < 2 ; i ++ )  
 			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
+		monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
 		for ( int i = 0 ; i < 2 ; i ++ )  
 			monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
-		for ( int i = 0 ; i < 2 ; i ++ )  
+		for ( int i = 0 ; i < 3 ; i ++ )  
 			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
-		for ( int i = 0 ; i < 1 ; i ++ )  
-			monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
 		for ( int i = 0 ; i < 3 ; i ++ )  
 			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
 		monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));

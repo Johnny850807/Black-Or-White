@@ -2,6 +2,7 @@ package role.abstractFactory;
 
 import mvc.ImageSequence;
 import mvc.Log;
+import role.movements.AI_Follow;
 import role.movements.AI_Halt;
 import role.movements.AI_Movement;
 import role.movements.AI_Walk;
@@ -46,7 +47,7 @@ public class SnowBallExFactory implements RoleFactory {
 
 	@Override
 	public AI_Movement getMovement() {
-		return new AI_Halt(new AI_Walk());
+		return new AI_Follow(new AI_Halt(new AI_Walk()));
 	}
 
 	@Override

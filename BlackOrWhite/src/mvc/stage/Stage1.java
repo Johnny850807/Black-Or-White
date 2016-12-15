@@ -9,6 +9,7 @@ import mvc.SoundManager;
 import role.AI;
 import role.AI_Ball;
 import role.AI_SnowBall;
+import role.AI_SnowBallEX;
 
 public class Stage1 extends Stage {
 	public Stage1(Controller controller) {
@@ -20,7 +21,7 @@ public class Stage1 extends Stage {
 
 	@Override
 	public void playMusic() {
-		SoundManager.getSoundManager().playStageMusic("sounds/stage/stage1_ost.wav");
+		SoundManager.getSoundManager().playStageMusic("sounds/stage/naruto_soundtrack.wav");
 	}
 
 	@Override
