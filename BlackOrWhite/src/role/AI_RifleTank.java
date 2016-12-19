@@ -2,28 +2,32 @@ package role;
 
 import java.util.Random;
 
-import mvc.*;
+import mvc.ActionType;
+import mvc.Controller;
+import mvc.Dir;
+import mvc.SoundManager;
 import mvc.gameObject.GameObjects;
 import role.abstractFactory.BallFactory;
+import role.abstractFactory.RifleTankFactory;
 import role.abstractFactory.RoleFactory;
 import weapon.guns.fallenWeapon.FallenMachine;
 import weapon.guns.fallenWeapon.FallenSniperRifle;
-					//Ä~©ÓAI 
-public class AI_Ball extends AI {
 
-	public AI_Ball(RoleFactory factory) {
+public class AI_RifleTank extends AI {
+
+	public AI_RifleTank(RoleFactory factory) {
 		super(factory);
 	}
 	
-	public AI_Ball(int x , int y , ActionType act , Dir dir) {
-		super(new BallFactory(),x,y,act,dir,1,3,64,59,300,80,20);
-		/*offsetX = 1;
-		offsetY = 3;
-		feetW = 64;
-		feetH = 59;
-		hp = 300;
-		atk = 80;
-		df = 20;*/
+	public AI_RifleTank(int x , int y , ActionType act , Dir dir) {
+		super(new RifleTankFactory(),x,y,act,dir,6,14,58,74,500,120,60);
+		/*offsetX = 6;
+		offsetY = 14;    
+		feetW = 58;
+		feetH = 74;
+		hp = 500;
+		atk = 120;
+		df = 60;*/
 	} 
 
 	@Override
@@ -33,13 +37,13 @@ public class AI_Ball extends AI {
 			case WALK:
 				switch(dir){
 					case NORTH:
-						return -8;
+						return -4;
 					case SOUTH:
-						return 8;
+						return 4;
 					case EAST:
-						return 8;
+						return 4;
 					case WEST:
-						return -8;
+						return -4;
 				}
 				break;
 			default:
@@ -63,7 +67,6 @@ public class AI_Ball extends AI {
 
 	@Override
 	protected void dieProcess() {
-		SoundManager.getSoundManager().playSound("sounds/monster/ball_die.wav");
 	}
 
 }

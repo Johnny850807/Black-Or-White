@@ -8,6 +8,7 @@ import mvc.Dir;
 import mvc.SoundManager;
 import role.AI;
 import role.AI_Ball;
+import role.AI_RifleTank;
 import role.AI_SnowBall;
 import role.AI_SnowBallEX;
 
