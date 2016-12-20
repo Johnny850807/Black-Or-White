@@ -10,23 +10,21 @@ public class Stage4 extends Stage{
 	public Stage4(Controller controller) {
 		super(controller);
 		for ( int i = 0 ; i < 2 ; i ++ )  //第一關10隻
-			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
+			monsters.add(new AI_Evil(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 2 ; i ++ )  //第一關10隻
+			monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 2 ; i ++ )  //第一關10隻
+			monsters.add(new AI_Evil(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 2 ; i ++ )  //第一關10隻
+			monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));
+		for ( int i = 0 ; i < 2 ; i ++ )  //第一關10隻
+			monsters.add(new AI_Evil(0,0,ActionType.HALT,Dir.NORTH));
 		for ( int i = 0 ; i < 2 ; i ++ )  //第一關10隻
 			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
 		for ( int i = 0 ; i < 2 ; i ++ )  //第一關10隻
-			monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
-		for ( int i = 0 ; i < 2 ; i ++ )  //第一關10隻
 			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
 		for ( int i = 0 ; i < 2 ; i ++ )  //第一關10隻
 			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
-		for ( int i = 0 ; i < 2 ; i ++ )  //第一關10隻
-			monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
-		for ( int i = 0 ; i < 2 ; i ++ )  //第一關10隻
-			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
-		for ( int i = 0 ; i < 2 ; i ++ )  //第一關10隻
-			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
-		for ( int i = 0 ; i < 2 ; i ++ )  //第一關10隻
-			monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
 	}
 
 	@Override

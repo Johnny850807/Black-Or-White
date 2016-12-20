@@ -19,14 +19,14 @@ public class AI_Evil extends AI {
 	}
 	
 	public AI_Evil(int x , int y , ActionType act , Dir dir) {
-		super(new EvilFactory(),x,y,act,dir,8,8,46,64,3000,800,0);
+		super(new EvilFactory(),x,y,act,dir,8,8,46,64,600,120,35);
 		/*offsetX = 8;
 		offsetY = 8;
 		feetW = 46;
 		feetH = 64;
-		hp = 3000;
-		atk = 800;
-		df = 0;*/
+		hp = 600;
+		atk = 120;
+		df = 35;*/
 	}
 
 	@Override
