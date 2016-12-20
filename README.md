@@ -27,3 +27,5 @@ Tank       400   120   60    步槍
 Black   200 100 80 機關槍
 
 Sniper     300    330    80        狙擊槍
+
+https://home.gamer.com.tw/creationDetail.php?sn=2492319
