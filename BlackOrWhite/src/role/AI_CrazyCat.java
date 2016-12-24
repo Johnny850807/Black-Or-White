@@ -19,14 +19,14 @@ public class AI_CrazyCat extends AI {
 	}
 	
 	public AI_CrazyCat(int x , int y , ActionType act , Dir dir) {
-		super(new CrazyCatFactory(),x,y,act,dir,28,12,70,81,2000,120,60);
+		super(new CrazyCatFactory(),x,y,act,dir,28,12,70,81,3000,120,60);
 		/*offsetX = 28;
 		offsetY = 12;
 		feetW = 91;
 		feetH = 81;
-		hp = 2000;
+		hp = 3300;
 		atk = 120;
-		df = 60;*/
+		df = 30;*/
 	} 
 
 	@Override
@@ -36,13 +36,13 @@ public class AI_CrazyCat extends AI {
 			case WALK:
 				switch(dir){
 					case NORTH:
-						return -13;
+						return -12;
 					case SOUTH:
-						return 13;
+						return 12;
 					case EAST:
-						return 13;
+						return 16;
 					case WEST:
-						return -13;
+						return -16;
 				}
 				break;
 			default:
@@ -66,6 +66,6 @@ public class AI_CrazyCat extends AI {
 
 	@Override
 	protected void dieProcess() {
-		SoundManager.getSoundManager().playSound("sounds/monster/ball_die.wav");
+		//SoundManager.getSoundManager().playSound("sounds/monster/ball_die.wav");
 	}
 }

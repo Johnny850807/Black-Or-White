@@ -15,9 +15,9 @@ public class PlayerFactory implements RoleFactory {
 	
 	@Override
 	public Gun getGun() {
-		return new Rifle(); 
+		//return new Rifle(); 
 		//return new SniperRifle();
-		//return new MachineGun();
+		return new MachineGun();
 	}
 
 	@Override

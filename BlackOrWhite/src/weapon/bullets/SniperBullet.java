@@ -8,4 +8,8 @@ public class SniperBullet extends Bullet{
 		super(cX,cY,7,26,330,true, true,curDir, factory);
 	}
 
+	public SniperBullet(int cX, int cY, Dir curDir, BulletFactory factory, boolean isPlayer) {
+		super(cX,cY,7,26,330,true, isPlayer,curDir, factory);
+	}
+
 }

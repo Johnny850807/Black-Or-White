@@ -15,9 +15,11 @@ import role.AI;
 public abstract class Stage implements Runnable{
 	protected Stage nextStage;
 	protected Controller controller;
+	protected int spacingCreation;
 	protected List<AI> monsters = Collections.checkedList(new ArrayList<AI>(), AI.class);
-	public Stage(Controller controller){
+	public Stage(Controller controller,int spacingCreation){
 		this.controller = controller;
+		this.spacingCreation = spacingCreation;
 	}
 	@Override
 	public void run(){
@@ -27,10 +29,10 @@ public abstract class Stage implements Runnable{
 		//先產生怪物在特定區域
 		for(int i = 0 ; i < Map1Director.AI_CREATE_X_SET.length && i < monsters.size() ; i ++ )
 			specificlyAddMonster(i);
-		
+		int time;
 		//再慢慢隨機位置產生
 		while(monsters.size() > 0){
-			try {TimeUnit.SECONDS.sleep(9);}catch (InterruptedException e) {e.printStackTrace();}
+			try {TimeUnit.SECONDS.sleep(spacingCreation);}catch (InterruptedException e) {e.printStackTrace();}
 			for ( int i = 0 ; i < 4 && monsters.size() > 0 ; i ++ )
 				randomlyAddMonster();
 		}

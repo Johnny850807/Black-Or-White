@@ -4,10 +4,12 @@ import mvc.ImageSequence;
 import mvc.Log;
 import role.movements.AI_Halt;
 import role.movements.AI_Movement;
+import role.movements.AI_Shooting;
 import role.movements.AI_Walk;
 import role.movements.Backable;
 import role.movements.Block;
 import role.movements.GoBack;
+import weapon.guns.AI_Rifle;
 import weapon.guns.Gun;
 import weapon.guns.Rifle;
 
@@ -16,12 +18,12 @@ public class RifleTankFactory implements RoleFactory{
 	
 	@Override
 	public Gun getGun() {
-		return new Rifle();
+		return new AI_Rifle();
 	}
 
 	@Override
 	public AI_Movement getMovement() {
-		return new AI_Halt(new AI_Walk());
+		return new AI_Shooting(new AI_Halt(new AI_Walk()));
 	}
 
 	@Override
@@ -52,7 +54,12 @@ public class RifleTankFactory implements RoleFactory{
   /*Walk*/		{ new ImageSequence( "pics/AI/RifleTank/Walk/North","png",1) ,
 						new ImageSequence( "pics/AI/RifleTank/Walk/East","png",1) ,
 						new ImageSequence( "pics/AI/RifleTank/Walk/South","png",1) ,
-						new ImageSequence( "pics/AI/RifleTank/Walk/West","png",1)}
+						new ImageSequence( "pics/AI/RifleTank/Walk/West","png",1)} ,
+  				{ new ImageSequence( "pics/AI/RifleTank/Walk/North","png",1) ,
+							new ImageSequence( "pics/AI/RifleTank/Walk/East","png",1) ,
+							new ImageSequence( "pics/AI/RifleTank/Walk/South","png",1) ,
+							new ImageSequence( "pics/AI/RifleTank/Walk/West","png",1)}
+					
 					};
 			Log.d("create ball image");
 		}

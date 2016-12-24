@@ -28,7 +28,7 @@ public class AI_Follow extends AI_Decorator {
 		if ( controller.getPlayer2() != null )  //裝進存在玩家
 			players.add(controller.getPlayer2());
 		if ( ai.isTimeToChangeMove() ){  //是時候轉換動作
-			if(!isInScope(ai))  //如果玩家在視野內 就追蹤 不然回傳false
+			if( !isInScope(ai))  //如果玩家在視野內 就追蹤 不然回傳false
 				movement.randomChoose(ai);  //回傳false就往下一層想
 			else{
 				Log.d("Follow");
@@ -41,46 +41,66 @@ public class AI_Follow extends AI_Decorator {
 	
 	public boolean isInScope(AI ai){
 		//是否在視野中
-		
+		int aX,aY;  // Ai座標在地圖上的索引
+		int rX,rY;  // 玩家座標在地圖上的索引
 		for ( Role r : players )
 		{
-			boolean hori_Barrier = false;
-			boolean verti_Barrier = false;
-			int x = r.x + 25; //身體重心點
-			int y = r.y + 25;
-
-
-			char southY = '*'; // 下一格地圖
-			char northY = '*'; // 下一格地圖
-			char westX = '*'; // 左一格地圖
-			char eastX = '*'; // 右一格地圖
-			//若下一格地圖為障礙物則取消追逐
-			if ( !((ai.y/100+1) >= MapBuilder.SIZEY || ai.x/100 < 0 || ai.x/100 > MapBuilder.SIZEX ))
-				southY = map[(ai.y/100+1)].charAt(ai.x/100); // 下一格地圖
-			if ( !((ai.y/100-1) < 0  || ai.x/100 < 0 || ai.x/100 > MapBuilder.SIZEX))
-				northY = map[(ai.y/100-1)].charAt(ai.x/100); // 下一格地圖
-			if ( !((ai.x/100-1) < 0 || ai.y/100 < 0 || ai.y/100 > MapBuilder.SIZEY))
-				westX = map[ai.y/100].charAt(ai.x/100-1); // 下一格地圖
-			if ( !((ai.x/100+1) >= MapBuilder.SIZEX || ai.y/100 < 0 || ai.y/100 > MapBuilder.SIZEY))
-				eastX = map[ai.y/100].charAt(ai.x/100+1); // 下一格地圖
+			aX = (ai.x+ai.getOffsetX()) / 100;
+			aY = (ai.y+ai.getOffsetY()) / 100;
+			rX = (r.x+r.getOffsetX()) / 100;
+			rY = (r.y+r.getOffsetY()) / 100;
+			if ( aX < 0 || aY < 0 || rX < 0 || rY < 0
+					|| aX >= MapBuilder.SIZEX || rX >= MapBuilder.SIZEX
+					|| aY >= MapBuilder.SIZEY || rY >= MapBuilder.SIZEY)
+				return false;
+			//Log.d("Site Player :("+rX+","+rY+")  AI :("+aX+","+aY+")");
+			//判斷障礙物 是否在該條線上
+			//run south
+			for ( int i = aY+1 ; i < MapBuilder.SIZEY && aX == rX ; i ++ )
+			{
+				if( i == rY ){
+					ai.getMoved(ActionType.WALK, Dir.SOUTH);
+					return true;
+				}
+				if ( map[i].charAt(aX) == '0' || map[i].charAt(aX) == '*' )
+					return false;
+			}
+			//run north
+			for ( int i = aY+1 ; i >= 0 && aX == rX ; i -- )
+			{
+				if( i == rY ){
+					ai.getMoved(ActionType.WALK, Dir.NORTH);
+					return true;
+				}
+				if ( map[i].charAt(aX) == '0' || map[i].charAt(aX) == '*' )
+					return false;
+			}
+			//run east
+			for ( int i = aX+1 ; i < MapBuilder.SIZEX && aY == rY ; i ++ )
+			{
+				if( i == rX ){
+					ai.getMoved(ActionType.WALK, Dir.EAST);
+					return true;
+				}
+				if ( map[aY].charAt(i) == '0' || map[aY].charAt(i) == '*' )
+					return false;
+			}
+			//run west
+			for ( int i = aX+1 ; i >= 0 && aY == rY  ; i -- )
+			{
+				if( i == rY ){
+					ai.getMoved(ActionType.WALK, Dir.WEST);
+					return true;
+				}
+				if ( map[aY].charAt(i) == '0' || map[aY].charAt(i) == '*' )
+					return false;
+			}
 			
-			if ( x >= ai.x && x <= ai.x+ai.getFeetW() && y <= ai.y && ( northY != '*' && northY != '0')){
-				ai.getMoved( ActionType.WALK , Dir.NORTH );
-				return true;
-			}
-			else if ( x >= ai.x && x <= ai.x+ai.getFeetW() && y > ai.y && ( southY != '*' && southY != '0')){
-				ai.getMoved( ActionType.WALK , Dir.SOUTH );
-				return true;
-			}
-			else if ( y >= ai.x && y <= ai.x+ai.getFeetH() && x <= ai.x && ( westX != '*' && westX != '0')){
-				ai.getMoved( ActionType.WALK , Dir.WEST );
-				return true;
-			}
-			else if ( y >= ai.x && y <= ai.x+ai.getFeetH() && x > ai.x && ( eastX != '*' && eastX != '0')){
-				ai.getMoved( ActionType.WALK , Dir.EAST );
-				return true;
-			}
+			//judge player site
+
+			
 		}
+
 		return false;
 	}
 	
