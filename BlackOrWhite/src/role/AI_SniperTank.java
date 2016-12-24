@@ -5,28 +5,27 @@ import java.util.Random;
 import mvc.ActionType;
 import mvc.Controller;
 import mvc.Dir;
-import mvc.SoundManager;
 import mvc.gameObject.GameObjects;
-import role.abstractFactory.BallFactory;
-import role.abstractFactory.CrazyCatFactory;
+import role.abstractFactory.RifleTankFactory;
 import role.abstractFactory.RoleFactory;
+import role.abstractFactory.SniperTankFactory;
 import weapon.guns.fallenWeapon.FallenMachine;
 import weapon.guns.fallenWeapon.FallenSniperRifle;
 
-public class AI_CrazyCat extends AI {
-	public AI_CrazyCat(RoleFactory factory) {
+public class AI_SniperTank extends AI{
+	public AI_SniperTank(RoleFactory factory) {
 		super(factory);
 	}
 	
-	public AI_CrazyCat(int x , int y , ActionType act , Dir dir) {
-		super(new CrazyCatFactory(),x,y,act,dir,28,12,70,81,2000,120,30);
-		/*offsetX = 28;
-		offsetY = 12;
-		feetW = 91;
-		feetH = 81;
-		hp = 2000;
-		atk = 120;
-		df = 30;*/
+	public AI_SniperTank(int x , int y , ActionType act , Dir dir) {
+		super(new SniperTankFactory(),x,y,act,dir,1,5,83,75,600,70,60);
+		/*offsetX = 1;
+		offsetY = 5;    
+		feetW = 83;
+		feetH = 75;
+		hp = 600;
+		atk = 70;
+		df = 60;*/
 	} 
 
 	@Override
@@ -36,13 +35,13 @@ public class AI_CrazyCat extends AI {
 			case WALK:
 				switch(dir){
 					case NORTH:
-						return -12;
+						return -4;
 					case SOUTH:
-						return 12;
+						return 4;
 					case EAST:
-						return 16;
+						return 4;
 					case WEST:
-						return -16;
+						return -4;
 				}
 				break;
 			default:
@@ -66,6 +65,5 @@ public class AI_CrazyCat extends AI {
 
 	@Override
 	protected void dieProcess() {
-		//SoundManager.getSoundManager().playSound("sounds/monster/ball_die.wav");
 	}
 }

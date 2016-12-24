@@ -2,12 +2,16 @@ package role.abstractFactory;
 
 import mvc.ImageSequence;
 import mvc.Log;
+import role.movements.AI_Follow;
 import role.movements.AI_Halt;
 import role.movements.AI_Movement;
+import role.movements.AI_Shooting;
 import role.movements.AI_Walk;
 import role.movements.Backable;
 import role.movements.Block;
 import role.movements.GoBack;
+import weapon.guns.AI_CatPower;
+import weapon.guns.AI_Rifle;
 import weapon.guns.Gun;
 
 public class CrazyCatFactory implements RoleFactory {
@@ -23,13 +27,13 @@ public class CrazyCatFactory implements RoleFactory {
 	@Override
 	public Gun getGun() {
 		//he has a gun but not finished
-		return null;
+		return new AI_CatPower();
 	}
 
 	@Override
 	public AI_Movement getMovement() {
 		// And Shoot action
-		return new AI_Halt(new AI_Walk());
+		return new AI_Shooting(new AI_Follow(new AI_Halt(new AI_Walk())));
 	}
 
 	@Override
@@ -60,7 +64,11 @@ public class CrazyCatFactory implements RoleFactory {
   /*Walk*/		{ new ImageSequence( "pics/AI/CrazyCat/Walk/East","png",4) ,
 						new ImageSequence( "pics/AI/CrazyCat/Walk/East","png",4) ,
 						new ImageSequence( "pics/AI/CrazyCat/Walk/West","png",4) ,
-						new ImageSequence( "pics/AI/CrazyCat/Walk/West","png",4)}
+						new ImageSequence( "pics/AI/CrazyCat/Walk/West","png",4)},
+  				{ new ImageSequence( "pics/AI/CrazyCat/Shoot/West","png",22) ,
+							new ImageSequence( "pics/AI/CrazyCat/Shoot/West","png",22) ,
+							new ImageSequence( "pics/AI/CrazyCat/Shoot/East","png",22) ,
+							new ImageSequence( "pics/AI/CrazyCat/Shoot/East","png",22)}
 					};
 		}
 		

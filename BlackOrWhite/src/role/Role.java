@@ -128,6 +128,22 @@ public abstract class Role implements Runnable{
 		return feetH;
 	}
 
+	public int getOffsetX() {
+		return offsetX;
+	}
+
+	public void setOffsetX(int offsetX) {
+		this.offsetX = offsetX;
+	}
+
+	public int getOffsetY() {
+		return offsetY;
+	}
+
+	public void setOffsetY(int offsetY) {
+		this.offsetY = offsetY;
+	}
+
 	protected void hurtedJudgement(){
 		// hook method , do something while hurted.
 		
@@ -203,16 +219,16 @@ public abstract class Role implements Runnable{
 		return conflict;
 	}
 	public void getDamaged(Bullet bullet){
-		// AI受到玩家子彈攻擊
-		if ( this instanceof AI && bullet.isPlayerBullet() && !isBeingHurted ){
+		// AI受到玩家子彈攻擊 或 玩家受到AI子彈攻擊 且非緩衝時間
+		if ( (this instanceof AI && bullet.isPlayerBullet())
+				|| (this instanceof Player && !bullet.isPlayerBullet())  && !isBeingHurted ){
 			hp = (hp - (bullet.getDamage() - df)) < 0 ? 0 : (hp - (bullet.getDamage() - df));
-			updateHp();
+			if (this instanceof Player)
+				updateHp();
 			if (bullet.isSingleHit())  //若為單數攻擊就消失
 				bullet.getModel().delete();
 		}
-		//玩家受到怪物子彈攻擊
-		else if ( this instanceof Player && !bullet.isPlayerBullet() && !isBeingHurted) //怪物子彈
-			;
+
 	}
 	
 	public void getDamaged(AI ai){

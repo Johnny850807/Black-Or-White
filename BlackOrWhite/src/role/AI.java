@@ -46,7 +46,8 @@ public abstract class AI extends Role {
 	
 	//持續目前動作
 	public void keepCurrentMove(){
-		getMoved(curAct,curDir);
+		if ( curAct != ActionType.SHOOT)
+			getMoved(curAct,curDir);
 	}
 	
 	public void setDimension(Dimension d){
