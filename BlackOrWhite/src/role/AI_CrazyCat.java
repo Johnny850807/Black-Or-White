@@ -19,12 +19,12 @@ public class AI_CrazyCat extends AI {
 	}
 	
 	public AI_CrazyCat(int x , int y , ActionType act , Dir dir) {
-		super(new CrazyCatFactory(),x,y,act,dir,28,12,70,81,2000,120,30);
+		super(new CrazyCatFactory(),x,y,act,dir,28,12,70,81,3000,120,60);
 		/*offsetX = 28;
 		offsetY = 12;
 		feetW = 91;
 		feetH = 81;
-		hp = 2000;
+		hp = 3300;
 		atk = 120;
 		df = 30;*/
 	} 

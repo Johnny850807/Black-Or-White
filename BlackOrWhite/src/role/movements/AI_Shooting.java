@@ -27,7 +27,7 @@ public class AI_Shooting extends AI_Decorator{
 		if ( controller.getPlayer2() != null )  //裝進存在玩家
 			players.add(controller.getPlayer2());
 		if ( ai.isTimeToChangeMove() ){  //是時候轉換動作
-			if(!isInScope(ai) || ai.isShootSpacing )  //如果玩家在視野內 就追蹤 不然回傳false
+			if( random.nextInt(100)>89 ||!isInScope(ai) )  //如果玩家在視野內 就追蹤 不然回傳false 10%
 				movement.randomChoose(ai);  //回傳false就往下一層想
 			else{
 				Log.d("Shoot");
@@ -44,10 +44,10 @@ public class AI_Shooting extends AI_Decorator{
 		int rX,rY;  // 玩家座標在地圖上的索引
 		for ( Role r : players )
 		{
-			aX = ai.x / 100;
-			aY = ai.y / 100;
-			rX = (r.x+r.getOffsetX()-20) / 100;
-			rY = (r.y+r.getOffsetY()-20) / 100;
+			aX = (ai.x+ai.getOffsetX()) / 100;
+			aY = (ai.y+ai.getOffsetY()) / 100;
+			rX = (r.x+r.getOffsetX()) / 100;
+			rY = (r.y+r.getOffsetY()-25) / 100;
 			if ( aX < 0 || aY < 0 || rX < 0 || rY < 0
 					|| aX >= MapBuilder.SIZEX || rX >= MapBuilder.SIZEX
 					|| aY >= MapBuilder.SIZEY || rY >= MapBuilder.SIZEY)
@@ -66,7 +66,7 @@ public class AI_Shooting extends AI_Decorator{
 					return false;
 			}
 			//run north
-			for ( int i = aY+1 ; i >= 0 && aX == rX ; i -- )
+			for ( int i = aY-1 ; i >= 0 && aX == rX ; i -- )
 			{
 				if( i == rY ){
 					ai.getMoved(ActionType.WALK, Dir.NORTH);
@@ -88,10 +88,10 @@ public class AI_Shooting extends AI_Decorator{
 					return false;
 			}
 			//run west
-			for ( int i = aX+1 ; i >= 0 && aY == rY  ; i -- )
+			for ( int i = aX-1 ; i >= 0 && aY == rY  ; i -- )
 			{
 				try{
-				if( i == rY ){
+				if( i == rX ){
 					ai.getMoved(ActionType.WALK, Dir.WEST);
 					ai.getMoved(ActionType.SHOOT, Dir.WEST);
 					return true;

@@ -15,24 +15,8 @@ public class AI_CatPower implements Gun {
 		SoundManager.getSoundManager().playSound("sounds/shoot/sniperRifle.wav");
 			int x = role.x;
 			int y = role.y;
-			switch(role.curDir){
-				case NORTH:
-					x += 56;
-					y += 2;
-					break;
-				case EAST:
-					x += 87;
-					y += 47;
-					break;
-				case WEST:
-					y += 47;
-					break;
-				case SOUTH:
-					x += 47;
-					y += 57;
-					break;
-			}
-			Bullet bullet = new CatExplodeBullet( x , y , role.curDir , new CatExplodeBulletFactory());
+
+			Bullet bullet = new CatExplodeBullet( x+10 , y+10 , role.curDir , new CatExplodeBulletFactory());
 			//	try {Thread.sleep(750);} catch (InterruptedException e) {e.printStackTrace();}
 			return bullet;
 	}

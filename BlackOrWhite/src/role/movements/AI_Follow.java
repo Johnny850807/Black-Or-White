@@ -28,7 +28,7 @@ public class AI_Follow extends AI_Decorator {
 		if ( controller.getPlayer2() != null )  //裝進存在玩家
 			players.add(controller.getPlayer2());
 		if ( ai.isTimeToChangeMove() ){  //是時候轉換動作
-			if(!isInScope(ai))  //如果玩家在視野內 就追蹤 不然回傳false
+			if( !isInScope(ai))  //如果玩家在視野內 就追蹤 不然回傳false
 				movement.randomChoose(ai);  //回傳false就往下一層想
 			else{
 				Log.d("Follow");
@@ -45,8 +45,8 @@ public class AI_Follow extends AI_Decorator {
 		int rX,rY;  // 玩家座標在地圖上的索引
 		for ( Role r : players )
 		{
-			aX = ai.x / 100;
-			aY = ai.y / 100;
+			aX = (ai.x+ai.getOffsetX()) / 100;
+			aY = (ai.y+ai.getOffsetY()) / 100;
 			rX = (r.x+r.getOffsetX()) / 100;
 			rY = (r.y+r.getOffsetY()) / 100;
 			if ( aX < 0 || aY < 0 || rX < 0 || rY < 0

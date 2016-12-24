@@ -18,19 +18,20 @@ public class AI_Sniper implements Gun{
 			int y = role.y;
 			switch(role.curDir){
 				case NORTH:
-					x += 56;
+					x += 38;
 					y += 2;
 					break;
 				case EAST:
-					x += 87;
-					y += 47;
+					x += 78;
+					y += 41;
 					break;
 				case WEST:
-					y += 47;
+					x += 3;
+					y += 39;
 					break;
 				case SOUTH:
-					x += 47;
-					y += 57;
+					x += 40;
+					y += 84;
 					break;
 			}
 			Bullet bullet = new SniperBullet( x , y , role.curDir , new SniperBulletFactory(),false);

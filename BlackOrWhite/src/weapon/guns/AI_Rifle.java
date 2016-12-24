@@ -19,19 +19,19 @@ public class AI_Rifle implements Gun{
 		int y = role.y;
 		switch(role.curDir){
 			case NORTH:
-				x += 56;
-				y += 2;
+				x += 27;
 				break;
 			case EAST:
-				x += 87;
-				y += 47;
+				x += 89;
+				y += 35;
 				break;
 			case WEST:
-				y += 47;
+				x += 4;
+				y += 30;
 				break;
 			case SOUTH:
-				x += 47;
-				y += 57;
+				x += 35;
+				y += 89;
 				break;
 		}
 		Bullet bullet = new BasicBullet( x , y , role.curDir , new RifleBulletFactory(),false);
