@@ -20,13 +20,13 @@ public class AI_RifleTank extends AI {
 	}
 	
 	public AI_RifleTank(int x , int y , ActionType act , Dir dir) {
-		super(new RifleTankFactory(),x,y,act,dir,6,14,58,74,500,120,60);
+		super(new RifleTankFactory(),x,y,act,dir,6,14,58,74,800,150,60);
 		/*offsetX = 6;
 		offsetY = 14;    
 		feetW = 58;
 		feetH = 74;
-		hp = 500;
-		atk = 120;
+		hp = 800;
+		atk = 150;
 		df = 60;*/
 	} 
 

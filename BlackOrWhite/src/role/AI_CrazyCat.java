@@ -8,26 +8,26 @@ import mvc.Dir;
 import mvc.SoundManager;
 import mvc.gameObject.GameObjects;
 import role.abstractFactory.BallFactory;
-import role.abstractFactory.EvilFactory;
+import role.abstractFactory.CrazyCatFactory;
 import role.abstractFactory.RoleFactory;
 import weapon.guns.fallenWeapon.FallenMachine;
 import weapon.guns.fallenWeapon.FallenSniperRifle;
 
-public class AI_Evil extends AI {
-	public AI_Evil(RoleFactory factory) {
+public class AI_CrazyCat extends AI {
+	public AI_CrazyCat(RoleFactory factory) {
 		super(factory);
 	}
 	
-	public AI_Evil(int x , int y , ActionType act , Dir dir) {
-		super(new EvilFactory(),x,y,act,dir,8,8,46,64,450,120,35);
-		/*offsetX = 8;
-		offsetY = 8;
-		feetW = 46;
-		feetH = 64;
-		hp = 450;
+	public AI_CrazyCat(int x , int y , ActionType act , Dir dir) {
+		super(new CrazyCatFactory(),x,y,act,dir,28,12,70,81,2000,120,60);
+		/*offsetX = 28;
+		offsetY = 12;
+		feetW = 91;
+		feetH = 81;
+		hp = 2000;
 		atk = 120;
-		df = 35;*/
-	}
+		df = 60;*/
+	} 
 
 	@Override
 	protected int getMovingDistance(ActionType act , Dir dir) {
@@ -36,13 +36,13 @@ public class AI_Evil extends AI {
 			case WALK:
 				switch(dir){
 					case NORTH:
-						return -15;
+						return -13;
 					case SOUTH:
-						return 15;
+						return 13;
 					case EAST:
-						return 15;
+						return 13;
 					case WEST:
-						return -15;
+						return -13;
 				}
 				break;
 			default:
@@ -56,7 +56,7 @@ public class AI_Evil extends AI {
 		Random random = new Random();
 		if (GameObjects.getGameObjects().fallenItemSize() < 2 )
 		{
-			if(random.nextInt(100) > 80) //20%機關槍
+			if(random.nextInt(100) > 84) //15%機關槍
 				Controller.getController().fallGun(new FallenMachine(x,y));
 			else if (random.nextInt(100) > 97)  //2%狙擊槍
 				Controller.getController().fallGun(new FallenSniperRifle(x,y));
@@ -68,5 +68,4 @@ public class AI_Evil extends AI {
 	protected void dieProcess() {
 		SoundManager.getSoundManager().playSound("sounds/monster/ball_die.wav");
 	}
-
 }
