@@ -17,22 +17,23 @@ public class SniperRifle implements Gun {
 			int x = role.x;
 			int y = role.y;
 			switch(role.curDir){
-				case NORTH:
-					x += 56;
-					y += 2;
-					break;
-				case EAST:
-					x += 87;
-					y += 47;
-					break;
-				case WEST:
-					y += 47;
-					break;
-				case SOUTH:
-					x += 47;
-					y += 57;
-					break;
-			}
+			case NORTH:
+				x += 29-15;
+				y += 2-98;
+				break;
+			case EAST:
+				x += 75;
+				y += 22;
+				break;
+			case WEST:
+				x += 6-98;
+				y += 31-15;
+				break;
+			case SOUTH:
+				x += 32-15;
+				y += 72;
+				break;
+		}
 			Bullet bullet = new SniperBullet( x , y , role.curDir , new SniperBulletFactory());
 			//	try {Thread.sleep(750);} catch (InterruptedException e) {e.printStackTrace();}
 			return bullet;
@@ -40,7 +41,7 @@ public class SniperRifle implements Gun {
 
 	@Override
 	public int getSpacing() {
-		return 2500;
+		return 1900;
 	}
 
 }

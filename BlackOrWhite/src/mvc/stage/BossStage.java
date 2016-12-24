@@ -8,7 +8,7 @@ import role.*;
 
 public class BossStage extends Stage{
 	public BossStage(Controller controller) {
-		super(controller,40);
+		super(controller,25);
 		
 
 		monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));  
@@ -28,6 +28,7 @@ public class BossStage extends Stage{
 		monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));  
 		monsters.add(new AI_SniperTank(0,0,ActionType.HALT,Dir.NORTH));  
 		monsters.add(new AI_SniperTank(0,0,ActionType.HALT,Dir.NORTH));  
+		 
 		
 	}
 
@@ -38,6 +39,6 @@ public class BossStage extends Stage{
 
 	@Override
 	public void playerControl() {
-		controller.curePlayer(220);
+		controller.curePlayer(380);
 	}
 }

@@ -1,0 +1,39 @@
+在cmd中輸入指令
+若不能開啟 BlackOrWhite.jar
+
+1.搜尋cmd到命令提示字元
+2.輸入  cd /該檔案路徑/  
+3.輸入  java -jar BlackOrWhite.jar  
+
+
+音樂資源
+1. Naruto Shippuden Ultimate Ninja Storm 2 OST Forest of Quiet Movement Day Soundtrack
+2. 痞子英雄 Black Or White
+3. x-ray dog，cyberworld?
+
+
+.weapon 武器套件
+
+--槍枝-- (子彈類型) (子彈飛行模式) (射擊時間間隔) (每發威力)
+
+Rifle BasicBullet NormalFlying   0.75s   120
+
+MachineGun BasicBullet FastFlying   0.1s   100
+
+SniperRifle niperBullet FastFlying   1.9s   330
+
+--怪物-- (生命)   (攻擊力)   (防禦力)   (攻擊模式)
+
+Ball 300 80 20 走路
+
+SnowBall 300 70 33 走路
+
+SnowBallEx 330 55 90 追逐 鐵壁
+
+RifleTank 800 120~150 60 步槍
+
+SniperTank 600 70~200 60 狙擊槍
+
+Evil 450 120 35 追逐
+
+瘋狂喵Z客 3800 120~180 60  魔法球攻擊 追逐

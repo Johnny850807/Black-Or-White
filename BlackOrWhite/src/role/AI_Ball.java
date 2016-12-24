@@ -33,13 +33,13 @@ public class AI_Ball extends AI {
 			case WALK:
 				switch(dir){
 					case NORTH:
-						return -8;
+						return -2;
 					case SOUTH:
-						return 8;
+						return 2;
 					case EAST:
-						return 8;
+						return 2;
 					case WEST:
-						return -8;
+						return -2;
 				}
 				break;
 			default:

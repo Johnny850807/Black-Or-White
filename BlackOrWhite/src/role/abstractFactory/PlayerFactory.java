@@ -15,9 +15,9 @@ public class PlayerFactory implements RoleFactory {
 	
 	@Override
 	public Gun getGun() {
-		//return new Rifle(); 
+		return new Rifle(); 
 		//return new SniperRifle();
-		return new MachineGun();
+		//return new MachineGun();
 	}
 
 	@Override
@@ -44,18 +44,18 @@ public class PlayerFactory implements RoleFactory {
 		
 		if ( actImgs == null ){
 			actImgs = new ImageSequence[][]{
-  /*Halt*/		{ new ImageSequence( "pics/Player/Halt/North","png",1) ,
-					new ImageSequence( "pics/Player/Halt/East","png",1) ,
-					new ImageSequence( "pics/Player/Halt/South","png",1) ,
-					new ImageSequence( "pics/Player/Halt/West","png",1)} ,
-  /*Walk*/		{ new ImageSequence( "pics/Player/Walk/North","png",4) ,
-						new ImageSequence( "pics/Player/Walk/East","png",6) ,
-						new ImageSequence( "pics/Player/Walk/South","png",4) ,
-						new ImageSequence( "pics/Player/Walk/West","png",6)},
-				{ new ImageSequence( "pics/Player/Shoot/North","png",4) ,
-					new ImageSequence( "pics/Player/Shoot/East","png",5) ,
-					new ImageSequence( "pics/Player/Shoot/South","png",5) ,
-					new ImageSequence( "pics/Player/Shoot/West","png",5)}
+  /*Halt*/		{ new ImageSequence( "pics/Player/Halt/North_T","png",1) ,
+					new ImageSequence( "pics/Player/Halt/East_T","png",1) ,
+					new ImageSequence( "pics/Player/Halt/South_T","png",1) ,
+					new ImageSequence( "pics/Player/Halt/West_T","png",1)} ,
+  /*Walk*/		{ new ImageSequence( "pics/Player/Walk/North_T","png",1) ,
+						new ImageSequence( "pics/Player/Walk/East_T","png",1) ,
+						new ImageSequence( "pics/Player/Walk/South_T","png",1) ,
+						new ImageSequence( "pics/Player/Walk/West_T","png",1)},
+				{ new ImageSequence( "pics/Player/Shoot/North_T","png",1) ,
+					new ImageSequence( "pics/Player/Shoot/East_T","png",1) ,
+					new ImageSequence( "pics/Player/Shoot/South_T","png",1) ,
+					new ImageSequence( "pics/Player/Shoot/West_T","png",1)}
 				};
 		}
 		

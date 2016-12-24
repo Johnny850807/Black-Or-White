@@ -17,22 +17,23 @@ public class Rifle implements Gun {
 		int x = role.x;
 		int y = role.y;
 		switch(role.curDir){
-			case NORTH:
-				x += 56;
-				y += 2;
-				break;
-			case EAST:
-				x += 87;
-				y += 47;
-				break;
-			case WEST:
-				y += 47;
-				break;
-			case SOUTH:
-				x += 47;
-				y += 57;
-				break;
-		}
+		case NORTH:
+			x += 29-6;
+			y += 2-35;
+			break;
+		case EAST:
+			x += 75;
+			y += 22;
+			break;
+		case WEST:
+			x += 6-35;
+			y += 31-6;
+			break;
+		case SOUTH:
+			x += 32-6;
+			y += 72;
+			break;
+	}
 		Bullet bullet = new BasicBullet( x , y , role.curDir , new RifleBulletFactory());
 		Log.d("¤l¼u++");
 		

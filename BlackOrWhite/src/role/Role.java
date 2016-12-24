@@ -174,11 +174,11 @@ public abstract class Role implements Runnable{
 				}
 				break;
 			case SHOOT:
+				if(this instanceof Player)
+					View.shootedBulletCount++;
 				gun.gunShooting(this);
 				ShootSpacing sh = new ShootSpacing(this);  //®gÀ»¶¡®æ
 				sh.start();
-				
-				break;
 		}
 		x = model.getcX();
 		y = model.getcY();

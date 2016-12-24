@@ -57,18 +57,18 @@ public class CrazyCatFactory implements RoleFactory {
 		
 		if ( actImgs == null ){
 			actImgs = new ImageSequence[][]{
-  /*Halt*/		{ new ImageSequence( "pics/AI/CrazyCat/Walk/East","png",4) ,
-					new ImageSequence( "pics/AI/CrazyCat/Walk/East","png",4) ,
-					new ImageSequence( "pics/AI/CrazyCat/Walk/West","png",4) ,
-					new ImageSequence( "pics/AI/CrazyCat/Walk/West","png",4)} ,
-  /*Walk*/		{ new ImageSequence( "pics/AI/CrazyCat/Walk/East","png",4) ,
-						new ImageSequence( "pics/AI/CrazyCat/Walk/East","png",4) ,
-						new ImageSequence( "pics/AI/CrazyCat/Walk/West","png",4) ,
-						new ImageSequence( "pics/AI/CrazyCat/Walk/West","png",4)},
-  				{ new ImageSequence( "pics/AI/CrazyCat/Shoot/West","png",22) ,
-							new ImageSequence( "pics/AI/CrazyCat/Shoot/West","png",22) ,
-							new ImageSequence( "pics/AI/CrazyCat/Shoot/East","png",22) ,
-							new ImageSequence( "pics/AI/CrazyCat/Shoot/East","png",22)}
+  /*Halt*/		{ new ImageSequence( "pics/AI/CrazyCat/Walk/East","png",32) ,
+					new ImageSequence( "pics/AI/CrazyCat/Walk/East","png",32) ,
+					new ImageSequence( "pics/AI/CrazyCat/Walk/West","png",32) ,
+					new ImageSequence( "pics/AI/CrazyCat/Walk/West","png",32)} ,
+  /*Walk*/		{ new ImageSequence( "pics/AI/CrazyCat/Walk/East","png",32) ,
+						new ImageSequence( "pics/AI/CrazyCat/Walk/East","png",32) ,
+						new ImageSequence( "pics/AI/CrazyCat/Walk/West","png",32) ,
+						new ImageSequence( "pics/AI/CrazyCat/Walk/West","png",32)},
+  				{ new ImageSequence( "pics/AI/CrazyCat/Shoot/West","png",88) ,
+							new ImageSequence( "pics/AI/CrazyCat/Shoot/West","png",88) ,
+							new ImageSequence( "pics/AI/CrazyCat/Shoot/East","png",88) ,
+							new ImageSequence( "pics/AI/CrazyCat/Shoot/East","png",88)}
 					};
 		}
 		

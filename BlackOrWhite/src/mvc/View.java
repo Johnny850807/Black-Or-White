@@ -25,6 +25,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -43,6 +44,7 @@ public class View {
 	private GameObjects gameObjects = GameObjects.getGameObjects();  //all objects will be painted in the game
 	private static boolean startGame = false;  
 	public boolean netWorking = false; // true if choose the networking mode
+	public static int shootedBulletCount = 0;  //結局時 讓玩家知道他總共射了多少子彈
 	
 	public View(JFrame frame) {
 		this.parent = frame;
@@ -99,6 +101,10 @@ public class View {
  	public void setButtonPanel(ButtonsPanel buttonPanel) {
 		this.buttonsPanel = buttonPanel;
 	}
+ 	
+ 	public void showGameFinalWinMessage(){
+		 JOptionPane.showMessageDialog(parent, "你擊敗了最終大魔王，並且闖關成功，恭喜 !!\n 總共射出子彈 : "+shootedBulletCount);
+ 	}
 
    	static class PlayerPanel extends JPanel { 
 		private static final String Player1 = "Player1 ";
@@ -156,11 +162,11 @@ public class View {
 
 	//放置按鈕的panel (開始遊戲按鈕或者連線等等)
 	class ButtonsPanel extends JPanel implements ActionListener , KeyListener{
-		private static final String NET_MESSAGE = "請輸入遊戲伺服器IP.";
-		private static final String NET_CONNECT = "連線到伺服器中.";
+		private static final String NET_MESSAGE = "方向鍵控制走位，空白鍵或C進行射擊，記得切掉中文輸入法。";
+		private static final String NET_CONNECT = "連線功能尚未開放.";
 		private Dir playerCurDir = Dir.NORTH;  //用來記錄玩家目前面向方位!
 		private boolean releaseWhileShooting = true;  //為了讓玩家不能按著空白鍵連射，按下去時為false,放開才為true
-		private JButton start;
+		private JButton start; 
 		private JButton networkGame;
 		private JFrame netFrame;
 		private JButton netConnectBTN;
@@ -170,7 +176,7 @@ public class View {
 			add(hpPanel); //將生命欄位設置近來
 			// 基本按鈕設置
 			start = new JButton("Start Game");
-			networkGame = new JButton("Connect to Another Player !!");
+			networkGame = new JButton("Game Tutorial!!");
 			start.setBackground(Color.cyan);
 			start.setPreferredSize(new Dimension(200,60));
 			start.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -181,9 +187,9 @@ public class View {
 			networkGame.addActionListener(this);
 			add(start);
 			add(networkGame);
-			
+
 			//連線版面設置
-			netFrame = new JFrame("連線到伺服器");
+			netFrame = new JFrame("遊戲教學");
 			netConnectBTN = new JButton("Input IP");
 			netConnectBTN.setFont(new Font("Arial", Font.PLAIN, 20));
 			netMessage = new JLabel(NET_MESSAGE);
@@ -247,7 +253,7 @@ public class View {
 					break;
 				case KeyEvent.VK_C:  //shoot
 				case KeyEvent.VK_SPACE:  //also shoot
-					if(releaseWhileShooting){
+					if(true){
 						releaseWhileShooting = false;
 						Log.d("press");
 						controller.movePlayer(ActionType.SHOOT, playerCurDir);

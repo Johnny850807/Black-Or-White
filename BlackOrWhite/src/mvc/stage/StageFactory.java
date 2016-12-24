@@ -10,11 +10,13 @@ public class StageFactory {
 		  Stage stage4 = new Stage4(controller);
 		  Stage stage5 = new Stage5(controller);
 		  Stage bossStage = new BossStage(controller);
+		  Stage finalShow = new FinalWinnerStage(controller);
 		stage1.setNextStage(stage2);
 		  stage2.setNextStage(stage3);
 		  stage3.setNextStage(stage4);
 		  stage4.setNextStage(stage5);
 		  stage5.setNextStage(bossStage);
-		return bossStage;
+		  bossStage.setNextStage(finalShow);
+		return stage1;
 	}
 }

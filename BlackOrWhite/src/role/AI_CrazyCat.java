@@ -19,14 +19,14 @@ public class AI_CrazyCat extends AI {
 	}
 	
 	public AI_CrazyCat(int x , int y , ActionType act , Dir dir) {
-		super(new CrazyCatFactory(),x,y,act,dir,28,12,70,81,3000,120,60);
+		super(new CrazyCatFactory(),x,y,act,dir,28,12,70,81,3800,120,60);
 		/*offsetX = 28;
 		offsetY = 12;
 		feetW = 91;
 		feetH = 81;
-		hp = 3300;
+		hp = 3800;
 		atk = 120;
-		df = 30;*/
+		df = 60;*/
 	} 
 
 	@Override
@@ -36,13 +36,13 @@ public class AI_CrazyCat extends AI {
 			case WALK:
 				switch(dir){
 					case NORTH:
-						return -12;
+						return -3;
 					case SOUTH:
-						return 12;
+						return 3;
 					case EAST:
-						return 16;
+						return 4;
 					case WEST:
-						return -16;
+						return -4;
 				}
 				break;
 			default:

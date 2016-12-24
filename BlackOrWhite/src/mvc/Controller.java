@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import mvc.gameObject.GameObjects;
 import mvc.stage.*;
 import role.AI;
@@ -60,7 +62,7 @@ public class Controller extends Thread{
 				checkUpdate();
 				checkConflict();
 				view.refreshScreen();
-				Thread.sleep(70); 
+				Thread.sleep(15); 
 			}
 		}catch (InterruptedException e) {
 			e.printStackTrace();
@@ -70,6 +72,10 @@ public class Controller extends Thread{
 		catch (Error e){
 			e.printStackTrace();
 		}
+	}
+	
+	public void showGameFinalWinMessage(){
+		 view.showGameFinalWinMessage();
 	}
 	
 	public void deleteModel(Role role){

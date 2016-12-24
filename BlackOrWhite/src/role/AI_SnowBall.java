@@ -41,13 +41,13 @@ public class AI_SnowBall extends AI {
 				case WALK:
 					switch(dir){
 						case NORTH:
-							return -12;
+							return -3;
 						case SOUTH:
-							return 12;
+							return 3;
 						case EAST:
-							return 12;
+							return 3;
 						case WEST:
-							return -12;
+							return -3;
 					}
 					break;
 				default:

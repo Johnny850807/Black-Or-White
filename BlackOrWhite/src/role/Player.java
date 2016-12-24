@@ -14,11 +14,11 @@ public class Player extends Role {
 	}
 
 	public Player(int x ,int y){
-		super(new PlayerFactory(),x,y, ActionType.HALT , Dir.NORTH , 21 , 90 , 40 , 10 , 500 , 0 , 20);
-		/*offsetX = 21;
-		offsetY = 90;
-		feetW = 40;
-		feetH = 10;
+		super(new PlayerFactory(),x,y, ActionType.HALT , Dir.NORTH , 11 , 13 , 48 , 36 , 500 , 0 , 20);
+		/*offsetX = 11;
+		offsetY = 13;
+		feetW = 48;
+		feetH = 36;
 		hp = 500;
 		atk = 0;
 		df = 20;*/
@@ -71,13 +71,13 @@ public class Player extends Role {
 			case WALK:
 				switch(dir){
 					case NORTH:
-						return -5;
+						return -4;
 					case SOUTH:
-						return 5;
+						return 4;
 					case EAST:
-						return 9;
+						return 6;
 					case WEST:
-						return -9;
+						return -6;
 				}
 				break;
 			default:
