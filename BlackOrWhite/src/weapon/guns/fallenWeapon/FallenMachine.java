@@ -15,7 +15,7 @@ public class FallenMachine extends FallenItem{
 				new ImageSequence( "pics/Fallen_Weapon/fall_machine","png",1)}};
 				
 	public FallenMachine(int x, int y) {
-		super(x, y ,100,50,new MachineGun(),actionImgs[0][0]);
+		super(x, y ,120,29,new MachineGun(),actionImgs[0][0]);
 	}
 
 	

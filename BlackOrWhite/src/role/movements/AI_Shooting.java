@@ -31,7 +31,7 @@ public class AI_Shooting extends AI_Decorator{
 				movement.randomChoose(ai);  //回傳false就往下一層想
 			else{
 				Log.d("Shoot");
-				ai.moveDurationCountDown(40);
+				ai.moveDurationCountDown(-70);
 			}
 		}
 		else

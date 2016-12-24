@@ -36,13 +36,13 @@ public class AI_Evil extends AI {
 			case WALK:
 				switch(dir){
 					case NORTH:
-						return -15;
+						return -3;
 					case SOUTH:
-						return 15;
+						return 3;
 					case EAST:
-						return 15;
+						return 3;
 					case WEST:
-						return -15;
+						return -3;
 				}
 				break;
 			default:

@@ -12,7 +12,7 @@ public class SniperBulletFactory implements BulletFactory{
 	@Override
 	public int getDistance() {
 		// TODO Auto-generated method stub
-		return 52;
+		return 13;
 	}
 
 	@Override

@@ -7,7 +7,7 @@ import mvc.Dir;
 import role.abstractFactory.RoleFactory;
 
 public abstract class AI extends Role {
-	protected final int moveDuration = 50;  //動作總長度
+	protected final int moveDuration = 120;  //動作總長度
 	protected int moveCountDown;  //計算中時間條
 	public AI(RoleFactory factory) {
 		super(factory);

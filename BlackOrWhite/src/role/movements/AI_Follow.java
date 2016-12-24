@@ -66,7 +66,7 @@ public class AI_Follow extends AI_Decorator {
 					return false;
 			}
 			//run north
-			for ( int i = aY+1 ; i >= 0 && aX == rX ; i -- )
+			for ( int i = aY-1 ; i >= 0 && aX == rX ; i -- )
 			{
 				if( i == rY ){
 					ai.getMoved(ActionType.WALK, Dir.NORTH);
@@ -86,9 +86,9 @@ public class AI_Follow extends AI_Decorator {
 					return false;
 			}
 			//run west
-			for ( int i = aX+1 ; i >= 0 && aY == rY  ; i -- )
+			for ( int i = aX-1 ; i >= 0 && aY == rY  ; i -- )
 			{
-				if( i == rY ){
+				if( i == rX ){
 					ai.getMoved(ActionType.WALK, Dir.WEST);
 					return true;
 				}

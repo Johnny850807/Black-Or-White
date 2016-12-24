@@ -46,14 +46,14 @@ public class EvilFactory implements RoleFactory {
 		
 		if ( actImgs == null ){
 			actImgs = new ImageSequence[][]{
-  /*Halt*/		{ new ImageSequence( "pics/AI/Evil/Walk/East","png",8) ,
-					new ImageSequence( "pics/AI/Evil/Walk/East","png",8) ,
-					new ImageSequence( "pics/AI/Evil/Walk/West","png",8) ,
-					new ImageSequence( "pics/AI/Evil/Walk/West","png",8)} ,
-  /*Walk*/		{ new ImageSequence( "pics/AI/Evil/Walk/East","png",4) ,
-						new ImageSequence( "pics/AI/Evil/Walk/East","png",8) ,
-						new ImageSequence( "pics/AI/Evil/Walk/West","png",8) ,
-						new ImageSequence( "pics/AI/Evil/Walk/West","png",8)}
+  /*Halt*/		{ new ImageSequence( "pics/AI/Evil/Walk/East","png",32) ,
+					new ImageSequence( "pics/AI/Evil/Walk/East","png",32) ,
+					new ImageSequence( "pics/AI/Evil/Walk/West","png",32) ,
+					new ImageSequence( "pics/AI/Evil/Walk/West","png",32)} ,
+  /*Walk*/		{ new ImageSequence( "pics/AI/Evil/Walk/East","png",32) ,
+						new ImageSequence( "pics/AI/Evil/Walk/East","png",32) ,
+						new ImageSequence( "pics/AI/Evil/Walk/West","png",32) ,
+						new ImageSequence( "pics/AI/Evil/Walk/West","png",32)}
 					};
 			Log.d("create ball image");
 		}

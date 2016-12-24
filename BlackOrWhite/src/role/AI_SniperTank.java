@@ -35,13 +35,13 @@ public class AI_SniperTank extends AI{
 			case WALK:
 				switch(dir){
 					case NORTH:
-						return -4;
+						return -1;
 					case SOUTH:
-						return 4;
+						return 1;
 					case EAST:
-						return 4;
+						return 1;
 					case WEST:
-						return -4;
+						return -1;
 				}
 				break;
 			default:
@@ -55,10 +55,10 @@ public class AI_SniperTank extends AI{
 		Random random = new Random();
 		if (GameObjects.getGameObjects().fallenItemSize() < 2 )
 		{
-			if(random.nextInt(100) > 84) //15%¾÷Ãöºj
-				Controller.getController().fallGun(new FallenMachine(x,y));
-			else if (random.nextInt(100) > 97)  //2%ª®À»ºj
+			if(random.nextInt(100) > 80)
 				Controller.getController().fallGun(new FallenSniperRifle(x,y));
+			else if (random.nextInt(100) > 80)  
+				Controller.getController().fallGun(new FallenMachine(x,y));
 		}
 			
 	}

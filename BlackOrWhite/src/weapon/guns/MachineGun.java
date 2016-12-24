@@ -18,19 +18,20 @@ public class MachineGun implements Gun{
 				int y = role.y;
 				switch(role.curDir){
 					case NORTH:
-						x += 56;
-						y += 2;
+						x += 29-6;
+						y += 2-35;
 						break;
 					case EAST:
-						x += 87;
-						y += 47;
+						x += 75;
+						y += 22;
 						break;
 					case WEST:
-						y += 47;
+						x += 6-35;
+						y += 31-6;
 						break;
 					case SOUTH:
-						x += 47;
-						y += 57;
+						x += 32-6;
+						y += 72;
 						break;
 				}
 				Bullet bullet = new MachineBullet( x , y , role.curDir , new MachineBulletFactory());
@@ -41,7 +42,7 @@ public class MachineGun implements Gun{
 
 	@Override
 	public int getSpacing() {
-		return 0;
+		return 100;
 	}
 
 }

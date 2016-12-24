@@ -16,10 +16,12 @@ public class ImageSequence { //分鏡畫面物件
 		numFiles = n;
 		baseFileName = bfname;
 		fileExt = fext;
+		 int i=0;
 	 try {
-		 for (int i=0; i<numFiles; i++)
+		 for (i=0; i<numFiles; i++)
 			 imgs[i] = ImageIO.read(new File(bfname+i+"."+fext)); //load the pic files
-	 } catch (Exception e) {e.printStackTrace();}
+	 } catch (Exception e) {e.printStackTrace();
+	 Log.d(bfname+i+"."+fext);}
 	}
 	public Image next(boolean cycle) { //取得下一張畫面
 		 if (!cycle && index == numFiles-1) { //cycle是false表示不重複播放

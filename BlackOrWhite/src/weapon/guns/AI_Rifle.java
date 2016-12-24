@@ -34,7 +34,7 @@ public class AI_Rifle implements Gun{
 				y += 89;
 				break;
 		}
-		Bullet bullet = new BasicBullet( x , y , role.curDir , new RifleBulletFactory(),false);
+		Bullet bullet = new BasicBullet( x , y-5 , role.curDir , new RifleBulletFactory(),false);
 		Log.d("¤l¼u++");
 		
 	//	try {Thread.sleep(750);} catch (InterruptedException e) {e.printStackTrace();}
