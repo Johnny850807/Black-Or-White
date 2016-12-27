@@ -43,7 +43,6 @@ public abstract class Stage implements Runnable{
 			
 		Log.d("下一關開始!!");
 		new Thread(nextStage).start();  //下一關
-			
 	} 
 	
 	public void specificlyAddMonster(int siteIndex){

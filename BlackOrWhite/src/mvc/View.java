@@ -45,6 +45,7 @@ public class View {
 	private static boolean startGame = false;  
 	public boolean netWorking = false; // true if choose the networking mode
 	public static int shootedBulletCount = 0;  //結局時 讓玩家知道他總共射了多少子彈
+
 	
 	public View(JFrame frame) {
 		this.parent = frame;
