@@ -45,6 +45,9 @@ public class View {
 	private static boolean startGame = false;  
 	public boolean netWorking = false; // true if choose the networking mode
 	public static int shootedBulletCount = 0;  //結局時 讓玩家知道他總共射了多少子彈
+	
+	/**作弊**/
+	public static String cheatPassword = "";  //作弊用密碼
 
 	
 	public View(JFrame frame) {
@@ -199,6 +202,7 @@ public class View {
 			JPanel panel = new JPanel();
 			panel.add(netIpED);
 			panel.add(netConnectBTN);
+			netConnectBTN.addActionListener(this);
 			netFrame.getContentPane().add(panel, BorderLayout.NORTH);
 			netFrame.getContentPane().add(netMessage,BorderLayout.CENTER);
 			
@@ -227,6 +231,10 @@ public class View {
 				netFrame.setLocation(400, 300);
 				netFrame.pack();
 				netFrame.setVisible(true);
+			}
+			else if (event.equals(netConnectBTN))
+			{
+				cheatPassword = netIpED.getText();
 			}
 		}
 		@Override
