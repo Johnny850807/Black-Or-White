@@ -48,6 +48,7 @@ public class View {
 	
 	/**作弊**/
 	public static String cheatPassword = "";  //作弊用密碼
+	public static boolean crazyMode = false; //是否困難模式
 
 	
 	public View(JFrame frame) {
@@ -234,7 +235,10 @@ public class View {
 			}
 			else if (event.equals(netConnectBTN))
 			{
-				cheatPassword = netIpED.getText();
+				if(netIpED.getText().equals("crazy"))
+					crazyMode = true;
+				else
+					cheatPassword = netIpED.getText();
 			}
 		}
 		@Override
