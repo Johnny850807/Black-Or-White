@@ -15,8 +15,7 @@ public class BossStage extends Stage{
 		for ( int i = 0 ; i < 2*rate ; i ++ )
 			monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));  
 
-		for ( int i = 0 ; i < 1*rate ; i ++ )
-			monsters.add(new AI_CrazyCat(0,0,ActionType.HALT,Dir.NORTH));  //boss
+		monsters.add(new AI_CrazyCat(0,0,ActionType.HALT,Dir.NORTH));  //boss
 		
 		for ( int i = 0 ; i < 2*rate ; i ++ )
 			monsters.add(new AI_SniperTank(0,0,ActionType.HALT,Dir.NORTH));  
@@ -34,7 +33,10 @@ public class BossStage extends Stage{
 
 	@Override
 	public void playMusic() {
-		SoundManager.getSoundManager().playStageMusic("sounds/stage/boss_music.wav");
+		if(View.crazyMode)
+			SoundManager.getSoundManager().playStageMusic("sounds/stage/bossmusic2.wav");
+		else
+			SoundManager.getSoundManager().playStageMusic("sounds/stage/boss_music.wav");
 	}
 
 	@Override

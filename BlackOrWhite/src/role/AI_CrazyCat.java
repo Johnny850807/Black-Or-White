@@ -6,6 +6,7 @@ import mvc.ActionType;
 import mvc.Controller;
 import mvc.Dir;
 import mvc.SoundManager;
+import mvc.View;
 import mvc.gameObject.GameObjects;
 import role.abstractFactory.BallFactory;
 import role.abstractFactory.CrazyCatFactory;
@@ -31,18 +32,19 @@ public class AI_CrazyCat extends AI {
 
 	@Override
 	protected int getMovingDistance(ActionType act , Dir dir) {
+		int distance = View.crazyMode ? 6 : 4;
 		switch(act)
 		{
 			case WALK:
 				switch(dir){
 					case NORTH:
-						return -3;
+						return -1*distance;
 					case SOUTH:
-						return 3;
+						return distance;
 					case EAST:
-						return 4;
+						return distance;
 					case WEST:
-						return -4;
+						return -1*distance;
 				}
 				break;
 			default:

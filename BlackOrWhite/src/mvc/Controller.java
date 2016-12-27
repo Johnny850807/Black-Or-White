@@ -43,6 +43,7 @@ public class Controller extends Thread{
 		gameStart = true;
 		createPlayer();
 		super.setName("controller");
+		
 		start();  //run stage
 	}
 	public void startP2PGame(){
