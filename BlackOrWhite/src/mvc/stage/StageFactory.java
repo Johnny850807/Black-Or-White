@@ -17,6 +17,6 @@ public class StageFactory {
 		  stage4.setNextStage(stage5);
 		  stage5.setNextStage(bossStage);
 		  bossStage.setNextStage(finalShow);
-		return bossStage;
+		return stage1;
 	}
 }
