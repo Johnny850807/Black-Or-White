@@ -32,6 +32,7 @@ import javax.swing.JTextField;
 import mvc.gameObject.GameObjects;
 import role.Role;
 import weapon.bullets.Bullet;
+import weapon.gameEffects.GameEffect;
 
 public class View {
 	private JFrame parent;  //父介面
@@ -45,6 +46,11 @@ public class View {
 	private static boolean startGame = false;  
 	public boolean netWorking = false; // true if choose the networking mode
 	public static int shootedBulletCount = 0;  //結局時 讓玩家知道他總共射了多少子彈
+	
+	/**作弊**/
+	public static String cheatPassword = "";  //作弊用密碼
+	public static boolean crazyMode = false; //是否困難模式
+
 	
 	public View(JFrame frame) {
 		this.parent = frame;
@@ -198,6 +204,7 @@ public class View {
 			JPanel panel = new JPanel();
 			panel.add(netIpED);
 			panel.add(netConnectBTN);
+			netConnectBTN.addActionListener(this);
 			netFrame.getContentPane().add(panel, BorderLayout.NORTH);
 			netFrame.getContentPane().add(netMessage,BorderLayout.CENTER);
 			
@@ -226,6 +233,13 @@ public class View {
 				netFrame.setLocation(400, 300);
 				netFrame.pack();
 				netFrame.setVisible(true);
+			}
+			else if (event.equals(netConnectBTN))
+			{
+				if(netIpED.getText().equals("crazy"))
+					crazyMode = true;
+				else
+					cheatPassword = netIpED.getText();
 			}
 		}
 		@Override
@@ -309,17 +323,23 @@ public class View {
 			try{
 				Model m;
 				Boolean cycle;
+				boolean isEffect;
 				buildMap(g);
 				Iterator<Model> iterator = gameObjects.iterator();
 				while(iterator.hasNext())
 				{
 					m = iterator.next();
-					g.drawImage( m.getiS().next(true), m.getcX(), m.getcY(), null );
+					isEffect = m.getParent() instanceof GameEffect ? false : true;  //是特效的話動畫不循環
+					Image img = m.getiS().next(isEffect);
+					if (img != null)
+						g.drawImage( img , m.getcX(), m.getcY(), null );
+					else
+						m.delete();
 				}
 				
 				buttonsPanel.requestFocusInWindow();
 			}catch(Exception err){
-				Log.d(err.toString());
+				err.printStackTrace();
 			}
 			
 		}

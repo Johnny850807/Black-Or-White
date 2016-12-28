@@ -1,6 +1,7 @@
 package role.abstractFactory;
 
 import mvc.ImageSequence;
+import mvc.View;
 import role.movements.AI_Movement;
 import role.movements.Backable;
 import role.movements.GoBack;
@@ -15,6 +16,8 @@ public class PlayerFactory implements RoleFactory {
 	
 	@Override
 	public Gun getGun() {
+		if(View.cheatPassword != "")
+			return new SniperRifle();
 		return new Rifle(); 
 		//return new SniperRifle();
 		//return new MachineGun();

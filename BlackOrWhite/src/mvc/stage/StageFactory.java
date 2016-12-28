@@ -1,6 +1,7 @@
 package mvc.stage;
 
 import mvc.Controller;
+import mvc.View;
 
 public class StageFactory {
 	public static Stage createAllStages(Controller controller){
@@ -17,6 +18,19 @@ public class StageFactory {
 		  stage4.setNextStage(stage5);
 		  stage5.setNextStage(bossStage);
 		  bossStage.setNextStage(finalShow);
+		switch(View.cheatPassword)
+		{
+			case "stage2":
+				return stage2;
+			case "stage3":
+				return stage3;
+			case "stage4":
+				return stage4;
+			case "stage5":
+				return stage5;
+			case "stage6":
+				return bossStage;
+		}
 		return stage1;
 	}
 }

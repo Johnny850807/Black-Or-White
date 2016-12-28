@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import mvc.Controller;
 import mvc.Log;
 import mvc.Map1Director;
+import mvc.View;
 import role.AI;
 
 public abstract class Stage implements Runnable{
@@ -30,6 +31,11 @@ public abstract class Stage implements Runnable{
 		for(int i = 0 ; i < Map1Director.AI_CREATE_X_SET.length && i < monsters.size() ; i ++ )
 			specificlyAddMonster(i);
 		int time;
+		
+		//困難模式的話 生產時間減少1/2
+		if(View.crazyMode)
+			spacingCreation *= 0.5;
+		
 		//再慢慢隨機位置產生
 		while(monsters.size() > 0){
 			try {TimeUnit.SECONDS.sleep(spacingCreation);}catch (InterruptedException e) {e.printStackTrace();}
@@ -43,7 +49,6 @@ public abstract class Stage implements Runnable{
 			
 		Log.d("下一關開始!!");
 		new Thread(nextStage).start();  //下一關
-			
 	} 
 	
 	public void specificlyAddMonster(int siteIndex){

@@ -12,26 +12,21 @@ import role.movements.GoBack;
 import weapon.guns.Gun;
 
 public class EvilFactory implements RoleFactory {
-	
 	private static ImageSequence[][] actImgs; //singleton ! lazy instantiation
-	
 	@Override
 	public Gun getGun() {
 		return null;
 	}
-
 	@Override
 	public AI_Movement getMovement() {
 		return new AI_Follow(new AI_Halt(new AI_Walk()));
 	}
-
 	@Override
 	public Backable getBackable() {
 		return new Block();
 	}
-
-
-
+	
+	
 	@Override
 	public ImageSequence[][] getActionImages() {
 

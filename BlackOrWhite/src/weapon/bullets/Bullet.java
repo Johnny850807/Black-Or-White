@@ -11,9 +11,14 @@ import mvc.Map1Director;
 import mvc.MapBuilder;
 import mvc.Model;
 import role.Role;
+import weapon.gameEffects.BallEffect;
+import weapon.gameEffects.FireEffect;
 
 
 public abstract class Bullet {
+	enum Bullet_Effect{
+		EFFECT_FIRE , EFFECT_BALL , EFFECT_POWER
+	}
 	public static ArrayList<Integer> BARRIER_X_SET = Map1Director.BULLET_BARRIER_X_SET;  //障礙物座標集合
 	public static ArrayList<Integer> BARRIER_Y_SET = Map1Director.BULLET_BARRIER_Y_SET;
 	protected Model model;
@@ -23,6 +28,7 @@ public abstract class Bullet {
 	protected ImageSequence[][] actionImgs;
 	protected int distance; //飛行距離
 	protected int damage;
+	protected Bullet_Effect effectType;
 	//建構子
 
 	private int vW;  // vertical 垂直高度
@@ -33,7 +39,7 @@ public abstract class Bullet {
 	protected int cY;
 	public Dir curDir;  //飛行方向
 
-	public Bullet(int cX, int cY, int w, int h,int damage,boolean singleHit,boolean playerBullet, Dir curDir ,BulletFactory factory) {
+	public Bullet(int cX, int cY, int w, int h,int damage,boolean singleHit,boolean playerBullet, Dir curDir ,BulletFactory factory , Bullet_Effect effectType ) {
 		super();
 		this.cX = cX;
 		this.cY = cY;
@@ -41,6 +47,7 @@ public abstract class Bullet {
 		this.playerBullet = playerBullet;
 		this.vW = w;
 		this.vH = h;
+		this.effectType = effectType;
 		this.curDir = curDir;
 		this.damage = damage;
 		this.actionImgs = factory.getActionImages();
@@ -106,6 +113,17 @@ public abstract class Bullet {
 		 * 
 		 * */
 		model.delete();
+		switch(effectType)
+		{
+			case EFFECT_FIRE:
+				new FireEffect(cX-10,cY-10);
+				break;
+			case EFFECT_BALL:
+				new BallEffect(cX-10,cY-10);
+				break;
+			case EFFECT_POWER:
+				break;
+		}
 	}
 	
 	public Model getModel() {

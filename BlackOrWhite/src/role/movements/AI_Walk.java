@@ -25,9 +25,9 @@ public class AI_Walk implements AI_Movement {
 		//判斷怪物在地圖四個方位的移動機率
 		Model model = ai.getModel();
 		int x = model.getcX() , y = model.getcY();
-		Dir[] dirEast = {Dir.NORTH,Dir.SOUTH,Dir.WEST,Dir.WEST,Dir.WEST,Dir.WEST,Dir.EAST};
-		Dir[] dirWest = {Dir.NORTH,Dir.SOUTH,Dir.EAST,Dir.EAST,Dir.EAST,Dir.EAST,Dir.EAST};
-		Dir[] dirNorth = {Dir.EAST,Dir.WEST,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.NORTH};
+		Dir[] dirEast = {Dir.SOUTH,Dir.NORTH,Dir.SOUTH,Dir.WEST,Dir.WEST,Dir.WEST,Dir.WEST,Dir.EAST};
+		Dir[] dirWest = {Dir.SOUTH,Dir.NORTH,Dir.SOUTH,Dir.EAST,Dir.EAST,Dir.EAST,Dir.EAST,Dir.EAST};
+		Dir[] dirNorth = {Dir.SOUTH,Dir.SOUTH,Dir.EAST,Dir.WEST,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.NORTH};
 		Dir[] dirSouth = {Dir.EAST,Dir.WEST,Dir.NORTH,Dir.NORTH,Dir.NORTH,Dir.WEST,Dir.SOUTH};
 		Dir rDir;  //結果方向
 		//east

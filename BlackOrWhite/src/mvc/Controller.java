@@ -15,6 +15,7 @@ import role.AI;
 import role.Player;
 import role.Role;
 import weapon.bullets.Bullet;
+import weapon.gameEffects.GameEffect;
 import weapon.guns.fallenWeapon.FallenItem;
 
 public class Controller extends Thread{
@@ -43,6 +44,7 @@ public class Controller extends Thread{
 		gameStart = true;
 		createPlayer();
 		super.setName("controller");
+		
 		start();  //run stage
 	}
 	public void startP2PGame(){
@@ -86,6 +88,9 @@ public class Controller extends Thread{
 	}
 	public void deleteModel(FallenItem fallen){
 		gameObjects.removeFallenItem(fallen);
+	}
+	public void deleteModel(GameEffect effect) {
+		gameObjects.removeEffect(effect);
 	}
 	
 	public void checkConflict(){
@@ -186,6 +191,10 @@ public class Controller extends Thread{
 		gameObjects.addBullet(bullet);
 	}
 	
+	public void addEffect(GameEffect e){
+		gameObjects.addEffect(e);
+	}
+	
 	//ªvÀøª±®a
 	public void curePlayer(int hp){
 		if (player1 != null )
@@ -218,5 +227,6 @@ public class Controller extends Thread{
 	public Player getPlayer2() {
 		return player2;
 	}
+
 	
 }

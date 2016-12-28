@@ -8,6 +8,7 @@ import java.util.List;
 import mvc.Log;
 import role.Role;
 import weapon.bullets.Bullet;
+import weapon.gameEffects.GameEffect;
 import weapon.guns.fallenWeapon.FallenItem;
 //所有出現在畫面中的物件
 public class GameObjects {
@@ -15,6 +16,7 @@ public class GameObjects {
 	private List<Role> roles = Collections.checkedList(new ArrayList<Role>(), Role.class); //所有存在角色
 	private List<Bullet> bullets  = Collections.checkedList(new ArrayList<Bullet>(), Bullet.class);  //所有存在子彈
 	private List<FallenItem> fallItems = Collections.checkedList(new ArrayList<FallenItem>(), FallenItem.class);  //所有掉落槍枝
+	private List<GameEffect> effects = Collections.checkedList(new ArrayList<GameEffect>(), GameEffect.class);  //所有特效
 	private GameObjects(){} //singleton
 	
 	public static GameObjects getGameObjects(){
@@ -49,6 +51,9 @@ public class GameObjects {
 	public List<Bullet> getBullets() {
 		return bullets;
 	}
+	public List<GameEffect> getEffects(){
+		return effects;
+	}
 	public void setBullets(List<Bullet> bullets) {
 		this.bullets = bullets;
 	}
@@ -61,6 +66,9 @@ public class GameObjects {
 	public void addFallenGun(FallenItem f){
 		fallItems.add(f);
 	}
+	public void addEffect(GameEffect e){
+		effects.add(e);
+	}
 	public void removeRole(Role r){
 		roles.remove(r);
 	}
@@ -69,6 +77,9 @@ public class GameObjects {
 	}
 	public void removeFallenItem(FallenItem f){
 		fallItems.remove(f);
+	}
+	public void removeEffect(GameEffect e){
+		effects.remove(e);
 	}
 	//overloading
 	public void removeRole(int r){

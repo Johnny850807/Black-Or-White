@@ -1,5 +1,5 @@
 package mvc;
 
 public enum Item {
-	ROLE,BULLET,GUN
+	ROLE,BULLET,GUN,EFFECT
 }

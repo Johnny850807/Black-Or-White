@@ -13,8 +13,8 @@ public class Map1Director implements MapDirector{
 	public static ArrayList<Integer> BULLET_BARRIER_Y_SET;
 	public static ArrayList<Integer> BARRIER_X_SET;  //障礙物座標集合
 	public static ArrayList<Integer> BARRIER_Y_SET;
-	public final static int[] AI_CREATE_X_SET = new int[]{200,500,600,900,0,1100};
-	public final static int[] AI_CREATE_Y_SET = new int[]{0,0,0,0,200,200};
+	public static int[] AI_CREATE_X_SET = new int[]{200,500,600,900,0,1100};
+	public static int[] AI_CREATE_Y_SET = new int[]{0,0,0,0,200,200};
 	
 	public Map1Director(){
 		String[] map = getMapString();
