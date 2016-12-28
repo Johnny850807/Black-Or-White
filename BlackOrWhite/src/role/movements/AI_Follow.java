@@ -49,14 +49,11 @@ public class AI_Follow extends AI_Decorator {
 			aY = (ai.y+ai.getOffsetY()) / 100;
 			rX = (r.x+r.getOffsetX()) / 100;
 			rY = (r.y+r.getOffsetY()) / 100;
-			if ( aX < 0 || aY < 0 || rX < 0 || rY < 0
-					|| aX >= MapBuilder.SIZEX || rX >= MapBuilder.SIZEX
-					|| aY >= MapBuilder.SIZEY || rY >= MapBuilder.SIZEY)
-				return false;
+
 			//Log.d("Site Player :("+rX+","+rY+")  AI :("+aX+","+aY+")");
 			//判斷障礙物 是否在該條線上
 			//run south
-			for ( int i = aY+1 ; i < MapBuilder.SIZEY && aX == rX ; i ++ )
+			for ( int i = aY+1 ; i >= 0 && i < MapBuilder.SIZEY && aX == rX ; i ++ )
 			{
 				if( i == rY ){
 					ai.getMoved(ActionType.WALK, Dir.SOUTH);
@@ -66,7 +63,7 @@ public class AI_Follow extends AI_Decorator {
 					return false;
 			}
 			//run north
-			for ( int i = aY-1 ; i >= 0 && aX == rX ; i -- )
+			for ( int i = aY-1 ; i >= 0 && i < MapBuilder.SIZEY && aX == rX ; i -- )
 			{
 				if( i == rY ){
 					ai.getMoved(ActionType.WALK, Dir.NORTH);
@@ -76,7 +73,7 @@ public class AI_Follow extends AI_Decorator {
 					return false;
 			}
 			//run east
-			for ( int i = aX+1 ; i < MapBuilder.SIZEX && aY == rY ; i ++ )
+			for ( int i = aX+1 ; i >= 0 && i < MapBuilder.SIZEX && aY == rY ; i ++ )
 			{
 				if( i == rX ){
 					ai.getMoved(ActionType.WALK, Dir.EAST);
@@ -86,7 +83,7 @@ public class AI_Follow extends AI_Decorator {
 					return false;
 			}
 			//run west
-			for ( int i = aX-1 ; i >= 0 && aY == rY  ; i -- )
+			for ( int i = aX-1 ; i >= 0 && i < MapBuilder.SIZEX && aY == rY  ; i -- )
 			{
 				if( i == rX ){
 					ai.getMoved(ActionType.WALK, Dir.WEST);

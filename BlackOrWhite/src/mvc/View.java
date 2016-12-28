@@ -32,6 +32,7 @@ import javax.swing.JTextField;
 import mvc.gameObject.GameObjects;
 import role.Role;
 import weapon.bullets.Bullet;
+import weapon.gameEffects.GameEffect;
 
 public class View {
 	private JFrame parent;  //父介面
@@ -322,17 +323,23 @@ public class View {
 			try{
 				Model m;
 				Boolean cycle;
+				boolean isEffect;
 				buildMap(g);
 				Iterator<Model> iterator = gameObjects.iterator();
 				while(iterator.hasNext())
 				{
 					m = iterator.next();
-					g.drawImage( m.getiS().next(true), m.getcX(), m.getcY(), null );
+					isEffect = m.getParent() instanceof GameEffect ? false : true;  //是特效的話動畫不循環
+					Image img = m.getiS().next(isEffect);
+					if (img != null)
+						g.drawImage( img , m.getcX(), m.getcY(), null );
+					else
+						m.delete();
 				}
 				
 				buttonsPanel.requestFocusInWindow();
 			}catch(Exception err){
-				Log.d(err.toString());
+				err.printStackTrace();
 			}
 			
 		}

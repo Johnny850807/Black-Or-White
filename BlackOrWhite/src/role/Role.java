@@ -226,7 +226,7 @@ public abstract class Role implements Runnable{
 			if (this instanceof Player)
 				updateHp();
 			if (bullet.isSingleHit())  //若為單數攻擊就消失
-				bullet.getModel().delete();
+				bullet.endFlying();
 		}
 
 	}

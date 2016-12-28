@@ -6,6 +6,7 @@ import java.util.Iterator;
 import mvc.Model;
 import role.Role;
 import weapon.bullets.Bullet;
+import weapon.gameEffects.GameEffect;
 import weapon.guns.fallenWeapon.FallenItem;
 
 public class GameObjectModelsItertor implements Iterator<Model> {
@@ -22,6 +23,8 @@ public class GameObjectModelsItertor implements Iterator<Model> {
 			models.add(b.getModel());
 		for ( FallenItem f : gameObjects.getFallItems() )
 			models.add(f.getModel());
+		for ( GameEffect e : gameObjects.getEffects() )
+			models.add(e.getModel());
 		iterator = models.iterator();
 	}
 	@Override

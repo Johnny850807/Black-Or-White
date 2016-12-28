@@ -3,6 +3,7 @@ package mvc;
 import role.Player;
 import role.Role;
 import weapon.bullets.Bullet;
+import weapon.gameEffects.GameEffect;
 import weapon.guns.fallenWeapon.FallenItem;
 
 public class Model {
@@ -26,6 +27,8 @@ public class Model {
 		this.iS = iS;
 		if (type == Item.BULLET)
 			controller.addBullet((Bullet)parent);
+		else if ( type == Item.EFFECT )
+			controller.addEffect((GameEffect)parent);
 	}
 
 	public void setState(int deltaX,int deltaY, ActionType act,Dir dir ,ImageSequence iS){
@@ -44,6 +47,8 @@ public class Model {
 			controller.deleteModel((Bullet)parent);
 		else if (parent instanceof FallenItem )
 			controller.deleteModel((FallenItem)parent);
+		else if (parent instanceof GameEffect)
+			controller.deleteModel((GameEffect)parent);
 	} 
 	
 	public Controller getController() {
@@ -67,6 +72,10 @@ public class Model {
 	public Object getParent() {
 		if (type == Item.ROLE)
 			return (Role)parent;
+		if (type == Item.EFFECT )
+			return (GameEffect)parent;
+		if (type == Item.GUN )
+			return (FallenItem)parent;
 		return (Bullet)parent;
 	}
 

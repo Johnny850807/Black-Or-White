@@ -70,4 +70,10 @@ public class AI_CrazyCat extends AI {
 	protected void dieProcess() {
 		//SoundManager.getSoundManager().playSound("sounds/monster/ball_die.wav");
 	}
+	
+	@Override
+	public void moveDurationCountDown(){
+		//每 moveDuration 個更新換一次動作
+		moveCountDown = moveCountDown <= 0 ? moveDuration : moveCountDown - 3;
+	}
 }
