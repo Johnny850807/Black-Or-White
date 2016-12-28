@@ -50,6 +50,7 @@ public class View {
 	/**国**/
 	public static String cheatPassword = "";  //国ノ盞絏
 	public static boolean crazyMode = false; //琌螟家Α
+	public static String cheatGunStyle = "";  //国簀
 
 	
 	public View(JFrame frame) {
@@ -238,8 +239,13 @@ public class View {
 			{
 				if(netIpED.getText().equals("crazy"))
 					crazyMode = true;
+				else if ( netIpED.getText().equals("MachineEX"))
+					cheatGunStyle = "MachineEX";
+				else if ( netIpED.getText().equals("Sniper"))
+					cheatGunStyle = "Sniper";
 				else
 					cheatPassword = netIpED.getText();
+				netIpED.setText("");
 			}
 		}
 		@Override

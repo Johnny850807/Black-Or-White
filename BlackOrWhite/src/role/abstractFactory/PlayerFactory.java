@@ -7,6 +7,7 @@ import role.movements.Backable;
 import role.movements.GoBack;
 import weapon.guns.Gun;
 import weapon.guns.MachineGun;
+import weapon.guns.MachineGunEX;
 import weapon.guns.Rifle;
 import weapon.guns.SniperRifle;
 
@@ -16,8 +17,10 @@ public class PlayerFactory implements RoleFactory {
 	
 	@Override
 	public Gun getGun() {
-		if(View.cheatPassword != "")
+		if(View.cheatGunStyle == "Sniper")
 			return new SniperRifle();
+		if(View.cheatGunStyle == "MachineEX")
+			return new MachineGunEX();
 		return new Rifle(); 
 		//return new SniperRifle();
 		//return new MachineGun();
