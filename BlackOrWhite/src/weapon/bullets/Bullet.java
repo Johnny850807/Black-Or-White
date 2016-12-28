@@ -13,6 +13,7 @@ import mvc.Model;
 import role.Role;
 import weapon.gameEffects.BallEffect;
 import weapon.gameEffects.FireEffect;
+import weapon.gameEffects.PowerEffect;
 
 
 public abstract class Bullet {
@@ -122,6 +123,7 @@ public abstract class Bullet {
 				new BallEffect(cX-10,cY-10);
 				break;
 			case EFFECT_POWER:
+				new PowerEffect(cX-10,cY-10);
 				break;
 		}
 	}
