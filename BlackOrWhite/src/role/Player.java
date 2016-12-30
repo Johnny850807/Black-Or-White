@@ -46,6 +46,8 @@ public class Player extends Role {
 		while(requests.size() > 0)
 		{
 			request = requests.poll();
+			if( request.act == curAct && request.act == ActionType.HALT)
+				continue;
 			if ( request.act == ActionType.SHOOT && isShootSpacing ){
 				return;  //如果位於射擊緩衝時間 而且使用者點選射擊 就不理會
 			}
@@ -89,5 +91,7 @@ public class Player extends Role {
 		}
 		return 0;
 	}
+	
+	
 	
 }

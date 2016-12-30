@@ -4,6 +4,7 @@ import mvc.ImageSequence;
 import mvc.View;
 import role.movements.AI_Movement;
 import role.movements.Backable;
+import role.movements.Block;
 import role.movements.GoBack;
 import weapon.guns.Gun;
 import weapon.guns.MachineGun;
@@ -34,7 +35,7 @@ public class PlayerFactory implements RoleFactory {
 
 	@Override
 	public Backable getBackable() {
-		return new GoBack();
+		return new Block();
 	}
 
 

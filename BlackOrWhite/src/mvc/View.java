@@ -171,6 +171,9 @@ public class View {
 		private JTextField netIpED;
 		private JLabel netMessage;
 		
+		private int player1CommandLevel = 0;  //為了改良halt問題 順暢度 用一個數字紀錄是不是連續方向 是 就不halt
+		private int player2CommandLevel = 0;  //為了改良halt問題 順暢度 用一個數字紀錄是不是連續方向 是 就不halt
+		
 		private Set<Character> commandSet = new HashSet<Character>();
 		public ButtonsPanel(JPanel hpPanel){
 			add(hpPanel); //將生命欄位設置近來
@@ -271,43 +274,73 @@ public class View {
 			{
 				switch(code){
 				case KeyEvent.VK_T:
+					if(controller.getPlayer1().getCurDir() != Dir.NORTH 
+					|| controller.getPlayer1().getCurAct() == ActionType.HALT)
+						player1CommandLevel++;
 					playerCurDir = Dir.NORTH;
+					Log.d("up");
 					controller.movePlayer(ActionType.WALK, Dir.NORTH);
 					break;
 				case KeyEvent.VK_G:
+					if( controller.getPlayer1().getCurDir() != Dir.SOUTH 
+							|| controller.getPlayer1().getCurAct() == ActionType.HALT)
+						player1CommandLevel++;
 					playerCurDir = Dir.SOUTH;
 					Log.d("down");
 					controller.movePlayer(ActionType.WALK, Dir.SOUTH);
 					break;
 				case KeyEvent.VK_F:
+					if(controller.getPlayer1().getCurDir() != Dir.WEST 
+							|| controller.getPlayer1().getCurAct() == ActionType.HALT)
+						player1CommandLevel++;
 					playerCurDir = Dir.WEST;
 					Log.d("left");
 					controller.movePlayer(ActionType.WALK, Dir.WEST);
 					break;
 				case KeyEvent.VK_H:
+					Log.d("right");
+					if(controller.getPlayer1().getCurDir() != Dir.EAST 
+							|| controller.getPlayer1().getCurAct() == ActionType.HALT)
+						player1CommandLevel++;
 					playerCurDir = Dir.EAST;
 					controller.movePlayer(ActionType.WALK, Dir.EAST);
 					break;
 				case KeyEvent.VK_C:  //also shoot
 					commandSet.add('C');
+					if(controller.getPlayer1().getCurAct() != ActionType.SHOOT)
+						player1CommandLevel = player1CommandLevel >= 1 ? 1 : player1CommandLevel + 1;
 					break;
 				case KeyEvent.VK_UP:
+					if(controller.getPlayer2().getCurDir() != Dir.NORTH 
+					|| controller.getPlayer2().getCurAct() == ActionType.HALT)
+						player2CommandLevel++;
 					player2CurDir = Dir.NORTH;
 					controller.movePlayer2(ActionType.WALK, Dir.NORTH);
 					break;
 				case KeyEvent.VK_DOWN:
+					if(controller.getPlayer2().getCurDir() != Dir.SOUTH 
+					|| controller.getPlayer2().getCurAct() == ActionType.HALT)
+						player2CommandLevel++;
 					player2CurDir = Dir.SOUTH;
 					controller.movePlayer2(ActionType.WALK, Dir.SOUTH);
 					break;
 				case KeyEvent.VK_LEFT:
+					if(controller.getPlayer2().getCurDir() != Dir.WEST 
+					|| controller.getPlayer2().getCurAct() == ActionType.HALT)
+						player2CommandLevel++;
 					player2CurDir = Dir.WEST;
 					controller.movePlayer2(ActionType.WALK, Dir.WEST);
 					break;
 				case KeyEvent.VK_RIGHT:
+					if(controller.getPlayer2().getCurDir() != Dir.EAST 
+					|| controller.getPlayer2().getCurAct() == ActionType.HALT)
+						player2CommandLevel++;
 					player2CurDir = Dir.EAST;
 					controller.movePlayer2(ActionType.WALK, Dir.EAST);
 					break;
 				case KeyEvent.VK_L:  //also shoot
+					if(controller.getPlayer2().getCurAct() != ActionType.SHOOT)
+						player2CommandLevel = player2CommandLevel >= 1 ? 1 : player2CommandLevel + 1;
 						commandSet.add('L');
 					break;
 				case KeyEvent.VK_ENTER:  //印出遊戲資訊
@@ -330,16 +363,30 @@ public class View {
 			if(( code == KeyEvent.VK_T ||  code == KeyEvent.VK_G || 
 					 code == KeyEvent.VK_F || code == KeyEvent.VK_H || code == KeyEvent.VK_C))
 			{
-				controller.movePlayer(ActionType.HALT, playerCurDir);
-				commandSet.remove('C');
+				player1CommandLevel = player1CommandLevel == 0 ? 0 :player1CommandLevel - 1;
+				Log.d(player1CommandLevel+"");
+				if( player1CommandLevel == 0)
+				{
+					controller.movePlayer(ActionType.HALT, playerCurDir);
+					Log.d("halt");
+					commandSet.remove('C');
+				}
+
 			}
 
 			
 			else if (( code == KeyEvent.VK_UP ||  code == KeyEvent.VK_DOWN || 
 					 code == KeyEvent.VK_LEFT || code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_L) ) //net work
 			{
-				controller.movePlayer2(ActionType.HALT, player2CurDir);
-				commandSet.remove('L');
+				player2CommandLevel = player2CommandLevel == 0 ? 0 :player2CommandLevel - 1;
+				Log.d(player2CommandLevel+"");
+				if( player2CommandLevel == 0)
+				{
+					controller.movePlayer2(ActionType.HALT, player2CurDir);
+					Log.d("halt");
+					commandSet.remove('L');
+				}
+		
 			}
 
 				;

@@ -245,6 +245,22 @@ public abstract class Role implements Runnable{
 		model.setHp(hp);
 	}
 	protected abstract int getMovingDistance(ActionType act , Dir dir);  //回傳該角色每次移動距離
+
+	public ActionType getCurAct() {
+		return curAct;
+	}
+
+	public void setCurAct(ActionType curAct) {
+		this.curAct = curAct;
+	}
+
+	public Dir getCurDir() {
+		return curDir;
+	}
+
+	public void setCurDir(Dir curDir) {
+		this.curDir = curDir;
+	}
 	
 	
 	
