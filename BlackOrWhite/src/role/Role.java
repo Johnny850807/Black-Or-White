@@ -222,7 +222,8 @@ public abstract class Role implements Runnable{
 		// AI受到玩家子彈攻擊 或 玩家受到AI子彈攻擊 且非緩衝時間
 		if ( (this instanceof AI && bullet.isPlayerBullet())
 				|| (this instanceof Player && !bullet.isPlayerBullet())  && !isBeingHurted ){
-			hp = (hp - (bullet.getDamage() - df)) < 0 ? 0 : (hp - (bullet.getDamage() - df));
+			int bDamage = (bullet.getDamage() - df <= 0 ? 10 : bullet.getDamage() - df);
+			hp = hp - bDamage <= 0 ? 0 : hp - bDamage;
 			if (this instanceof Player)
 				updateHp();
 			if (bullet.isSingleHit())  //若為單數攻擊就消失

@@ -274,6 +274,7 @@ public class View {
 			{
 				switch(code){
 				case KeyEvent.VK_T:
+					if(controller.getPlayer1()!=null)
 					if(controller.getPlayer1().getCurDir() != Dir.NORTH 
 					|| controller.getPlayer1().getCurAct() == ActionType.HALT)
 						player1CommandLevel++;
@@ -282,6 +283,7 @@ public class View {
 					controller.movePlayer(ActionType.WALK, Dir.NORTH);
 					break;
 				case KeyEvent.VK_G:
+					if(controller.getPlayer1()!=null)
 					if( controller.getPlayer1().getCurDir() != Dir.SOUTH 
 							|| controller.getPlayer1().getCurAct() == ActionType.HALT)
 						player1CommandLevel++;
@@ -290,6 +292,7 @@ public class View {
 					controller.movePlayer(ActionType.WALK, Dir.SOUTH);
 					break;
 				case KeyEvent.VK_F:
+					if(controller.getPlayer1()!=null)
 					if(controller.getPlayer1().getCurDir() != Dir.WEST 
 							|| controller.getPlayer1().getCurAct() == ActionType.HALT)
 						player1CommandLevel++;
@@ -298,7 +301,7 @@ public class View {
 					controller.movePlayer(ActionType.WALK, Dir.WEST);
 					break;
 				case KeyEvent.VK_H:
-					Log.d("right");
+					if(controller.getPlayer1()!=null)
 					if(controller.getPlayer1().getCurDir() != Dir.EAST 
 							|| controller.getPlayer1().getCurAct() == ActionType.HALT)
 						player1CommandLevel++;
@@ -307,10 +310,12 @@ public class View {
 					break;
 				case KeyEvent.VK_C:  //also shoot
 					commandSet.add('C');
+					if(controller.getPlayer1()!=null)
 					if(controller.getPlayer1().getCurAct() != ActionType.SHOOT)
 						player1CommandLevel = player1CommandLevel >= 1 ? 1 : player1CommandLevel + 1;
 					break;
 				case KeyEvent.VK_UP:
+					if(controller.getPlayer2()!=null)
 					if(controller.getPlayer2().getCurDir() != Dir.NORTH 
 					|| controller.getPlayer2().getCurAct() == ActionType.HALT)
 						player2CommandLevel++;
@@ -318,6 +323,7 @@ public class View {
 					controller.movePlayer2(ActionType.WALK, Dir.NORTH);
 					break;
 				case KeyEvent.VK_DOWN:
+					if(controller.getPlayer2()!=null)
 					if(controller.getPlayer2().getCurDir() != Dir.SOUTH 
 					|| controller.getPlayer2().getCurAct() == ActionType.HALT)
 						player2CommandLevel++;
@@ -325,6 +331,7 @@ public class View {
 					controller.movePlayer2(ActionType.WALK, Dir.SOUTH);
 					break;
 				case KeyEvent.VK_LEFT:
+					if(controller.getPlayer2()!=null)
 					if(controller.getPlayer2().getCurDir() != Dir.WEST 
 					|| controller.getPlayer2().getCurAct() == ActionType.HALT)
 						player2CommandLevel++;
@@ -332,6 +339,7 @@ public class View {
 					controller.movePlayer2(ActionType.WALK, Dir.WEST);
 					break;
 				case KeyEvent.VK_RIGHT:
+					if(controller.getPlayer2()!=null)
 					if(controller.getPlayer2().getCurDir() != Dir.EAST 
 					|| controller.getPlayer2().getCurAct() == ActionType.HALT)
 						player2CommandLevel++;
@@ -339,6 +347,7 @@ public class View {
 					controller.movePlayer2(ActionType.WALK, Dir.EAST);
 					break;
 				case KeyEvent.VK_L:  //also shoot
+					if(controller.getPlayer2()!=null)
 					if(controller.getPlayer2().getCurAct() != ActionType.SHOOT)
 						player2CommandLevel = player2CommandLevel >= 1 ? 1 : player2CommandLevel + 1;
 						commandSet.add('L');
