@@ -207,7 +207,7 @@ public class View {
 			netConnectBTN.addActionListener(this);
 			netFrame.getContentPane().add(panel, BorderLayout.NORTH);
 			netFrame.getContentPane().add(netMessage,BorderLayout.CENTER);
-			
+	
 			addKeyListener(this);
 		}
 		@Override
@@ -221,6 +221,7 @@ public class View {
 					//make playerPanel visible
 					parent.setVisible(true);
 					controller.startGame();
+					new ShootingCommand().start();
 				}
 				else{
 					// End game Event 
@@ -235,6 +236,7 @@ public class View {
 					//make playerPanel visible
 					parent.setVisible(true);
 					controller.startP2PGame();
+					new ShootingCommand().start();
 				}
 				else{
 					// End game Event 
@@ -318,10 +320,6 @@ public class View {
 			{
 				
 			}
-			if(commandSet.contains('C'))
-				controller.movePlayer(ActionType.SHOOT, playerCurDir);
-			if(commandSet.contains('L'))
-				controller.movePlayer2(ActionType.SHOOT, player2CurDir);
 		}
 		@Override
 		public void keyTyped(KeyEvent e) {}
@@ -346,6 +344,25 @@ public class View {
 
 				;
 		}
+		class ShootingCommand extends Thread{
+			@Override
+			public void run(){
+				while(true){
+					if(commandSet.contains('C'))
+						controller.movePlayer(ActionType.SHOOT, playerCurDir);
+					if(commandSet.contains('L'))
+						controller.movePlayer2(ActionType.SHOOT, player2CurDir);
+						try {
+							Thread.sleep(30);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+				
+			}
+		
 	}
 	
 	//放置遊戲畫面的panel
@@ -360,6 +377,7 @@ public class View {
 		@Override
 		protected void paintComponent(Graphics g) {
 			super.paintComponent(g);
+			
 			/* draw here
 			 * 1. Use the MapBuilder for map creating
 			 * 2. Paint All the roles
