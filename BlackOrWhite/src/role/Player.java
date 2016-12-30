@@ -60,6 +60,10 @@ public class Player extends Role {
 	protected void die(){
 		// while the player dies
 		if ( hp <= 0 ){
+			if(this == Controller.getController().getPlayer1())
+				Controller.getController().player1SetDie();
+			else if(this == Controller.getController().getPlayer2())
+				Controller.getController().player2SetDie();
 			model.delete();  //在控制器中刪除掉自己
 		}
 	}

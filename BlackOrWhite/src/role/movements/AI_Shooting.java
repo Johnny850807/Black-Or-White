@@ -14,7 +14,7 @@ import role.Role;
 
 public class AI_Shooting extends AI_Decorator{
 	private String[] map = Map1Director.getMapString();
-	private List<Role> players = new ArrayList<Role>(); //裝入玩家
+
 	
 	public AI_Shooting(AI_Movement wrapped) {
 		super(wrapped);
@@ -22,12 +22,14 @@ public class AI_Shooting extends AI_Decorator{
 
 	@Override
 	public void randomChoose(AI ai) {
+		List<Role> players = new ArrayList<Role>(); //裝入玩家
 		Controller controller = Controller.getController();
-		players.add(controller.getPlayer1());
+		if ( controller.getPlayer1() != null )  //裝進存在玩家
+			players.add(controller.getPlayer1());
 		if ( controller.getPlayer2() != null )  //裝進存在玩家
 			players.add(controller.getPlayer2());
 		if ( ai.isTimeToChangeMove() ){  //是時候轉換動作
-			if( random.nextInt(100)>89 ||!isInScope(ai) )  //如果玩家在視野內 就追蹤 不然回傳false 10%
+			if( random.nextInt(100)>89 ||!isInScope(ai,players) )  //如果玩家在視野內 就追蹤 不然回傳false 10%
 				movement.randomChoose(ai);  //回傳false就往下一層想
 			else{
 				Log.d("Shoot");
@@ -38,7 +40,7 @@ public class AI_Shooting extends AI_Decorator{
 			ai.keepCurrentMove();
 	}
 	
-	public boolean isInScope(AI ai){
+	public boolean isInScope(AI ai,List<Role> players){
 		//是否在視野中
 		int aX,aY;  // Ai座標在地圖上的索引
 		int rX,rY;  // 玩家座標在地圖上的索引

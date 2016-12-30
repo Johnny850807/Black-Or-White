@@ -17,8 +17,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
@@ -36,7 +38,7 @@ import weapon.gameEffects.GameEffect;
 
 public class View {
 	private JFrame parent;  //父介面
-	private Controller controller;  
+	private static Controller controller;  
 	public GamePanel gamePanel;  //遊戲畫面
 	public ButtonsPanel buttonsPanel;  //按鈕畫面
 	public PlayerPanel playerPanel;  //玩家狀況
@@ -60,8 +62,8 @@ public class View {
 		buttonsPanel = new ButtonsPanel(playerPanel);
 	}
 	
-	public void updatePlayerHp(int hp){
-		playerPanel.setP1Hp(hp);
+	public void updatePlayerHp(){
+		playerPanel.updateText();
 	}
 	
 	public void refreshScreen(){
@@ -110,15 +112,13 @@ public class View {
 	}
  	
  	public void showGameFinalWinMessage(){
-		 JOptionPane.showMessageDialog(parent, "你擊敗了最終大魔王，並且闖關成功，恭喜 !!\n 總共射出子彈 : "+shootedBulletCount);
+		 JOptionPane.showMessageDialog(parent, "你擊敗了最終大魔王，並且闖關成功，恭喜 !!\n 總共射出子彈 : "+shootedBulletCount +"\n點擊Game Tutorial 並輸入:crazy\n進行瘋狂模式吧!");
  	}
 
    	static class PlayerPanel extends JPanel { 
 		private static final String Player1 = "Player1 ";
 		private static final String Player2 = "Player2 ";
 		private static final String HP = "HP : ";
-		private int p1Hp = 0;
-		private int p2Hp = -1;
 		private JLabel player1HP = new JLabel(Player1+HP); 
 		private JLabel player2HP = new JLabel(Player2+HP); ;
 		//overloading for 1 or 2 players-game
@@ -129,42 +129,31 @@ public class View {
 			add(player2HP);
 		}
 		public void updateText(){
-			player1HP.setText(Player1+HP+p1Hp);
-			if ( p1Hp <= 0 )
-				player1HP.setText("Game Over");
-			if ( p1Hp < 150 )  //警告生命顏色
-				player1HP.setForeground(Color.red);
-			else
-				player1HP.setForeground(Color.black);
-			if(p2Hp == -1)
+			if( controller.getPlayer1() != null )
+			{
+				player1HP.setText(Player1+HP+controller.getPlayer1().getHp());
+				if ( controller.getPlayer1().getHp() <= 0 )
+					player1HP.setText("Game Over");
+				if ( controller.getPlayer1().getHp() < 150 )  //警告生命顏色
+					player1HP.setForeground(Color.red);
+				else
+					player1HP.setForeground(Color.black);
+			}
+			
+			if(controller.getPlayer2() == null)
 				player2HP.setText("");
 			else
 			{
-				player2HP.setText(Player2+HP+p2Hp);
-				if ( p2Hp < 150 )
+				player2HP.setText(Player2+HP+controller.getPlayer2().getHp());
+				if ( controller.getPlayer2().getHp() < 150 )
 					player2HP.setForeground(Color.red);
 				else
 					player2HP.setForeground(Color.black);
-				if ( p2Hp <= 0 )
+				if ( controller.getPlayer2().getHp() <= 0 )
 					player2HP.setText("Game Over");
 			}
 				
 		}
-		public int getP1Hp() {
-			return p1Hp;
-		}
-		public void setP1Hp(int p1Hp) {
-			this.p1Hp = p1Hp;
-			updateText();
-		}
-		public int getP2Hp() {
-			return p2Hp;
-		}
-		public void setP2Hp(int p2Hp) {
-			this.p2Hp = p2Hp;
-			updateText();
-		}
-			
 	}
 
 	//放置按鈕的panel (開始遊戲按鈕或者連線等等)
@@ -172,18 +161,27 @@ public class View {
 		private static final String NET_MESSAGE = "方向鍵控制走位，空白鍵或C進行射擊，記得切掉中文輸入法。";
 		private static final String NET_CONNECT = "連線功能尚未開放.";
 		private Dir playerCurDir = Dir.NORTH;  //用來記錄玩家目前面向方位!
+		private Dir player2CurDir = Dir.NORTH;  //用來記錄玩家目前面向方位!
 		private boolean releaseWhileShooting = true;  //為了讓玩家不能按著空白鍵連射，按下去時為false,放開才為true
 		private JButton start; 
 		private JButton networkGame;
+		private JButton twoPlayerStart;
 		private JFrame netFrame;
 		private JButton netConnectBTN;
 		private JTextField netIpED;
 		private JLabel netMessage;
+		
+		private Set<Character> commandSet = new HashSet<Character>();
 		public ButtonsPanel(JPanel hpPanel){
 			add(hpPanel); //將生命欄位設置近來
 			// 基本按鈕設置
 			start = new JButton("Start Game");
 			networkGame = new JButton("Game Tutorial!!");
+			twoPlayerStart = new JButton("Two Player Game");
+			twoPlayerStart.setBackground(Color.cyan);
+			twoPlayerStart.setPreferredSize(new Dimension(200,60));
+			twoPlayerStart.setFont(new Font("Arial", Font.PLAIN, 20));
+			twoPlayerStart.addActionListener(this);
 			start.setBackground(Color.cyan);
 			start.setPreferredSize(new Dimension(200,60));
 			start.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -193,6 +191,7 @@ public class View {
 			networkGame.setPreferredSize(new Dimension(350,60));
 			networkGame.addActionListener(this);
 			add(start);
+			add(twoPlayerStart);
 			add(networkGame);
 
 			//連線版面設置
@@ -220,9 +219,22 @@ public class View {
 					start.setText("End Game");
 					startGame = true; 
 					//make playerPanel visible
-					playerPanel.setP1Hp(500);
 					parent.setVisible(true);
 					controller.startGame();
+				}
+				else{
+					// End game Event 
+					 System.exit(0); //leave
+				}
+			}
+			else if (event.equals(twoPlayerStart)){
+				if ( !startGame ){
+					// Start game Event
+					start.setText("End Game");
+					startGame = true; 
+					//make playerPanel visible
+					parent.setVisible(true);
+					controller.startP2PGame();
 				}
 				else{
 					// End game Event 
@@ -247,6 +259,7 @@ public class View {
 					cheatPassword = netIpED.getText();
 				netIpED.setText("");
 			}
+			playerPanel.updateText();
 		}
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -255,29 +268,45 @@ public class View {
 			if (!netWorking)  //single game
 			{
 				switch(code){
-				case KeyEvent.VK_UP:
+				case KeyEvent.VK_T:
 					playerCurDir = Dir.NORTH;
 					controller.movePlayer(ActionType.WALK, Dir.NORTH);
 					break;
-				case KeyEvent.VK_DOWN:
+				case KeyEvent.VK_G:
 					playerCurDir = Dir.SOUTH;
+					Log.d("down");
 					controller.movePlayer(ActionType.WALK, Dir.SOUTH);
 					break;
-				case KeyEvent.VK_LEFT:
+				case KeyEvent.VK_F:
 					playerCurDir = Dir.WEST;
+					Log.d("left");
 					controller.movePlayer(ActionType.WALK, Dir.WEST);
 					break;
-				case KeyEvent.VK_RIGHT:
+				case KeyEvent.VK_H:
 					playerCurDir = Dir.EAST;
 					controller.movePlayer(ActionType.WALK, Dir.EAST);
 					break;
-				case KeyEvent.VK_C:  //shoot
-				case KeyEvent.VK_SPACE:  //also shoot
-					if(true){
-						releaseWhileShooting = false;
-						Log.d("press");
-						controller.movePlayer(ActionType.SHOOT, playerCurDir);
-					}
+				case KeyEvent.VK_C:  //also shoot
+					commandSet.add('C');
+					break;
+				case KeyEvent.VK_UP:
+					player2CurDir = Dir.NORTH;
+					controller.movePlayer2(ActionType.WALK, Dir.NORTH);
+					break;
+				case KeyEvent.VK_DOWN:
+					player2CurDir = Dir.SOUTH;
+					controller.movePlayer2(ActionType.WALK, Dir.SOUTH);
+					break;
+				case KeyEvent.VK_LEFT:
+					player2CurDir = Dir.WEST;
+					controller.movePlayer2(ActionType.WALK, Dir.WEST);
+					break;
+				case KeyEvent.VK_RIGHT:
+					player2CurDir = Dir.EAST;
+					controller.movePlayer2(ActionType.WALK, Dir.EAST);
+					break;
+				case KeyEvent.VK_L:  //also shoot
+						commandSet.add('L');
 					break;
 				case KeyEvent.VK_ENTER:  //印出遊戲資訊
 					Log.d("Role : " + gameObjects.rolesSize() + "Bullet : " + gameObjects.bulletSize() + 
@@ -289,7 +318,10 @@ public class View {
 			{
 				
 			}
-			
+			if(commandSet.contains('C'))
+				controller.movePlayer(ActionType.SHOOT, playerCurDir);
+			if(commandSet.contains('L'))
+				controller.movePlayer2(ActionType.SHOOT, player2CurDir);
 		}
 		@Override
 		public void keyTyped(KeyEvent e) {}
@@ -297,14 +329,21 @@ public class View {
 		public void keyReleased(KeyEvent e) {
 			int code = e.getKeyCode();
 			if (!startGame) return;  //若遊戲還沒開始 則不反應按鍵
-			if (!releaseWhileShooting){
-				releaseWhileShooting = true;
-				Log.d("release");
-			}
-			if(!netWorking)
+			if(( code == KeyEvent.VK_T ||  code == KeyEvent.VK_G || 
+					 code == KeyEvent.VK_F || code == KeyEvent.VK_H || code == KeyEvent.VK_C))
+			{
 				controller.movePlayer(ActionType.HALT, playerCurDir);
+				commandSet.remove('C');
+			}
+
 			
-			else //net work
+			else if (( code == KeyEvent.VK_UP ||  code == KeyEvent.VK_DOWN || 
+					 code == KeyEvent.VK_LEFT || code == KeyEvent.VK_RIGHT || code == KeyEvent.VK_L) ) //net work
+			{
+				controller.movePlayer2(ActionType.HALT, player2CurDir);
+				commandSet.remove('L');
+			}
+
 				;
 		}
 	}

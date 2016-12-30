@@ -35,10 +35,10 @@ public class Controller extends Thread{
 		player1 = new Player(Map1Director.PLAYER_CREATE_X,Map1Director.PLAYER_CREATE_Y);
 		Log.d("Create PLAYER 1 ");
 		gameObjects.addRole(player1);
-		/*if(netWork){ //網路部分....可有可無
-			player2 = new Player(Map1Director.PLAYER_CREATE_X,Map1Director.PLAYER_CREATE_Y);
-			roles.add(player2);
-		}*/
+		if(netWork){ //網路部分....可有可無
+			player2 = new Player(Map1Director.PLAYER2_CREATE_X,Map1Director.PLAYER2_CREATE_Y);
+			gameObjects.addRole(player2);
+		}
 	}
 	public void startGame(){
 		gameStart = true;
@@ -97,16 +97,20 @@ public class Controller extends Thread{
 		//確認衝突
 		List<Role> roles = gameObjects.getRoles();
 		AI ai;
-		Model playerModel = player1.getModel();
-		int pX = playerModel.getcX() , pY = playerModel.getcY(); //玩家座標
 		Model AIModel;  //怪物資料
 		//確認玩家是否碰到怪物
 		//略過玩家
 		for ( int i = 1 ; i < roles.size() ; i ++ ){
+			if(roles.get(i)instanceof Player)
+				continue;
 			ai = (AI)roles.get(i);
 			AIModel = ai.getModel();
+			if(player1 != null)
 			if ( player1.conflictWithSomething(AIModel.getcX(), AIModel.getcY(), ai.getFeetW() , ai.getFeetH() ))
 				player1.getDamaged(ai);
+			if(player2 !=null )
+			if ( player2.conflictWithSomething(AIModel.getcX(), AIModel.getcY(), ai.getFeetW() , ai.getFeetH() ))
+				player2.getDamaged(ai);
 		}
 		//確認怪物是否碰到子彈
 		List<Bullet> bullets = gameObjects.getBullets();
@@ -131,8 +135,15 @@ public class Controller extends Thread{
 		for ( int i = 0 ; i < fallItems.size() ; i ++ ){
 			fallItem = fallItems.get(i);
 			fModel = fallItem.getModel();
+			if(player1 != null)
 			if ( player1.conflictWithSomething(fModel.getcX(), fModel.getcY(), fallItem.getW(), fallItem.getH())){
 				player1.setGun(fallItem.getGun());
+				fallItems.remove(fallItem);
+				break;
+			}
+			if(player2 != null)
+			if ( player2.conflictWithSomething(fModel.getcX(), fModel.getcY(), fallItem.getW(), fallItem.getH())){
+				player2.setGun(fallItem.getGun());
 				fallItems.remove(fallItem);
 				break;
 			}
@@ -160,11 +171,16 @@ public class Controller extends Thread{
 	}
 	
 	public void updatePlayerHp(){
-		view.updatePlayerHp(player1.getModel().getHp());
+		view.updatePlayerHp();
 	}
 	
 	public void movePlayer(ActionType act,Dir dir){
-		player1.addRequest(act, dir);
+		if(player1 != null)
+			player1.addRequest(act, dir);
+	}
+	public void movePlayer2(ActionType act,Dir dir){
+		if(player2 != null)
+			player2.addRequest(act, dir);
 	}
 	
 	public int getRemainningMonster(){
@@ -227,6 +243,11 @@ public class Controller extends Thread{
 	public Player getPlayer2() {
 		return player2;
 	}
-
+	public void player1SetDie(){
+		player1 = null;
+	}
+	public void player2SetDie(){
+		player2 = null;
+	}
 	
 }

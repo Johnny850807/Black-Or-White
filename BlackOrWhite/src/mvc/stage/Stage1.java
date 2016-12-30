@@ -29,6 +29,9 @@ public class Stage1 extends Stage {
 
 	@Override
 	public void playMusic() {
+		if(View.crazyMode)
+			SoundManager.getSoundManager().playStageMusic("sounds/stage/gym_kinesis.wav");
+		else
 		SoundManager.getSoundManager().playStageMusic("sounds/stage/naruto_soundtrack.wav");
 	}
 

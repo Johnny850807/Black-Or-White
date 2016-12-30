@@ -33,6 +33,9 @@ public class Stage4 extends Stage{
 
 	@Override
 	public void playMusic() {
+		if(View.crazyMode)
+			SoundManager.getSoundManager().playStageMusic("sounds/stage/japan.wav");
+		else
 		SoundManager.getSoundManager().playStageMusic("sounds/stage/stage1_ost.wav");
 	}
 
