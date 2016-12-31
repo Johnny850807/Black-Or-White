@@ -27,8 +27,8 @@ public class AI_Walk implements AI_Movement {
 		int x = model.getcX() , y = model.getcY();
 		Dir[] dirEast = {Dir.SOUTH,Dir.NORTH,Dir.SOUTH,Dir.WEST,Dir.WEST,Dir.WEST,Dir.WEST,Dir.EAST};
 		Dir[] dirWest = {Dir.SOUTH,Dir.NORTH,Dir.SOUTH,Dir.EAST,Dir.EAST,Dir.EAST,Dir.EAST,Dir.EAST};
-		Dir[] dirNorth = {Dir.SOUTH,Dir.SOUTH,Dir.EAST,Dir.WEST,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.NORTH};
-		Dir[] dirSouth = {Dir.EAST,Dir.WEST,Dir.NORTH,Dir.NORTH,Dir.NORTH,Dir.WEST,Dir.SOUTH};
+		Dir[] dirNorth = {Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.EAST,Dir.WEST,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.SOUTH,Dir.NORTH};
+		Dir[] dirSouth = {Dir.NORTH,Dir.NORTH,Dir.EAST,Dir.WEST,Dir.NORTH,Dir.NORTH,Dir.NORTH,Dir.WEST,Dir.SOUTH};
 		Dir rDir;  //結果方向
 		//east
 		if ( x < 400 && y > 200 && y < 600 )

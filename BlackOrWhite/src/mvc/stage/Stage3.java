@@ -25,7 +25,21 @@ public class Stage3 extends Stage{
 			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
 		for ( int i = 0 ; i < 1*rate ; i ++ ) 
 			monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
-		
+		if(Controller.isNetWork()){
+			rate *= 0.4;
+			for ( int i = 0 ; i < 1*rate ; i ++ ) 
+				monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
+			for ( int i = 0 ; i < 2*rate ; i ++ )  
+				monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
+			for ( int i = 0 ; i < 1*rate ; i ++ ) 
+				monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
+			for ( int i = 0 ; i < 2*rate ; i ++ )  
+				monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
+			for ( int i = 0 ; i < 3*rate ; i ++ )  
+				monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
+			for ( int i = 0 ; i < 1*rate ; i ++ ) 
+				monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
+		}
 	}
 	@Override
 	public void playMusic() {	

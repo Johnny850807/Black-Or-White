@@ -274,6 +274,7 @@ public class View {
 			{
 				switch(code){
 				case KeyEvent.VK_T:
+					commandSet.remove('C');
 					if(controller.getPlayer1()!=null)
 					if(controller.getPlayer1().getCurDir() != Dir.NORTH 
 					|| controller.getPlayer1().getCurAct() == ActionType.HALT)
@@ -283,6 +284,7 @@ public class View {
 					controller.movePlayer(ActionType.WALK, Dir.NORTH);
 					break;
 				case KeyEvent.VK_G:
+					commandSet.remove('C');
 					if(controller.getPlayer1()!=null)
 					if( controller.getPlayer1().getCurDir() != Dir.SOUTH 
 							|| controller.getPlayer1().getCurAct() == ActionType.HALT)
@@ -292,6 +294,7 @@ public class View {
 					controller.movePlayer(ActionType.WALK, Dir.SOUTH);
 					break;
 				case KeyEvent.VK_F:
+					commandSet.remove('C');
 					if(controller.getPlayer1()!=null)
 					if(controller.getPlayer1().getCurDir() != Dir.WEST 
 							|| controller.getPlayer1().getCurAct() == ActionType.HALT)
@@ -301,6 +304,7 @@ public class View {
 					controller.movePlayer(ActionType.WALK, Dir.WEST);
 					break;
 				case KeyEvent.VK_H:
+					commandSet.remove('C');
 					if(controller.getPlayer1()!=null)
 					if(controller.getPlayer1().getCurDir() != Dir.EAST 
 							|| controller.getPlayer1().getCurAct() == ActionType.HALT)
@@ -310,11 +314,13 @@ public class View {
 					break;
 				case KeyEvent.VK_C:  //also shoot
 					commandSet.add('C');
+					Log.d("shoot");
 					if(controller.getPlayer1()!=null)
 					if(controller.getPlayer1().getCurAct() != ActionType.SHOOT)
 						player1CommandLevel = player1CommandLevel >= 1 ? 1 : player1CommandLevel + 1;
 					break;
 				case KeyEvent.VK_UP:
+					commandSet.remove('L');
 					if(controller.getPlayer2()!=null)
 					if(controller.getPlayer2().getCurDir() != Dir.NORTH 
 					|| controller.getPlayer2().getCurAct() == ActionType.HALT)
@@ -323,6 +329,7 @@ public class View {
 					controller.movePlayer2(ActionType.WALK, Dir.NORTH);
 					break;
 				case KeyEvent.VK_DOWN:
+					commandSet.remove('L');
 					if(controller.getPlayer2()!=null)
 					if(controller.getPlayer2().getCurDir() != Dir.SOUTH 
 					|| controller.getPlayer2().getCurAct() == ActionType.HALT)
@@ -331,6 +338,7 @@ public class View {
 					controller.movePlayer2(ActionType.WALK, Dir.SOUTH);
 					break;
 				case KeyEvent.VK_LEFT:
+					commandSet.remove('L');
 					if(controller.getPlayer2()!=null)
 					if(controller.getPlayer2().getCurDir() != Dir.WEST 
 					|| controller.getPlayer2().getCurAct() == ActionType.HALT)
@@ -339,6 +347,7 @@ public class View {
 					controller.movePlayer2(ActionType.WALK, Dir.WEST);
 					break;
 				case KeyEvent.VK_RIGHT:
+					commandSet.remove('L');
 					if(controller.getPlayer2()!=null)
 					if(controller.getPlayer2().getCurDir() != Dir.EAST 
 					|| controller.getPlayer2().getCurAct() == ActionType.HALT)

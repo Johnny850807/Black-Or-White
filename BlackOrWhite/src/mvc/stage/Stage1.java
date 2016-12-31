@@ -25,6 +25,9 @@ public class Stage1 extends Stage {
 			Log.d("困難模式");
 		for ( int i = 0 ; i < amount ; i ++ )  //第一關10隻
 			monsters.add(new AI_Ball(0,0,ActionType.HALT,Dir.NORTH));
+		if(Controller.isNetWork())
+			for ( int i = 0 ; i < amount*0.3 ; i ++ )  //第一關10隻
+				monsters.add(new AI_Ball(0,0,ActionType.HALT,Dir.NORTH));
 	}
 
 	@Override
