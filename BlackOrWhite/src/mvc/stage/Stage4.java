@@ -12,7 +12,6 @@ public class Stage4 extends Stage{
 		super(controller,19);
 		
 		int rate = View.crazyMode ? 2 : 1;
-		
 		for ( int i = 0 ; i < 2*rate ; i ++ ) 
 			monsters.add(new AI_Evil(0,0,ActionType.HALT,Dir.NORTH));
 		for ( int i = 0 ; i < 2*rate ; i ++ ) 
@@ -54,10 +53,6 @@ public class Stage4 extends Stage{
 
 	@Override
 	public void playMusic() {
-		if(View.crazyMode)
-			SoundManager.getSoundManager().playStageMusic("sounds/stage/japan.wav");
-		else
-		SoundManager.getSoundManager().playStageMusic("sounds/stage/stage1_ost.wav");
 	}
 
 	@Override

@@ -10,6 +10,8 @@ import mvc.SoundManager;
 import mvc.View;
 import role.AI;
 import role.AI_Ball;
+import role.AI_Black;
+import role.AI_BlackGunner;
 import role.AI_CrazyCat;
 import role.AI_Evil;
 import role.AI_RifleTank;

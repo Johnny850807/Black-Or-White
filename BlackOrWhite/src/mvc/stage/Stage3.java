@@ -3,6 +3,7 @@ package mvc.stage;
 import mvc.ActionType;
 import mvc.Controller;
 import mvc.Dir;
+import mvc.SoundManager;
 import mvc.View;
 import role.AI_Ball;
 import role.AI_SnowBall;
@@ -43,6 +44,10 @@ public class Stage3 extends Stage{
 	}
 	@Override
 	public void playMusic() {	
+		if(View.crazyMode)
+			SoundManager.getSoundManager().playStageMusic("sounds/stage/japan.wav");
+		else
+		SoundManager.getSoundManager().playStageMusic("sounds/stage/stage1_ost.wav");
 	}
 	@Override
 	public void playerControl() {

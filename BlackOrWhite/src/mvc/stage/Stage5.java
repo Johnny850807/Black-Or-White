@@ -5,6 +5,7 @@ import mvc.Controller;
 import mvc.Dir;
 import mvc.SoundManager;
 import mvc.View;
+import role.AI_Black;
 import role.AI_Evil;
 import role.AI_RifleTank;
 import role.AI_SniperTank;
@@ -15,6 +16,9 @@ public class Stage5 extends Stage{
 	public Stage5(Controller controller) {
 		super(controller,22);
 		int rate = View.crazyMode ? 2 : 1;
+		
+		for ( int i = 0 ; i < (int)(0.5*rate) ; i ++ ) 
+			monsters.add(new AI_Black(0,0,ActionType.HALT,Dir.NORTH));
 		
 		for(int i = 0 ; i < 1*rate ; i ++ )
 			monsters.add(new AI_Evil(0,0,ActionType.HALT,Dir.NORTH));
@@ -60,6 +64,7 @@ public class Stage5 extends Stage{
 
 	@Override
 	public void playMusic() {
+		SoundManager.getSoundManager().playStageMusic("sounds/stage/bossblack.wav");
 	}
 
 	@Override
