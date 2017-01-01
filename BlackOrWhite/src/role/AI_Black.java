@@ -63,6 +63,12 @@ public class AI_Black extends AI{
 		}
 			
 	}
+	
+	@Override
+	public void moveDurationCountDown(){
+		//每 moveDuration 個更新換一次動作
+		moveCountDown = moveCountDown <= 0 ? moveDuration : moveCountDown - 3;
+	}
 
 	@Override
 	protected void dieProcess() {
