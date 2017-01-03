@@ -260,6 +260,8 @@ public class View {
 					cheatGunStyle = "MachineEX";
 				else if ( netIpED.getText().equals("Sniper"))
 					cheatGunStyle = "Sniper";
+				else if ( netIpED.getText().equals("Machine"))
+					cheatGunStyle = "Machine";
 				else
 					cheatPassword = netIpED.getText();
 				netIpED.setText("");

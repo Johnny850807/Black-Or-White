@@ -22,6 +22,8 @@ public class PlayerFactory implements RoleFactory {
 			return new SniperRifle();
 		if(View.cheatGunStyle == "MachineEX")
 			return new MachineGunEX();
+		if(View.cheatGunStyle == "Machine")
+			return new MachineGun();
 		return new Rifle(); 
 		//return new SniperRifle();
 		//return new MachineGun();
