@@ -39,9 +39,9 @@ public class AI_BlackGunner extends AI{
 					case SOUTH:
 						return 3;
 					case EAST:
-						return 3;
+						return 4;
 					case WEST:
-						return -3;
+						return -4;
 				}
 				break;
 			default:

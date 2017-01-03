@@ -158,7 +158,7 @@ public class View {
 
 	//放置按鈕的panel (開始遊戲按鈕或者連線等等)
 	class ButtonsPanel extends JPanel implements ActionListener , KeyListener{
-		private static final String NET_MESSAGE = "方向鍵控制走位，空白鍵或C進行射擊，記得切掉中文輸入法。";
+		private static final String NET_MESSAGE = "1p TGFH控制走位 C射擊   2p 方向鍵控制走位，L進行射擊，記得切掉中文輸入法。";
 		private static final String NET_CONNECT = "連線功能尚未開放.";
 		private Dir playerCurDir = Dir.NORTH;  //用來記錄玩家目前面向方位!
 		private Dir player2CurDir = Dir.NORTH;  //用來記錄玩家目前面向方位!

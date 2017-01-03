@@ -2,7 +2,7 @@
 若不能開啟 BlackOrWhite.jar
 
 1.搜尋cmd到命令提示字元
-2.輸入  cd /該檔案路徑/  
+2.輸入  cd /該檔案所在資料夾路徑/  
 3.輸入  java -jar BlackOrWhite.jar  
 
 

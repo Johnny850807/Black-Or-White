@@ -44,10 +44,10 @@ public class BlackGunnerFactory implements RoleFactory{
 					new ImageSequence( "pics/AI/BlackGunner/Halt/East","png",1) ,
 					new ImageSequence( "pics/AI/BlackGunner/Halt/West","png",1) ,
 					new ImageSequence( "pics/AI/BlackGunner/Halt/West","png",1)} ,
-  /*Walk*/		{ new ImageSequence( "pics/AI/BlackGunner/Walk/East","png",16) ,
-						new ImageSequence( "pics/AI/BlackGunner/Walk/East","png",16) ,
-						new ImageSequence( "pics/AI/BlackGunner/Walk/West","png",16) ,
-						new ImageSequence( "pics/AI/BlackGunner/Walk/West","png",16)}
+  /*Walk*/		{ new ImageSequence( "pics/AI/BlackGunner/Walk/East","png",32) ,
+						new ImageSequence( "pics/AI/BlackGunner/Walk/East","png",32) ,
+						new ImageSequence( "pics/AI/BlackGunner/Walk/West","png",32) ,
+						new ImageSequence( "pics/AI/BlackGunner/Walk/West","png",32)}
 					};
 		}
 		

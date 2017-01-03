@@ -40,7 +40,7 @@ public class Player extends Role {
 		die();
 	}
 	
-	private final void processRequest(){
+	private synchronized final void processRequest(){
 		// handle the request ... and update the model
 		Request request;
 		while(requests.size() > 0)

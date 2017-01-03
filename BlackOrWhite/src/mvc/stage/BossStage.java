@@ -31,20 +31,19 @@ public class BossStage extends Stage{
 			monsters.add(new AI_SniperTank(0,0,ActionType.HALT,Dir.NORTH));  
 		
 		if(Controller.isNetWork()){
-			rate *= 0.4;
-			for ( int i = 0 ; i < 2*rate ; i ++ )
+			float frate = 0.7f*rate;
+			for ( int i = 0 ; i < 2*frate ; i ++ )
 				monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));  
-			
-			for ( int i = 0 ; i < 1*rate ; i ++ )
+			for ( int i = 0 ; i < 1*frate ; i ++ )
 				monsters.add(new AI_SniperTank(0,0,ActionType.HALT,Dir.NORTH));  
-			
-			for ( int i = 0 ; i < 1*rate ; i ++ )
+			for ( int i = 0 ; i < 1*frate ; i ++ )
 				monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));  
-			for ( int i = 0 ; i < 2*rate ; i ++ )
+			for ( int i = 0 ; i < 2*frate ; i ++ )
 				monsters.add(new AI_SniperTank(0,0,ActionType.HALT,Dir.NORTH));  
-			for ( int i = 0 ; i < 2*rate ; i ++ )
-				monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));  
-
+			for ( int i = 0 ; i < 2*frate ; i ++ )
+				monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));
+			for ( int i = 0 ; i < 2*frate ; i ++ )
+				monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));
 		}
 	}
 

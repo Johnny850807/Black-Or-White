@@ -38,8 +38,9 @@ public abstract class Stage implements Runnable{
 		
 		//再慢慢隨機位置產生
 		while(monsters.size() > 0){
+			float createRate = Controller.isNetWork() ? 1.5f : 1;
 			try {TimeUnit.SECONDS.sleep(spacingCreation);}catch (InterruptedException e) {e.printStackTrace();}
-			for ( int i = 0 ; i < 4 && monsters.size() > 0 ; i ++ )
+			for ( int i = 0 ; i < 4*createRate && monsters.size() > 0 ; i ++ )
 				randomlyAddMonster();
 		}
 			
