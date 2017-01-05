@@ -64,7 +64,7 @@ public class Controller extends Thread{
 				checkUpdate();
 				checkConflict();
 				view.refreshScreen();
-				Thread.sleep(13); 
+				Thread.sleep(15); 
 			}
 		}catch (InterruptedException e) {
 			e.printStackTrace();
