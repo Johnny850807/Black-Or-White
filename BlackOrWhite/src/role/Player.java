@@ -45,13 +45,21 @@ public class Player extends Role {
 		Request request;
 		while(requests.size() > 0)
 		{
-			request = requests.poll();
-			if( request.act == curAct && request.act == ActionType.HALT)
-				continue;
-			if ( request.act == ActionType.SHOOT && isShootSpacing ){
-				return;  //如果位於射擊緩衝時間 而且使用者點選射擊 就不理會
+			try{
+				request = requests.poll();
+				if( request.act == curAct && request.act == ActionType.HALT)
+					continue;
+				if ( request.act == ActionType.SHOOT && isShootSpacing ){
+					return;  //如果位於射擊緩衝時間 而且使用者點選射擊 就不理會
+				}
+				getMoved(request.act, request.dir);	
+			}catch(NullPointerException err){
+				err.printStackTrace();
+				break;
+			}catch(Exception err){
+				err.printStackTrace();
 			}
-			getMoved(request.act, request.dir);	
+			
 		}
 	}
 	

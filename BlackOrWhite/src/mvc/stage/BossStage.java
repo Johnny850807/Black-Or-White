@@ -26,7 +26,7 @@ public class BossStage extends Stage{
 		
 		for ( int i = 0 ; i < 2*rate ; i ++ )
 			monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));  
-		for ( int i = 0 ; i < 2*rate ; i ++ )
+		for ( int i = 0 ; i < 1*rate ; i ++ )
 			monsters.add(new AI_SniperTank(0,0,ActionType.HALT,Dir.NORTH));  
 		
 		if(Controller.isNetWork()){
