@@ -14,7 +14,6 @@ public class BossStage extends Stage{
 		
 		for ( int i = 0 ; i < 2*rate ; i ++ )
 			monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));  
-
 		monsters.add(new AI_CrazyCat(0,0,ActionType.HALT,Dir.NORTH));  //boss
 		
 		for ( int i = 0 ; i < 1*rate ; i ++ )
@@ -35,11 +34,7 @@ public class BossStage extends Stage{
 			for ( int i = 0 ; i < 2*frate ; i ++ )
 				monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));  
 			for ( int i = 0 ; i < 1*frate ; i ++ )
-				monsters.add(new AI_SniperTank(0,0,ActionType.HALT,Dir.NORTH));  
-			for ( int i = 0 ; i < 1*frate ; i ++ )
-				monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));  
-			for ( int i = 0 ; i < 2*frate ; i ++ )
-				monsters.add(new AI_SniperTank(0,0,ActionType.HALT,Dir.NORTH));  
+				monsters.add(new AI_SniperTank(0,0,ActionType.HALT,Dir.NORTH));   
 			for ( int i = 0 ; i < 2*frate ; i ++ )
 				monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));
 			for ( int i = 0 ; i < 2*frate ; i ++ )

@@ -14,7 +14,7 @@ public class Stage4 extends Stage{
 		int rate = View.crazyMode ? 2 : 1;
 		for ( int i = 0 ; i < 2*rate ; i ++ ) 
 			monsters.add(new AI_Evil(0,0,ActionType.HALT,Dir.NORTH));
-		for ( int i = 0 ; i < 3*rate ; i ++ ) 
+		for ( int i = 0 ; i < 2*rate ; i ++ ) 
 			monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));
 		for ( int i = 0 ; i < 1*rate ; i ++ )
 			monsters.add(new AI_Evil(0,0,ActionType.HALT,Dir.NORTH));
@@ -26,20 +26,20 @@ public class Stage4 extends Stage{
 			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
 		for ( int i = 0 ; i < 2*rate ; i ++ )  
 			monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));
-		for ( int i = 0 ; i < 2*rate ; i ++ )  
+		for ( int i = 0 ; i < 1*rate ; i ++ )  
 			monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
 		
 		if(Controller.isNetWork()){
 			float frate = 0.7f*rate;
-			for ( int i = 0 ; i < 3*frate ; i ++ ) 
+			for ( int i = 0 ; i < 2*frate ; i ++ ) 
 				monsters.add(new AI_Evil(0,0,ActionType.HALT,Dir.NORTH));
-			for ( int i = 0 ; i < 3*frate ; i ++ ) 
+			for ( int i = 0 ; i < 2*frate ; i ++ ) 
 				monsters.add(new AI_Evil(0,0,ActionType.HALT,Dir.NORTH));
 			for ( int i = 0 ; i < 2*frate ; i ++ ) 
 				monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));
 			for ( int i = 0 ; i < 1*frate ; i ++ )
 				monsters.add(new AI_Evil(0,0,ActionType.HALT,Dir.NORTH));
-			for ( int i = 0 ; i < 2*frate ; i ++ )  
+			for ( int i = 0 ; i < 1*frate ; i ++ )  
 				monsters.add(new AI_SnowBall(0,0,ActionType.HALT,Dir.NORTH));
 			for ( int i = 0 ; i < 1*frate ; i ++ )
 				monsters.add(new AI_Evil(0,0,ActionType.HALT,Dir.NORTH));
