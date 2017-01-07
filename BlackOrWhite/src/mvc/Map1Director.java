@@ -6,9 +6,9 @@ public class Map1Director implements MapDirector{
 	private static String[] mapString; // singleton
 	// 玩家、怪物出生地、障礙物座標
 	public final static int PLAYER_CREATE_X = 200;
-	public final static int PLAYER_CREATE_Y = 600;
+	public final static int PLAYER_CREATE_Y = 800;
 	public final static int PLAYER2_CREATE_X = 900;
-	public final static int PLAYER2_CREATE_Y = 600;
+	public final static int PLAYER2_CREATE_Y = 800;
 	public static ArrayList<Integer> BULLET_BARRIER_X_SET;  //子彈的障礙物座標集合(海不列入)
 	public static ArrayList<Integer> BULLET_BARRIER_Y_SET;
 	public static ArrayList<Integer> BARRIER_X_SET;  //障礙物座標集合
@@ -30,8 +30,8 @@ public class Map1Director implements MapDirector{
 						/*3*/	 "*--0*--*0--*",
 						/*4*/	 "*--0----0--*",
 						/*5*/	 "*----**----*",
-						/*6*/    "**-******-**",
-						/*7*/	 "*-*------*-*",
+						/*6*/    "***------***",
+						/*7*/	 "*----------*",
 						/*8*/	 "**-******-**"};
 		}
 		return mapString;
