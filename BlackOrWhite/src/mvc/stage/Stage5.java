@@ -23,7 +23,6 @@ public class Stage5 extends Stage{
 		monsters.add(new AI_BlackGunner(0,0,ActionType.HALT,Dir.NORTH));
 		monsters.add(new AI_BlackGunner(0,0,ActionType.HALT,Dir.NORTH));
 		monsters.add(new AI_BlackGunner(0,0,ActionType.HALT,Dir.NORTH));
-		monsters.add(new AI_BlackGunner(0,0,ActionType.HALT,Dir.NORTH));
 		for(int i = 0 ; i < 1*rate ; i ++ )
 			monsters.add(new AI_BlackGunner(0,0,ActionType.HALT,Dir.NORTH));
 		for(int i = 0 ; i < 1*rate ; i ++ )
@@ -36,8 +35,6 @@ public class Stage5 extends Stage{
 			monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));
 		for(int i = 0 ; i < 2*rate ; i ++ )
 			monsters.add(new AI_BlackGunner(0,0,ActionType.HALT,Dir.NORTH)); 
-		for(int i = 0 ; i < 1*rate ; i ++ )
-			monsters.add(new AI_SnowBallEX(0,0,ActionType.HALT,Dir.NORTH));
 		for ( int i = 0 ; i < 2*rate ; i ++ )  
 			monsters.add(new AI_SniperTank(0,0,ActionType.HALT,Dir.NORTH));
 		for ( int i = 0 ; i < 2*rate ; i ++ )  
@@ -48,8 +45,6 @@ public class Stage5 extends Stage{
 			monsters.add(new AI_BlackGunner(0,0,ActionType.HALT,Dir.NORTH));
 			monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));
 			monsters.add(new AI_BlackGunner(0,0,ActionType.HALT,Dir.NORTH));
-			for(int i = 0 ; i < 1*frate ; i ++ )
-				monsters.add(new AI_RifleTank(0,0,ActionType.HALT,Dir.NORTH));
 			for(int i = 0 ; i < 2*frate ; i ++ )
 				monsters.add(new AI_BlackGunner(0,0,ActionType.HALT,Dir.NORTH));
 			for(int i = 0 ; i < 1*frate ; i ++ )

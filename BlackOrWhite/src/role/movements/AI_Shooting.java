@@ -46,14 +46,15 @@ public class AI_Shooting extends AI_Decorator{
 		int rX,rY;  // 玩家座標在地圖上的索引
 		for ( Role r : players )
 		{
-			aX = (ai.x+ai.getOffsetX()) / 100;
-			aY = (ai.y+ai.getOffsetY()) / 100;
+			aX = (ai.x+ai.getOffsetX()+8) / 100;
+			aY = (ai.y+ai.getOffsetY()+20) / 100;
 			rX = (r.x+r.getOffsetX()) / 100;
 			rY = (r.y+r.getOffsetY()) / 100;
 			//Log.d("Site Player :("+rX+","+rY+")  AI :("+aX+","+aY+")");
 			//判斷障礙物 是否在該條線上
 			//run south
-			for ( int i = aY+1 ;  i >= 0 && i < MapBuilder.SIZEY && aX == rX ; i ++ )
+			
+			for ( int i = aY+1 ;  i >= 0 && i < MapBuilder.SIZEY && aX == rX && rY > aY ; i ++ )
 			{
 				if( i == rY ){
 					ai.getMoved(ActionType.WALK, Dir.SOUTH);
@@ -64,7 +65,7 @@ public class AI_Shooting extends AI_Decorator{
 					return false;
 			}
 			//run north
-			for ( int i = aY-1 ; i >= 0  && i < MapBuilder.SIZEY && aX == rX ; i -- )
+			for ( int i = aY-1 ; i >= 0  && i < MapBuilder.SIZEY && aX == rX &&  rY < aY ; i -- )
 			{
 				if( i == rY ){
 					ai.getMoved(ActionType.WALK, Dir.NORTH);
@@ -75,7 +76,7 @@ public class AI_Shooting extends AI_Decorator{
 					return false;
 			}
 			//run east
-			for ( int i = aX+1 ; i >= 0 && i < MapBuilder.SIZEX && aY == rY ; i ++ )
+			for ( int i = aX+1 ; i >= 0 && i < MapBuilder.SIZEX && aY == rY && rX > aX ; i ++ )
 			{
 				if( i == rX ){
 					ai.getMoved(ActionType.WALK, Dir.EAST);
@@ -86,7 +87,7 @@ public class AI_Shooting extends AI_Decorator{
 					return false;
 			}
 			//run west
-			for ( int i = aX-1 ; i >= 0 && i < MapBuilder.SIZEX && aY == rY  ; i -- )
+			for ( int i = aX-1 ; i >= 0 && i < MapBuilder.SIZEX && aY == rY && rX < aX  ; i -- )
 			{
 				if( i == rX ){
 					ai.getMoved(ActionType.WALK, Dir.WEST);
