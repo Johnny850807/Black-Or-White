@@ -45,12 +45,8 @@ public class Player extends Role {
 		Request request;
 		while(requests.size() > 0)
 		{
-<<<<<<< HEAD
-			try
-			{
-=======
+
 			try{
->>>>>>> FIXED_AI
 				request = requests.poll();
 				if( request.act == curAct && request.act == ActionType.HALT)
 					continue;
@@ -58,21 +54,16 @@ public class Player extends Role {
 					return;  //如果位於射擊緩衝時間 而且使用者點選射擊 就不理會
 				}
 				getMoved(request.act, request.dir);	
-<<<<<<< HEAD
-			}catch(Exception err){
+			}catch(NullPointerException err){
+				err.printStackTrace();
+				break;
+			}
+			catch(Exception err){
 				err.printStackTrace();
 				Log.d("命令佇列長度: "+requests.size());
 				//break;
 			}
-=======
-			}catch(NullPointerException err){
-				err.printStackTrace();
-				break;
-			}catch(Exception err){
-				err.printStackTrace();
-			}
 			
->>>>>>> FIXED_AI
 		}
 	}
 	
