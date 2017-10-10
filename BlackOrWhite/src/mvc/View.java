@@ -497,7 +497,7 @@ public class View {
 		ButtonsPanel buttonsPanel = v.getButtonPanel();
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1300,1000);
+		frame.setSize(1300,800);
 		frame.getContentPane().add(BorderLayout.CENTER, game);
 		frame.getContentPane().add(BorderLayout.SOUTH , buttonsPanel);
 		frame.setVisible(true);

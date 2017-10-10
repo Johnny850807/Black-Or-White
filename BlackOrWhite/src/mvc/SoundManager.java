@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 
+import javax.print.attribute.standard.Media;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -19,26 +20,13 @@ public class SoundManager {
 		return soundManager;
 	}
 	
-	/*public void playMainMusic(){
-		 new Thread(new Runnable() {
-			  // The wrapper thread is unnecessary, unless it blocks on the
-			  // Clip finishing; see comments.
-			    public void run() {
-			      try {
-			  		rifleSound.start();
-			  	
-			      } catch (Exception e) {
-			        System.err.println(e.getMessage());
-			      }
-			    }
-			  }).start();
-
-	}*/
 	public void playSound(String url){
 		 try {   
 			new Thread(new Runnable() {
-				  // The wrapper thread is unnecessary, unless it bl  ocks on the
+				  // The wrapper thread is unnecessary, unless it blocks on the
 				  // Clip finishing; see comments.
+				
+	
 				 Clip soundClip = AudioSystem.getClip();
 				    public void run() {
 				      try {
@@ -58,26 +46,7 @@ public class SoundManager {
 	}
 	
 	public void playStageMusic(String url){
-		//播放背景音樂 一次只能存在一首
-
-		try {
-			if ( backgroundMusic != null && backgroundMusic.isOpen() )
-				backgroundMusic.close();
-			backgroundMusic = AudioSystem.getClip();
-			backgroundMusic.open(AudioSystem.getAudioInputStream(new File(url).toURL()));
-			backgroundMusic.loop(-1);
-		} catch (LineUnavailableException e) {
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedAudioFileException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		// 不播放背景音樂
 	}
 
 	
