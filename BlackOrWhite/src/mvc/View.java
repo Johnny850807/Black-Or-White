@@ -199,7 +199,7 @@ public class View {
 
 			//連線版面設置
 			netFrame = new JFrame("遊戲教學");
-			netConnectBTN = new JButton("Input IP");
+			netConnectBTN = new JButton("Input");
 			netConnectBTN.setFont(new Font("Arial", Font.PLAIN, 20));
 			netMessage = new JLabel(NET_MESSAGE);
 			netIpED = new JTextField();
